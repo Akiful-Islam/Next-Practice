@@ -42,7 +42,7 @@ const GetById = () => {
           placeholder="Enter Id"
           onChange={(event) => setEmployeeId(event.target.value)}
         />
-        <button type="submit">Search</button>
+        {employeeId ? <button type="submit">Search</button> : null}
       </form>
       {showResponse ? (
         employee ? (

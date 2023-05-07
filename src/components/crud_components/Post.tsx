@@ -77,7 +77,9 @@ const Post = () => {
           />
         </label>
         <br />
-        <button type="submit">Post Employee</button>
+        {firstName && lastName && email ? (
+          <button type="submit">Post Employee</button>
+        ) : null}
       </form>
       {postedEmployee ? (
         <div>

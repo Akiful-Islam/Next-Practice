@@ -45,7 +45,7 @@ const DeleteById = () => {
           placeholder="Id"
           onChange={(event) => setEmployeeId(event.target.value)}
         />
-        <button type="submit">Delete</button>
+        {employeeId ? <button type="submit">Delete</button> : null}
       </form>
       {showResponse ? (
         employeeFound ? (

@@ -138,7 +138,9 @@ const PatchById = () => {
             <br />
           </div>
         )}
-        <button type="submit">Patch</button>
+        {firstName || lastName || email ? (
+          <button type="submit">Post Employee</button>
+        ) : null}
       </form>
       {patchedEmployee ? (
         <div>
