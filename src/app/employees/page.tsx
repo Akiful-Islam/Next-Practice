@@ -1,5 +1,5 @@
 import GetAllButton from "@/components/GetAllButton";
-import GetById from "@/components/GetById";
+import GetByIdButton from "@/components/GetByIdButton";
 import React from "react";
 
 type Props = {};
@@ -9,7 +9,7 @@ const page = (props: Props) => {
     <div>
       <ul>
         <GetAllButton />
-        <GetById />
+        <GetByIdButton />
         <li>Post</li>
         <li>Patch by Id</li>
         <li>Delete by Id</li>

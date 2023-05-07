@@ -4,7 +4,7 @@ import { Employee, dummyEmployees } from "@/dummy_data/DummyEmployee";
 import React, { useState } from "react";
 import EmployeeTable from "./EmployeeTable";
 
-const GetById = () => {
+const GetByIdButton = () => {
   const [employee, setEmployee] = useState<Employee | null>();
   const [employeeId, setEmployeeId] = useState("");
 
@@ -58,4 +58,4 @@ const GetById = () => {
   );
 };
 
-export default GetById;
+export default GetByIdButton;
