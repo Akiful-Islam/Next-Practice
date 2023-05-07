@@ -26,54 +26,30 @@ const QueryForm: React.FC<Props> = ({
       <div>
         <label htmlFor="page-size">Page Size:</label>
         <input
-          style={{
-            width: 64,
-            height: 36,
-            color: "black",
-            borderRadius: 6,
-            margin: 8,
-            WebkitAppearance: "none",
-            MozAppearance: "textfield",
-          }}
           id="page-size"
           type="number"
           value={pageSize}
           onChange={(e) => setPageSize(parseInt(e.target.value))}
+          placeholder="Page Size"
         />
       </div>
       <div>
         <label htmlFor="page-number">Page Number:</label>
         <input
-          style={{
-            width: 64,
-            height: 36,
-            color: "black",
-            borderRadius: 6,
-            margin: 8,
-            WebkitAppearance: "none",
-            MozAppearance: "textfield",
-          }}
           id="page-number"
           type="number"
           value={pageNumber}
           onChange={(e) => setPageNumber(parseInt(e.target.value))}
+          placeholder="Page Number"
         />
       </div>
       <div>
         <label htmlFor="sort-by">Sort By:</label>
         <select
-          style={{
-            width: 64,
-            height: 36,
-            color: "black",
-            borderRadius: 6,
-            margin: 8,
-            WebkitAppearance: "none",
-            MozAppearance: "textfield",
-          }}
           id="sort-by"
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}
+          placeholder="Sort By"
         >
           <option value="id">Id</option>
           <option value="firstName">First Name</option>
@@ -84,18 +60,10 @@ const QueryForm: React.FC<Props> = ({
       <div>
         <label htmlFor="sort-order">Sort Order:</label>
         <select
-          style={{
-            width: 64,
-            height: 36,
-            color: "black",
-            borderRadius: 6,
-            margin: 8,
-            WebkitAppearance: "none",
-            MozAppearance: "textfield",
-          }}
           id="sort-order"
           value={sortDirection}
           onChange={(e) => setSortDirection(e.target.value)}
+          placeholder="Sort Direction"
         >
           <option value="asc">Asc</option>
           <option value="desc">Desc</option>

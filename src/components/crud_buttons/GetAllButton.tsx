@@ -4,8 +4,6 @@ import React, { useState } from "react";
 import EmployeeTable from "../EmployeeTable";
 import QueryForm from "../QueryForm";
 
-import "@/styles/inputs.css";
-
 type QueryParams = {
   pageNumber?: number;
   pageSize?: number;

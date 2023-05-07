@@ -3,7 +3,6 @@
 import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "../EmployeeTable";
-import "@/styles/inputs.css";
 
 const GetByIdButton = () => {
   const [employee, setEmployee] = useState<Employee | null>();
