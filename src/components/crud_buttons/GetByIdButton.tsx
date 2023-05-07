@@ -3,6 +3,7 @@
 import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "../EmployeeTable";
+import "@/styles/inputs.css";
 
 const GetByIdButton = () => {
   const [employee, setEmployee] = useState<Employee | null>();
@@ -41,28 +42,8 @@ const GetByIdButton = () => {
           value={employeeId}
           placeholder="Enter Id"
           onChange={(event) => setEmployeeId(event.target.value)}
-          style={{
-            width: 64,
-            height: 36,
-            color: "black",
-            borderRadius: 6,
-            margin: 8,
-            WebkitAppearance: "none",
-            MozAppearance: "textfield",
-          }}
         />
-        <button
-          type="submit"
-          style={{
-            border: 12,
-            padding: 8,
-            background: "white",
-            borderRadius: 6,
-            color: "black",
-          }}
-        >
-          Search
-        </button>
+        <button type="submit">Search</button>
       </form>
       {showEmployee ? (
         employee ? (

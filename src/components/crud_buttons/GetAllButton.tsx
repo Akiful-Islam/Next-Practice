@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import EmployeeTable from "../EmployeeTable";
 import QueryForm from "../QueryForm";
 
+import "@/styles/inputs.css";
+
 type QueryParams = {
   pageNumber?: number;
   pageSize?: number;
@@ -21,14 +23,6 @@ const GetAllButton = () => {
   const [pageSize, setPageSize] = useState(20);
   const [sortBy, setSortBy] = useState("id");
   const [sortDirection, setSortDirection] = useState("asc");
-
-  const buttonStyle = {
-    border: 12,
-    padding: 8,
-    background: "white",
-    borderRadius: 6,
-    color: "black",
-  };
 
   const handleGetAllClick = () => {
     fetchData({ pageNumber, pageSize, sortBy, sortDirection });
@@ -66,10 +60,7 @@ const GetAllButton = () => {
   return (
     <div className="get-all">
       <h2>Get All</h2>
-      <button
-        onClick={() => setShowQueryForm(!showQueryForm)}
-        style={buttonStyle}
-      >
+      <button onClick={() => setShowQueryForm(!showQueryForm)}>
         Add Query Params?
       </button>
       {showQueryForm && (
@@ -84,9 +75,7 @@ const GetAllButton = () => {
           setSortDirection={setSortDirection}
         />
       )}
-      <button onClick={handleGetAllClick} style={buttonStyle}>
-        Show Employees
-      </button>
+      <button onClick={handleGetAllClick}>Show Employees</button>
 
       {showTable && <EmployeeTable employees={employees} />}
     </div>

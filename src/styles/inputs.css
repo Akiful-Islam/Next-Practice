@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input {
+  @apply w-20 h-9 text-black rounded-lg m-2 appearance-none;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  display: none;
+}
+
+button {
+  @apply text-black rounded-lg m-2 bg-white;
+  border: 12;
+  padding: 16;
+  margin: 8;
+}
+
+button[type="submit"] {
+  @apply text-black rounded-lg m-2 bg-white;
+  border: 12;
+  padding: 16;
+  margin: 8;
+}
+
+button:hover {
+  @apply bg-gray-200;
+}
