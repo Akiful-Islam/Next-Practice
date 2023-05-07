@@ -1,4 +1,4 @@
-import { Employee } from "@/dummy_data/DummyEmployee";
+import { Employee } from "@/types/DummyEmployee";
 import React from "react";
 
 type Props = {

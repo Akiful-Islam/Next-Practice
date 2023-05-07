@@ -1,5 +1,5 @@
 "use client";
-import { Employee, dummyEmployees } from "@/dummy_data/DummyEmployee";
+import { Employee, dummyEmployees } from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "./EmployeeTable";
 import QueryForm from "./QueryForm";
