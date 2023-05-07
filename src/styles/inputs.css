@@ -19,6 +19,13 @@ input[type="email"] {
   @apply w-24 h-9 text-black rounded-lg m-2 appearance-none;
 }
 
+input[type="checkbox"] {
+  @apply w-4 h-4 bg-gray-500 text-black rounded-lg m-2;
+}
+input[type="checkbox"]:checked {
+  @apply bg-white;
+}
+
 select {
   @apply w-16 h-9 text-black rounded-lg m-2;
 }

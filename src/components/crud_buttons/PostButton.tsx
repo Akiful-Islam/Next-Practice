@@ -4,9 +4,7 @@ import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "../EmployeeTable";
 
-type Props = {};
-
-const PostButton = (props: Props) => {
+const PostButton = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -26,6 +24,7 @@ const PostButton = (props: Props) => {
         if (response.ok) {
           return response.json();
         } else {
+          setPostedEmployee(null);
           throw new Error("Error adding employee");
         }
       })
