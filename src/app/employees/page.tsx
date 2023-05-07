@@ -1,5 +1,6 @@
-import GetAllButton from "@/components/GetAllButton";
-import GetByIdButton from "@/components/GetByIdButton";
+import GetAllButton from "@/components/crud_buttons/GetAllButton";
+import GetByIdButton from "@/components/crud_buttons/GetByIdButton";
+import PostButton from "@/components/crud_buttons/PostButton";
 import React from "react";
 
 type Props = {};
@@ -10,7 +11,7 @@ const page = (props: Props) => {
       <ul>
         <GetAllButton />
         <GetByIdButton />
-        <li>Post</li>
+        <PostButton />
         <li>Patch by Id</li>
         <li>Delete by Id</li>
       </ul>

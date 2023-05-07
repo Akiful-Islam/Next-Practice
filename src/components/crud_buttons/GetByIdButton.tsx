@@ -1,8 +1,8 @@
 "use client";
 
-import { Employee, dummyEmployees } from "@/types/Employee";
+import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
-import EmployeeTable from "./EmployeeTable";
+import EmployeeTable from "../EmployeeTable";
 
 const GetByIdButton = () => {
   const [employee, setEmployee] = useState<Employee | null>();
