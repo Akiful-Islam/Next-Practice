@@ -1,52 +1,55 @@
 "use client";
 
-import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
-import EmployeeTable from "../EmployeeTable";
 
-const GetByIdButton = () => {
-  const [employee, setEmployee] = useState<Employee | null>();
+const DeleteButton = () => {
+  const [employeeFound, setemployeeFound] = useState(false);
   const [employeeId, setEmployeeId] = useState("");
   const [showResponse, setShowResponse] = useState(false);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const url = `http://localhost:3030/api/employees/${employeeId}`;
-    fetch(url)
+    fetch(url, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ employeeId }),
+    })
       .then((response) => {
-        if (response.ok) {
+        if (response.status === 204) {
+          setemployeeFound(true);
           return response.json();
         } else {
-          setEmployee(null);
-          throw new Error("Employee not found");
+          throw new Error("Error deleting employee");
         }
       })
       .then((data) => {
-        setEmployee(data);
+        console.log(data);
+        setEmployeeId("");
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        console.log(err.message);
       });
     setShowResponse(true);
   };
 
   return (
     <div>
-      <h2>Get by Id</h2>
+      <h2>Delete by Id</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="employeeId">Employee Id: </label>
         <input
           id="employeeId"
           type="number"
           value={employeeId}
-          placeholder="Enter Id"
+          placeholder="Id"
           onChange={(event) => setEmployeeId(event.target.value)}
         />
-        <button type="submit">Search</button>
+        <button type="submit">Delete</button>
       </form>
       {showResponse ? (
-        employee ? (
-          <EmployeeTable employees={[employee]} />
+        employeeFound ? (
+          <p>Employee Deleted :D</p>
         ) : (
           <p>Employee Not found :(</p>
         )
@@ -55,4 +58,4 @@ const GetByIdButton = () => {
   );
 };
 
-export default GetByIdButton;
+export default DeleteButton;

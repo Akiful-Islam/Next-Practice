@@ -1,3 +1,4 @@
+import DeleteButton from "@/components/crud_buttons/DeleteButton";
 import GetAllButton from "@/components/crud_buttons/GetAllButton";
 import GetByIdButton from "@/components/crud_buttons/GetByIdButton";
 import PostButton from "@/components/crud_buttons/PostButton";
@@ -13,7 +14,7 @@ const page = (props: Props) => {
         <GetByIdButton />
         <PostButton />
         <li>Patch by Id</li>
-        <li>Delete by Id</li>
+        <DeleteButton />
       </ul>
     </div>
   );
