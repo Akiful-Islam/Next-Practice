@@ -11,7 +11,7 @@ type QueryParams = {
   sortDirection?: string;
 };
 
-const GetAllButton = () => {
+const GetAllPaginated = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
 
   const [showTable, setShowTable] = useState(false);
@@ -80,4 +80,4 @@ const GetAllButton = () => {
   );
 };
 
-export default GetAllButton;
+export default GetAllPaginated;

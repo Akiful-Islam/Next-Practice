@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-const DeleteButton = () => {
+const DeleteById = () => {
   const [employeeFound, setemployeeFound] = useState(false);
   const [employeeId, setEmployeeId] = useState("");
   const [showResponse, setShowResponse] = useState(false);
@@ -58,4 +58,4 @@ const DeleteButton = () => {
   );
 };
 
-export default DeleteButton;
+export default DeleteById;

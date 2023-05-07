@@ -4,7 +4,7 @@ import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "../EmployeeTable";
 
-const PostButton = () => {
+const Post = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -91,4 +91,4 @@ const PostButton = () => {
   );
 };
 
-export default PostButton;
+export default Post;

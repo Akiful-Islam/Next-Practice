@@ -3,7 +3,7 @@ import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "../EmployeeTable";
 
-const PatchButton = () => {
+const PatchById = () => {
   const [employeeId, setEmployeeId] = useState("");
 
   const [firstName, setFirstName] = useState("");
@@ -152,4 +152,4 @@ const PatchButton = () => {
   );
 };
 
-export default PatchButton;
+export default PatchById;
