@@ -70,7 +70,7 @@ const getAllEmployees = async (
 };
 
 const getEmployeeById = async (
-  id: string,
+  id: number,
   setEmployee: (employee: Employee | null) => void
 ) => {
   const url = `http://localhost:3030/api/employees/${id}`;
