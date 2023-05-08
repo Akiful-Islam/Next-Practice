@@ -22,6 +22,6 @@
   @apply bg-gray-600;
 }
 
-.employee-table tr:hover {
-  @apply bg-gray-500;
+.employee-table tr {
+  @apply transition duration-200 ease-in-out hover:bg-gray-500;
 }

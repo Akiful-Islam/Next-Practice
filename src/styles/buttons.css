@@ -16,6 +16,6 @@ button[type="submit"] {
   margin: 8;
 }
 
-button:hover {
-  @apply bg-gray-200;
+button {
+  @apply transition duration-500 ease-in-out hover:bg-gray-400 active:animate-pulse active:duration-75 active:bg-gray-300;
 }

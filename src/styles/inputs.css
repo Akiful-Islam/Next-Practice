@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-input {
-  @apply w-20 h-9 text-black rounded-lg m-2 appearance-none;
-}
-
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   display: none;
@@ -16,16 +12,13 @@ input[type="number"] {
 }
 
 input[type="text"] {
-  @apply w-32 h-9 text-black rounded-lg m-2 appearance-none;
+  @apply w-32 h-9 text-black rounded-lg m-2 appearance-none transition duration-200 ease-in-out focus:w-52;
 }
 
 input[type="email"] {
-  @apply w-24 h-9 text-black rounded-lg m-2 appearance-none;
+  @apply w-24 h-9 text-black rounded-lg m-2 appearance-none transition duration-200 ease-in-out focus:w-52;
 }
 
 input[type="checkbox"] {
-  @apply w-4 h-4 bg-gray-500 text-black rounded-lg m-2;
-}
-input[type="checkbox"]:checked {
-  @apply bg-white;
+  @apply w-4 h-4 bg-gray-500 text-black rounded-lg m-2 transition duration-200 ease-in-out checked:bg-white;
 }
