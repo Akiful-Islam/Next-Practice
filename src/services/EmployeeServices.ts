@@ -184,6 +184,7 @@ const deleteEmployee = async (
         setemployeeFound(true);
         return response.json();
       } else {
+        setemployeeFound(false);
         throw new Error("Error deleting employee");
       }
     })
