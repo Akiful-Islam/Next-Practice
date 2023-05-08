@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import EmployeeTable from "../EmployeeTable";
 import { postEmployee } from "@/services/EmployeeServices";
 import TextInput from "../input_components/TextInput";
+import EmailInput from "../input_components/EmailInput";
 
 const Post = () => {
   const [firstName, setFirstName] = useState("");
@@ -49,7 +50,7 @@ const Post = () => {
         </label>
         <label>
           Email:
-          <TextInput value={email} setValue={setEmail} placeholder="Email" />
+          <EmailInput value={email} setValue={setEmail} placeholder="Email" />
         </label>
         {firstName && lastName && email ? (
           <button type="submit">Post Employee</button>

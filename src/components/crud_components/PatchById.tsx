@@ -5,6 +5,7 @@ import EmployeeTable from "../EmployeeTable";
 import { PatchData, patchEmployee } from "@/services/EmployeeServices";
 import TextInput from "../input_components/TextInput";
 import NumberInput from "../input_components/NumberInput";
+import EmailInput from "../input_components/EmailInput";
 
 const PatchById = () => {
   const [employeeId, setEmployeeId] = useState(0);
@@ -104,7 +105,7 @@ const PatchById = () => {
             {editEmail && (
               <label>
                 :
-                <TextInput
+                <EmailInput
                   value={email}
                   setValue={setEmail}
                   placeholder="Enter Email"
