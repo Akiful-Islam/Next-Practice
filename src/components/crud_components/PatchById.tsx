@@ -3,9 +3,11 @@ import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "../EmployeeTable";
 import { PatchData, patchEmployee } from "@/services/EmployeeServices";
+import TextInput from "../input_components/TextInput";
+import NumberInput from "../input_components/NumberInput";
 
 const PatchById = () => {
-  const [employeeId, setEmployeeId] = useState("");
+  const [employeeId, setEmployeeId] = useState(0);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -44,16 +46,14 @@ const PatchById = () => {
       <form onSubmit={handleSubmit}>
         <label>
           Employee ID:
-          <input
-            type="number"
+          <NumberInput
             value={employeeId}
-            onChange={(e) => setEmployeeId(e.target.value)}
-            placeholder="Enter ID"
-            required
+            setValue={setEmployeeId}
+            placeholder="Employee ID"
           />
         </label>
         <br />
-        {employeeId && (
+        {employeeId > 0 && (
           <div>
             <label>
               <input
@@ -63,7 +63,17 @@ const PatchById = () => {
               />
               Edit First Name
             </label>
-
+            {editFirstName && (
+              <label>
+                :
+                <TextInput
+                  value={firstName}
+                  setValue={setFirstName}
+                  placeholder="Enter First Name"
+                />
+              </label>
+            )}
+            <br />
             <label>
               <input
                 type="checkbox"
@@ -72,7 +82,17 @@ const PatchById = () => {
               />
               Edit Last Name
             </label>
-
+            {editLastName && (
+              <label>
+                :
+                <TextInput
+                  value={lastName}
+                  setValue={setLastName}
+                  placeholder="Enter Last Name"
+                />
+              </label>
+            )}
+            <br />
             <label>
               <input
                 type="checkbox"
@@ -81,44 +101,16 @@ const PatchById = () => {
               />
               Edit Email
             </label>
-            <br />
-            {editFirstName && (
-              <label>
-                First Name:
-                <input
-                  type="text"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  placeholder="Enter First Name"
-                  required
-                />
-              </label>
-            )}
-            {editLastName && (
-              <label>
-                Last Name:
-                <input
-                  type="text"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                  placeholder="Enter Last Name"
-                  required
-                />
-              </label>
-            )}
             {editEmail && (
               <label>
-                Email:
-                <input
-                  type="email"
+                :
+                <TextInput
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  setValue={setEmail}
                   placeholder="Enter Email"
-                  required
                 />
               </label>
             )}
-            <br />
           </div>
         )}
         {firstName || lastName || email ? (

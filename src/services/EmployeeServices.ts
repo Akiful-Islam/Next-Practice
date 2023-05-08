@@ -26,7 +26,7 @@ export type PatchData = {
 
 type PatchFields = {
   patchData: PatchData;
-  employeeId: string;
+  employeeId: number;
   setFirstName: (firstName: string) => void;
   setLastName: (lastName: string) => void;
   setEmail: (email: string) => void;
