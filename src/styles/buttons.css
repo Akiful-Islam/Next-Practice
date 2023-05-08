@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-button {
+.get-all button {
   @apply text-black rounded-lg m-2 bg-white;
   border: 12;
   padding: 16;
