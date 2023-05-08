@@ -7,7 +7,18 @@ type QueryParams = {
   sortDirection?: string;
 };
 
-const fetchAllEmployees = async (
+type PostFields = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  setFirstName: (firstName: string) => void;
+  setLastName: (lastName: string) => void;
+  setEmail: (email: string) => void;
+  setError: (error: string) => void;
+  setPostedEmployee: (employee: Employee | null) => void;
+};
+
+const getAllEmployees = async (
   queryParams: QueryParams,
   setEmployees: (employees: Employee[]) => void
 ) => {
@@ -42,7 +53,7 @@ const fetchAllEmployees = async (
     });
 };
 
-const fetchEmployeeById = async (
+const getEmployeeById = async (
   id: string,
   setEmployee: (employee: Employee | null) => void
 ) => {
@@ -64,4 +75,42 @@ const fetchEmployeeById = async (
     });
 };
 
-export { fetchAllEmployees, fetchEmployeeById };
+const postEmployee = async (postFields: PostFields) => {
+  const {
+    firstName,
+    lastName,
+    email,
+    setFirstName,
+    setLastName,
+    setEmail,
+    setError,
+    setPostedEmployee,
+  } = postFields;
+  const url = `http://localhost:3030/api/employees`;
+  fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ firstName, lastName, email }),
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        setPostedEmployee(null);
+        throw new Error("Error adding employee");
+      }
+    })
+    .then((data) => {
+      console.log(data);
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setError("");
+      setPostedEmployee(data);
+    })
+    .catch((err) => {
+      setError(err.message);
+    });
+};
+
+export { getAllEmployees, getEmployeeById, postEmployee };

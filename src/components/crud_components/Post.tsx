@@ -3,6 +3,7 @@
 import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "../EmployeeTable";
+import { postEmployee } from "@/services/EmployeeServices";
 
 const Post = () => {
   const [firstName, setFirstName] = useState("");
@@ -14,31 +15,16 @@ const Post = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const url = `http://localhost:3030/api/employees`;
-    fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ firstName, lastName, email }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          setPostedEmployee(null);
-          throw new Error("Error adding employee");
-        }
-      })
-      .then((data) => {
-        console.log(data);
-        setFirstName("");
-        setLastName("");
-        setEmail("");
-        setError("");
-        setPostedEmployee(data);
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
+    postEmployee({
+      firstName,
+      lastName,
+      email,
+      setFirstName,
+      setLastName,
+      setEmail,
+      setError,
+      setPostedEmployee,
+    });
   };
   return (
     <div>
