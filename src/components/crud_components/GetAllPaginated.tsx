@@ -1,9 +1,9 @@
 "use client";
-import { Employee, dummyEmployees } from "@/types/Employee";
+import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "../EmployeeTable";
 import QueryForm from "../QueryForm";
-import { fetchAllEmployees } from "@/services/EmployeeServices";
+import { getAllEmployees } from "@/services/EmployeeServices";
 
 const GetAllPaginated = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -17,7 +17,7 @@ const GetAllPaginated = () => {
   const [sortDirection, setSortDirection] = useState("asc");
 
   const handleGetAllClick = () => {
-    fetchAllEmployees(
+    getAllEmployees(
       { pageNumber, pageSize, sortBy, sortDirection },
       setEmployees
     );

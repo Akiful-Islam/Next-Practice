@@ -3,7 +3,7 @@
 import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "../EmployeeTable";
-import { fetchEmployeeById } from "@/services/EmployeeServices";
+import { getEmployeeById } from "@/services/EmployeeServices";
 
 const GetById = () => {
   const [employee, setEmployee] = useState<Employee | null>();
@@ -12,7 +12,7 @@ const GetById = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    fetchEmployeeById(employeeId, setEmployee);
+    getEmployeeById(employeeId, setEmployee);
     setShowResponse(true);
   };
 
