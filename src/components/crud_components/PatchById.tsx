@@ -2,6 +2,7 @@
 import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "../EmployeeTable";
+import { PatchData, patchEmployee } from "@/services/EmployeeServices";
 
 const PatchById = () => {
   const [employeeId, setEmployeeId] = useState("");
@@ -21,38 +22,20 @@ const PatchById = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const patchData: any = {};
+    const patchData: PatchData = {};
     if (editFirstName) patchData.firstName = firstName;
     if (editLastName) patchData.lastName = lastName;
     if (editEmail) patchData.email = email;
 
-    const url = `http://localhost:3030/api/employees/${employeeId}`;
-
-    fetch(url, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(patchData),
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          setPatchedEmployee(null);
-          throw new Error("Error patching employee");
-        }
-      })
-      .then((data) => {
-        console.log(data);
-        setFirstName("");
-        setLastName("");
-        setEmail("");
-        setPatchedEmployee(data);
-      })
-      .catch((err) => {
-        console.log(err);
-
-        setError(err.message);
-      });
+    patchEmployee({
+      patchData,
+      employeeId,
+      setFirstName,
+      setLastName,
+      setEmail,
+      setPatchedEmployee,
+      setError,
+    });
   };
 
   return (
