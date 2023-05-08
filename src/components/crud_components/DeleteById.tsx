@@ -1,5 +1,6 @@
 "use client";
 
+import { deleteEmployee } from "@/services/EmployeeServices";
 import React, { useState } from "react";
 
 const DeleteById = () => {
@@ -9,27 +10,7 @@ const DeleteById = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const url = `http://localhost:3030/api/employees/${employeeId}`;
-    fetch(url, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ employeeId }),
-    })
-      .then((response) => {
-        if (response.status === 204) {
-          setemployeeFound(true);
-          return response.json();
-        } else {
-          throw new Error("Error deleting employee");
-        }
-      })
-      .then((data) => {
-        console.log(data);
-        setEmployeeId("");
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    deleteEmployee(employeeId, setEmployeeId, setemployeeFound);
     setShowResponse(true);
   };
 

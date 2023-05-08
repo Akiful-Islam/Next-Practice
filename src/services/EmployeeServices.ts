@@ -168,4 +168,38 @@ const patchEmployee = async (patchFields: PatchFields) => {
     });
 };
 
-export { getAllEmployees, getEmployeeById, postEmployee, patchEmployee };
+const deleteEmployee = async (
+  id: string,
+  setEmployeeId: (employeeId: string) => void,
+  setemployeeFound: (employeeFound: boolean) => void
+) => {
+  const url = `http://localhost:3030/api/employees/${id}`;
+  fetch(url, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id }),
+  })
+    .then((response) => {
+      if (response.status === 204) {
+        setemployeeFound(true);
+        return response.json();
+      } else {
+        throw new Error("Error deleting employee");
+      }
+    })
+    .then((data) => {
+      console.log(data);
+      setEmployeeId("");
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+export {
+  getAllEmployees,
+  getEmployeeById,
+  postEmployee,
+  patchEmployee,
+  deleteEmployee,
+};
