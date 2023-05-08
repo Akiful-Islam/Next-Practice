@@ -25,25 +25,3 @@ input[type="checkbox"] {
 input[type="checkbox"]:checked {
   @apply bg-white;
 }
-
-select {
-  @apply w-16 h-9 text-black rounded-lg m-2;
-}
-
-button {
-  @apply text-black rounded-lg m-2 bg-white;
-  border: 12;
-  padding: 16;
-  margin: 8;
-}
-
-button[type="submit"] {
-  @apply text-black rounded-lg m-2 bg-white;
-  border: 12;
-  padding: 16;
-  margin: 8;
-}
-
-button:hover {
-  @apply bg-gray-200;
-}

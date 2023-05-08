@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+button {
+  @apply text-black rounded-lg m-2 bg-white;
+  border: 12;
+  padding: 16;
+  margin: 8;
+}
+
+button[type="submit"] {
+  @apply text-black rounded-lg m-2 bg-white;
+  border: 12;
+  padding: 16;
+  margin: 8;
+}
+
+button:hover {
+  @apply bg-gray-200;
+}
