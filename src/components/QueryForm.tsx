@@ -1,4 +1,7 @@
 import React from "react";
+import NumberInput from "./input_components/NumberInput";
+import SortDirectionSelector from "./input_components/SortDirectionSelector";
+import SortBySelector from "./input_components/SortBySelector";
 
 type Props = {
   pageNumber: number;
@@ -23,52 +26,29 @@ const QueryForm: React.FC<Props> = ({
 }) => {
   return (
     <div>
-      <div>
-        <label htmlFor="page-size">Page Size:</label>
-        <input
-          id="page-size"
-          type="number"
-          value={pageSize}
-          onChange={(e) => setPageSize(parseInt(e.target.value))}
-          placeholder="Page Size"
-        />
-      </div>
-      <div>
-        <label htmlFor="page-number">Page Number:</label>
-        <input
-          id="page-number"
-          type="number"
-          value={pageNumber}
-          onChange={(e) => setPageNumber(parseInt(e.target.value))}
-          placeholder="Page Number"
-        />
-      </div>
-      <div>
-        <label htmlFor="sort-by">Sort By:</label>
-        <select
-          id="sort-by"
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
-          placeholder="Sort By"
-        >
-          <option value="id">Id</option>
-          <option value="firstName">First Name</option>
-          <option value="lastName">Last Name</option>
-          <option value="email">Email</option>
-        </select>
-      </div>
-      <div>
-        <label htmlFor="sort-order">Sort Order:</label>
-        <select
-          id="sort-order"
-          value={sortDirection}
-          onChange={(e) => setSortDirection(e.target.value)}
-          placeholder="Sort Direction"
-        >
-          <option value="asc">Asc</option>
-          <option value="desc">Desc</option>
-        </select>
-      </div>
+      <label htmlFor="page-size">Page Size:</label>
+      <NumberInput
+        id="page-size"
+        value={pageSize}
+        setValue={setPageSize}
+        placeholder="Page Size"
+        required={false}
+      />
+      <label htmlFor="page-number">Page Number:</label>
+      <NumberInput
+        id="page-size"
+        value={pageNumber}
+        setValue={setPageNumber}
+        placeholder="Page Number"
+        required={false}
+      />
+      <label htmlFor="sort-by">Sort By:</label>
+      <SortBySelector value={sortBy} setValue={setSortBy} />
+      <label htmlFor="sort-direction">Sort Direction:</label>
+      <SortDirectionSelector
+        value={sortDirection}
+        setValue={setSortDirection}
+      />
     </div>
   );
 };
