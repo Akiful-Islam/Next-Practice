@@ -11,6 +11,10 @@ input[type="number"]::-webkit-outer-spin-button {
   display: none;
 }
 
+input[type="number"] {
+  @apply w-20 h-9 text-black rounded-lg m-2 appearance-none;
+}
+
 input[type="text"] {
   @apply w-32 h-9 text-black rounded-lg m-2 appearance-none;
 }

@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.employee-table table {
+  @apply w-48 border-collapse border border-gray-500;
+}
+
+.employee-table th {
+  @apply bg-gray-800 border border-gray-500 px-4 py-2;
+}
+
+.employee-table td {
+  @apply border border-gray-300 px-4 py-2;
+}
+
+.employee-table tr:nth-child(even) {
+  @apply bg-gray-700;
+}
+
+.employee-table tr:nth-child(odd) {
+  @apply bg-gray-600;
+}
+
+.employee-table tr:hover {
+  @apply bg-gray-500;
+}

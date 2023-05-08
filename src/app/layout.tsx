@@ -1,7 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import "@/styles/inputs.css";
 import "@/styles/buttons.css";
+import "@/styles/inputs.css";
 import "@/styles/select.css";
 import "@/styles/tables.css";
 
