@@ -3,6 +3,7 @@
 import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "../EmployeeTable";
+import { fetchEmployeeById } from "@/services/EmployeeServices";
 
 const GetById = () => {
   const [employee, setEmployee] = useState<Employee | null>();
@@ -11,22 +12,7 @@ const GetById = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const url = `http://localhost:3030/api/employees/${employeeId}`;
-    fetch(url)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          setEmployee(null);
-          throw new Error("Employee not found");
-        }
-      })
-      .then((data) => {
-        setEmployee(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    fetchEmployeeById(employeeId, setEmployee);
     setShowResponse(true);
   };
 

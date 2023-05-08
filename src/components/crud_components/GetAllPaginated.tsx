@@ -3,13 +3,7 @@ import { Employee, dummyEmployees } from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "../EmployeeTable";
 import QueryForm from "../QueryForm";
-
-type QueryParams = {
-  pageNumber?: number;
-  pageSize?: number;
-  sortBy?: string;
-  sortDirection?: string;
-};
+import { fetchAllEmployees } from "@/services/EmployeeServices";
 
 const GetAllPaginated = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -23,38 +17,13 @@ const GetAllPaginated = () => {
   const [sortDirection, setSortDirection] = useState("asc");
 
   const handleGetAllClick = () => {
-    fetchData({ pageNumber, pageSize, sortBy, sortDirection });
+    fetchAllEmployees(
+      { pageNumber, pageSize, sortBy, sortDirection },
+      setEmployees
+    );
     setShowTable(true);
   };
 
-  const fetchData = async (queryParams: QueryParams) => {
-    const { pageNumber, pageSize, sortBy, sortDirection } = queryParams;
-    let url = "http://localhost:3030/api/employees";
-    const params = new URLSearchParams();
-    if (pageNumber) {
-      params.append("page", pageNumber.toString());
-    }
-    if (pageSize) {
-      params.append("size", pageSize.toString());
-    }
-    if (sortBy) {
-      if (sortDirection) {
-        params.append("sort", `${sortBy},${sortDirection}`);
-      } else {
-        params.append("sort", sortBy);
-      }
-    }
-    if (params.toString()) {
-      console.log(url);
-      url += `?${params.toString()}`;
-    }
-
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        setEmployees(data.content);
-      });
-  };
   return (
     <div className="get-all">
       <h2>Get All</h2>
