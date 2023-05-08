@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.response .ok-response p {
+  @apply text-lg font-semibold text-green-300 animate-pulse;
+}
+
+.response p {
+  @apply text-lg font-bold text-red-500 animate-pulse;
+}

@@ -30,13 +30,15 @@ const GetById = () => {
         />
         {employeeId > 0 ? <button type="submit">Search</button> : null}
       </form>
-      {showResponse ? (
-        employee ? (
-          <EmployeeTable employees={[employee]} />
-        ) : (
-          <p>Employee Not found :(</p>
-        )
-      ) : null}
+      <div className="response">
+        {showResponse ? (
+          employee ? (
+            <EmployeeTable employees={[employee]} />
+          ) : (
+            <p>Employee Not found :(</p>
+          )
+        ) : null}
+      </div>
     </div>
   );
 };

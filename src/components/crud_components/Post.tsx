@@ -56,14 +56,16 @@ const Post = () => {
           <button type="submit">Post Employee</button>
         ) : null}
       </form>
-      {postedEmployee ? (
-        <div>
-          <p>Employee successfully Posted :D</p>
-          <EmployeeTable employees={[postedEmployee]} />
-        </div>
-      ) : (
-        error && <p>{error}</p>
-      )}
+      <div className="response">
+        {postedEmployee ? (
+          <div className="ok-response">
+            <p>Employee successfully Posted :D</p>
+            <EmployeeTable employees={[postedEmployee]} />
+          </div>
+        ) : (
+          error && <p>{error}</p>
+        )}
+      </div>
     </div>
   );
 };

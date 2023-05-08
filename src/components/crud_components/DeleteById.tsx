@@ -27,13 +27,17 @@ const DeleteById = () => {
         />
         {employeeId > 0 ? <button type="submit">Delete</button> : null}
       </form>
-      {showResponse ? (
-        employeeFound ? (
-          <p>Employee Deleted :D</p>
-        ) : (
-          <p>Employee Not found :(</p>
-        )
-      ) : null}
+      <div className="response">
+        {showResponse ? (
+          employeeFound ? (
+            <div className="ok-response">
+              <p>Employee Deleted :D</p>
+            </div>
+          ) : (
+            <p>Employee Not found :(</p>
+          )
+        ) : null}
+      </div>
     </div>
   );
 };

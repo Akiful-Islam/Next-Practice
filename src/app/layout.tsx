@@ -4,6 +4,7 @@ import "@/styles/buttons.css";
 import "@/styles/inputs.css";
 import "@/styles/select.css";
 import "@/styles/tables.css";
+import "@/styles/response.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

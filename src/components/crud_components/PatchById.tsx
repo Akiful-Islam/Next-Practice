@@ -118,14 +118,16 @@ const PatchById = () => {
           <button type="submit">Update Employee</button>
         ) : null}
       </form>
-      {patchedEmployee ? (
-        <div>
-          <h1>Employee Patched</h1>
-          <EmployeeTable employees={[patchedEmployee]} />
-        </div>
-      ) : (
-        error && <h1>Employee not found with id: {employeeId}</h1>
-      )}
+      <div className="response">
+        {patchedEmployee ? (
+          <div className="ok-response">
+            <p>Employee Patched :)</p>
+            <EmployeeTable employees={[patchedEmployee]} />
+          </div>
+        ) : (
+          error && <p>Employee not found with id: {employeeId} :(</p>
+        )}
+      </div>
     </div>
   );
 };
