@@ -2,10 +2,11 @@
 
 import { deleteEmployee } from "@/services/EmployeeServices";
 import React, { useState } from "react";
+import NumberInput from "../input_components/NumberInput";
 
 const DeleteById = () => {
   const [employeeFound, setemployeeFound] = useState(false);
-  const [employeeId, setEmployeeId] = useState("");
+  const [employeeId, setEmployeeId] = useState(0);
   const [showResponse, setShowResponse] = useState(false);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -19,14 +20,12 @@ const DeleteById = () => {
       <h2>Delete by Id</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="employeeId">Employee Id: </label>
-        <input
-          id="employeeId"
-          type="number"
+        <NumberInput
           value={employeeId}
-          placeholder="Id"
-          onChange={(event) => setEmployeeId(event.target.value)}
+          setValue={setEmployeeId}
+          placeholder="Employee Id"
         />
-        {employeeId ? <button type="submit">Delete</button> : null}
+        {employeeId > 0 ? <button type="submit">Delete</button> : null}
       </form>
       {showResponse ? (
         employeeFound ? (

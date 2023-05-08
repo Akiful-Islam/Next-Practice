@@ -169,8 +169,8 @@ const patchEmployee = async (patchFields: PatchFields) => {
 };
 
 const deleteEmployee = async (
-  id: string,
-  setEmployeeId: (employeeId: string) => void,
+  id: number,
+  setEmployeeId: (employeeId: number) => void,
   setemployeeFound: (employeeFound: boolean) => void
 ) => {
   const url = `http://localhost:3030/api/employees/${id}`;
@@ -189,7 +189,7 @@ const deleteEmployee = async (
     })
     .then((data) => {
       console.log(data);
-      setEmployeeId("");
+      setEmployeeId(0);
     })
     .catch((err) => {
       console.log(err.message);
