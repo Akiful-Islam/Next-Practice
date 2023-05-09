@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .form-button {
-  @apply self-center w-48 h-14 text-4xl font-extrabold bg-slate-100 rounded-xl;
+  @apply self-center w-48 h-14 text-4xl font-extrabold bg-slate-100 rounded-xl m-1;
 }
 
 .form-button .button-link {
