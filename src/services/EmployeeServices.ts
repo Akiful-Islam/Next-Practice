@@ -77,33 +77,21 @@ const patchEmployee = async (id: number, patchData: PatchData) => {
   return res.json();
 };
 
-const deleteEmployee = async (
-  id: number,
-  setEmployeeId: (employeeId: number) => void,
-  setemployeeFound: (employeeFound: boolean) => void
-) => {
+const deleteEmployee = async (id: number) => {
   const url = `http://localhost:3030/api/employees/${id}`;
-  fetch(url, {
+  const res = await fetch(url, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ id }),
-  })
-    .then((response) => {
-      if (response.status === 204) {
-        setemployeeFound(true);
-        return response.json();
-      } else {
-        setemployeeFound(false);
-        throw new Error("Error deleting employee");
-      }
-    })
-    .then((data) => {
-      console.log(data);
-      setEmployeeId(0);
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
+    cache: "no-store",
+  });
+
+  if (res.status === 404) {
+    return res.json();
+  }
+
+  if (res.status === 204) {
+    return;
+  }
 };
 
 export {
