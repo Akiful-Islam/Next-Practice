@@ -18,9 +18,10 @@ const PatchById = () => {
   const [editLastName, setEditLastName] = useState(false);
   const [editEmail, setEditEmail] = useState(false);
 
-  const [error, setError] = useState("");
-
+  const [error, setError] = useState<string | null>(null);
   const [patchedEmployee, setPatchedEmployee] = useState<Employee | null>(null);
+
+  const [showResponse, setShowResponse] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -30,15 +31,16 @@ const PatchById = () => {
     if (editLastName) patchData.lastName = lastName;
     if (editEmail) patchData.email = email;
 
-    patchEmployee({
-      patchData,
-      employeeId,
-      setFirstName,
-      setLastName,
-      setEmail,
-      setPatchedEmployee,
-      setError,
-    });
+    const res = await patchEmployee(employeeId, patchData);
+
+    if ("errorMessage" in res) {
+      setPatchedEmployee(null);
+      setError(`${res.code} - ${res.errorMessage}`);
+    } else {
+      setPatchedEmployee(res);
+    }
+
+    setShowResponse(true);
   };
 
   return (
@@ -119,14 +121,20 @@ const PatchById = () => {
         ) : null}
       </form>
       <div className="response">
-        {patchedEmployee ? (
-          <div className="ok-response">
-            <p>Employee Patched :)</p>
-            <EmployeeTable employees={[patchedEmployee]} />
-          </div>
-        ) : (
-          error && <p>Employee not found with id: {employeeId} :(</p>
-        )}
+        {showResponse &&
+          (patchedEmployee ? (
+            <div className="ok-response">
+              <p>Employee Patched :)</p>
+              <EmployeeTable employees={[patchedEmployee]} />
+            </div>
+          ) : error ? (
+            <div>
+              <p>Error Occured :(</p>
+              <p>{error}</p>
+            </div>
+          ) : (
+            <p>Something went wrong :(</p>
+          ))}
       </div>
     </div>
   );

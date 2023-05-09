@@ -1,5 +1,3 @@
-import { Employee } from "@/types/Employee";
-
 type QueryParams = {
   pageNumber?: number;
   pageSize?: number;
@@ -7,15 +5,10 @@ type QueryParams = {
   sortDirection?: string;
 };
 
-type PostFields = {
+type PostData = {
   firstName: string;
   lastName: string;
   email: string;
-  setFirstName: (firstName: string) => void;
-  setLastName: (lastName: string) => void;
-  setEmail: (email: string) => void;
-  setError: (error: string) => void;
-  setPostedEmployee: (employee: Employee | null) => void;
 };
 
 export type PatchData = {
@@ -24,20 +17,7 @@ export type PatchData = {
   email?: string;
 };
 
-type PatchFields = {
-  patchData: PatchData;
-  employeeId: number;
-  setFirstName: (firstName: string) => void;
-  setLastName: (lastName: string) => void;
-  setEmail: (email: string) => void;
-  setPatchedEmployee: (employee: Employee | null) => void;
-  setError: (error: string) => void;
-};
-
-const getAllEmployees = async (
-  queryParams: QueryParams,
-  setEmployees: (employees: Employee[]) => void
-) => {
+const getAllEmployees = async (queryParams: QueryParams) => {
   const { pageNumber, pageSize, sortBy, sortDirection } = queryParams;
 
   let url = "http://localhost:3030/api/employees";
@@ -58,143 +38,60 @@ const getAllEmployees = async (
   }
 
   if (params.toString()) {
-    console.log(url);
     url += `?${params.toString()}`;
   }
 
-  await fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      setEmployees(data.content);
-    });
+  const res = await fetch(url, { cache: "no-store" });
+
+  return res.json();
 };
 
-const getEmployeeById = async (
-  id: number,
-  setEmployee: (employee: Employee | null) => void
-) => {
+const getEmployeeById = async (id: number) => {
   const url = `http://localhost:3030/api/employees/${id}`;
-  await fetch(url)
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        setEmployee(null);
-        throw new Error("Employee not found");
-      }
-    })
-    .then((data) => {
-      setEmployee(data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  const res = await fetch(url, { cache: "no-store" });
+  return res.json();
 };
 
-const postEmployee = async (postFields: PostFields) => {
-  const {
-    firstName,
-    lastName,
-    email,
-    setFirstName,
-    setLastName,
-    setEmail,
-    setError,
-    setPostedEmployee,
-  } = postFields;
+const postEmployee = async (postData: PostData) => {
   const url = `http://localhost:3030/api/employees`;
-  fetch(url, {
+  const res = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ firstName, lastName, email }),
-  })
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        setPostedEmployee(null);
-        throw new Error("Error adding employee");
-      }
-    })
-    .then((data) => {
-      console.log(data);
-      setFirstName("");
-      setLastName("");
-      setEmail("");
-      setError("");
-      setPostedEmployee(data);
-    })
-    .catch((err) => {
-      setError(err.message);
-    });
+    body: JSON.stringify(postData),
+    cache: "no-store",
+  });
+
+  return res.json();
 };
 
-const patchEmployee = async (patchFields: PatchFields) => {
-  const {
-    patchData,
-    employeeId,
-    setFirstName,
-    setLastName,
-    setEmail,
-    setPatchedEmployee,
-    setError,
-  } = patchFields;
+const patchEmployee = async (id: number, patchData: PatchData) => {
+  const url = `http://localhost:3030/api/employees/${id}`;
 
-  const url = `http://localhost:3030/api/employees/${employeeId}`;
-  fetch(url, {
+  const res = await fetch(url, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(patchData),
-  })
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        setPatchedEmployee(null);
-        throw new Error("Error patching employee");
-      }
-    })
-    .then((data) => {
-      console.log(data);
-      setFirstName("");
-      setLastName("");
-      setEmail("");
-      setPatchedEmployee(data);
-    })
-    .catch((err) => {
-      console.log(err);
+    cache: "no-store",
+  });
 
-      setError(err.message);
-    });
+  return res.json();
 };
 
-const deleteEmployee = async (
-  id: number,
-  setEmployeeId: (employeeId: number) => void,
-  setemployeeFound: (employeeFound: boolean) => void
-) => {
+const deleteEmployee = async (id: number) => {
   const url = `http://localhost:3030/api/employees/${id}`;
-  fetch(url, {
+  const res = await fetch(url, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ id }),
-  })
-    .then((response) => {
-      if (response.status === 204) {
-        setemployeeFound(true);
-        return response.json();
-      } else {
-        setemployeeFound(false);
-        throw new Error("Error deleting employee");
-      }
-    })
-    .then((data) => {
-      console.log(data);
-      setEmployeeId(0);
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
+    cache: "no-store",
+  });
+
+  if (res.status === 404) {
+    return res.json();
+  }
+
+  if (res.status === 204) {
+    return;
+  }
 };
 
 export {

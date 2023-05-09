@@ -5,13 +5,21 @@ import React, { useState } from "react";
 import NumberInput from "../input_components/NumberInput";
 
 const DeleteById = () => {
-  const [employeeFound, setemployeeFound] = useState(false);
   const [employeeId, setEmployeeId] = useState(0);
+
+  const [employeeFound, setemployeeFound] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [showResponse, setShowResponse] = useState(false);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    deleteEmployee(employeeId, setEmployeeId, setemployeeFound);
+    const res = await deleteEmployee(employeeId);
+    if (res) {
+      setemployeeFound(false);
+      setError(`${res.code} - ${res.errorMessage}`);
+    } else {
+      setemployeeFound(true);
+    }
     setShowResponse(true);
   };
 
@@ -33,8 +41,13 @@ const DeleteById = () => {
             <div className="ok-response">
               <p>Employee Deleted :D</p>
             </div>
+          ) : error ? (
+            <div>
+              <p>Error Occured :(</p>
+              <p>{error}</p>
+            </div>
           ) : (
-            <p>Employee Not found :(</p>
+            <p>Something went wrong :(</p>
           )
         ) : null}
       </div>
