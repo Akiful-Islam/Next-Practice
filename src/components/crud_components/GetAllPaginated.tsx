@@ -25,8 +25,7 @@ const GetAllPaginated = () => {
   };
 
   return (
-    <div className="get-all">
-      <h2>Get All</h2>
+    <div className="get-all-component">
       <button onClick={() => setShowQueryForm(!showQueryForm)}>
         Add Query Params?
       </button>

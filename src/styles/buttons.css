@@ -10,7 +10,7 @@
   @apply bg-transparent text-slate-800;
 }
 
-.get-all button {
+.get-all-component button {
   @apply text-black rounded-lg m-2 bg-white;
   border: 12;
   padding: 16;
