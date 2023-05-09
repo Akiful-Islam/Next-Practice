@@ -34,10 +34,7 @@ type PatchFields = {
   setError: (error: string) => void;
 };
 
-const getAllEmployees = async (
-  queryParams: QueryParams,
-  setEmployees: (employees: Employee[]) => void
-) => {
+const getAllEmployees = async (queryParams: QueryParams) => {
   const { pageNumber, pageSize, sortBy, sortDirection } = queryParams;
 
   let url = "http://localhost:3030/api/employees";
@@ -58,15 +55,12 @@ const getAllEmployees = async (
   }
 
   if (params.toString()) {
-    console.log(url);
     url += `?${params.toString()}`;
   }
 
-  await fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      setEmployees(data.content);
-    });
+  const res = await fetch(url, { cache: "no-store" });
+
+  return res.json();
 };
 
 const getEmployeeById = async (

@@ -16,11 +16,15 @@ const GetAllPaginated = () => {
   const [sortBy, setSortBy] = useState("id");
   const [sortDirection, setSortDirection] = useState("asc");
 
-  const handleGetAllClick = () => {
-    getAllEmployees(
-      { pageNumber, pageSize, sortBy, sortDirection },
-      setEmployees
-    );
+  const handleGetAllClick = async () => {
+    const response = await getAllEmployees({
+      pageNumber,
+      pageSize,
+      sortBy,
+      sortDirection,
+    });
+
+    setEmployees(response.content);
     setShowTable(true);
   };
 
