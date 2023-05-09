@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.loading {
+  @apply flex items-center justify-center h-screen;
+}
+
+.loading-text {
+  @apply animate-pulse self-center text-6xl bg-slate-500 rounded-xl;
+}
