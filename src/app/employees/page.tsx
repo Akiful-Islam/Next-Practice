@@ -3,7 +3,7 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className="employees-root flex flex-col items-center justify-center h-screen">
+    <div className="employees-root flex flex-col">
       <button className="form-button">
         <Link className="button-link" href="/employees/get">
           Get All

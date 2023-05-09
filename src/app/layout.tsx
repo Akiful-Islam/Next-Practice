@@ -24,7 +24,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={roboto.className}>{children}</body>
+      <body className={roboto.className}>
+        <div className="root-layout flex items-center justify-center h-screen">
+          {children}
+        </div>
+      </body>
     </html>
   );
 }

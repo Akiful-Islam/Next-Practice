@@ -3,7 +3,7 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className="home flex items-center justify-center h-screen">
+    <div className="home">
       <button className="form-button">
         <Link className="button-link" href="/employees">
           Employees
