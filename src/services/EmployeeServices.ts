@@ -1,6 +1,3 @@
-import { Employee } from "@/types/Employee";
-import { ErrorResponse } from "@/types/ErrorResponse";
-
 type QueryParams = {
   pageNumber?: number;
   pageSize?: number;
@@ -8,7 +5,7 @@ type QueryParams = {
   sortDirection?: string;
 };
 
-type PostFields = {
+type PostData = {
   firstName: string;
   lastName: string;
   email: string;
@@ -18,16 +15,6 @@ export type PatchData = {
   firstName?: string;
   lastName?: string;
   email?: string;
-};
-
-type PatchFields = {
-  patchData: PatchData;
-  employeeId: number;
-  setFirstName: (firstName: string) => void;
-  setLastName: (lastName: string) => void;
-  setEmail: (email: string) => void;
-  setPatchedEmployee: (employee: Employee | null) => void;
-  setError: (error: string) => void;
 };
 
 const getAllEmployees = async (queryParams: QueryParams) => {
@@ -65,55 +52,29 @@ const getEmployeeById = async (id: number) => {
   return res.json();
 };
 
-const postEmployee = async (postFields: PostFields) => {
+const postEmployee = async (postData: PostData) => {
   const url = `http://localhost:3030/api/employees`;
   const res = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(postFields),
+    body: JSON.stringify(postData),
     cache: "no-store",
   });
 
   return res.json();
 };
 
-const patchEmployee = async (patchFields: PatchFields) => {
-  const {
-    patchData,
-    employeeId,
-    setFirstName,
-    setLastName,
-    setEmail,
-    setPatchedEmployee,
-    setError,
-  } = patchFields;
+const patchEmployee = async (id: number, patchData: PatchData) => {
+  const url = `http://localhost:3030/api/employees/${id}`;
 
-  const url = `http://localhost:3030/api/employees/${employeeId}`;
-  fetch(url, {
+  const res = await fetch(url, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(patchData),
-  })
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        setPatchedEmployee(null);
-        throw new Error("Error patching employee");
-      }
-    })
-    .then((data) => {
-      console.log(data);
-      setFirstName("");
-      setLastName("");
-      setEmail("");
-      setPatchedEmployee(data);
-    })
-    .catch((err) => {
-      console.log(err);
+    cache: "no-store",
+  });
 
-      setError(err.message);
-    });
+  return res.json();
 };
 
 const deleteEmployee = async (
