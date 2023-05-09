@@ -128,7 +128,10 @@ const PatchById = () => {
               <EmployeeTable employees={[patchedEmployee]} />
             </div>
           ) : error ? (
-            <p>Employee not found with id: {employeeId} :(</p>
+            <div>
+              <p>Error Occured :(</p>
+              <p>{error}</p>
+            </div>
           ) : (
             <p>Something went wrong :(</p>
           ))}
