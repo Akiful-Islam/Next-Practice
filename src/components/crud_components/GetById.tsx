@@ -17,7 +17,6 @@ const GetById = () => {
 
     if ("errorMessage" in res) {
       setEmployee(null);
-
       setError(`${res.code} - ${res.errorMessage}`);
     } else {
       setEmployee(res);

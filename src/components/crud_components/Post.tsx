@@ -11,22 +11,27 @@ const Post = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
 
+  const [error, setError] = useState<string | null>(null);
   const [postedEmployee, setPostedEmployee] = useState<Employee | null>(null);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const [showResponse, setShowResponse] = useState(false);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    postEmployee({
+    const res = await postEmployee({
       firstName,
       lastName,
       email,
-      setFirstName,
-      setLastName,
-      setEmail,
-      setError,
-      setPostedEmployee,
     });
+
+    if ("errorMessage" in res) {
+      setPostedEmployee(null);
+      setError(`${res.code} - ${res.errorMessage}`);
+    } else {
+      setPostedEmployee(res);
+    }
+    setShowResponse(true);
   };
   return (
     <div>
@@ -57,14 +62,20 @@ const Post = () => {
         ) : null}
       </form>
       <div className="response">
-        {postedEmployee ? (
-          <div className="ok-response">
-            <p>Employee successfully Posted :D</p>
-            <EmployeeTable employees={[postedEmployee]} />
-          </div>
-        ) : (
-          error && <p>{error}</p>
-        )}
+        {showResponse &&
+          (postedEmployee ? (
+            <div className="ok-response">
+              <p>Employee successfully Posted :D</p>
+              <EmployeeTable employees={[postedEmployee]} />
+            </div>
+          ) : error ? (
+            <div>
+              <p>Error Occured :(</p>
+              <p>{error}</p>
+            </div>
+          ) : (
+            <p>Something Happened :(</p>
+          ))}
       </div>
     </div>
   );
