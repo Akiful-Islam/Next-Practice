@@ -10,10 +10,18 @@ const GetById = () => {
   const [employee, setEmployee] = useState<Employee | null>();
   const [employeeId, setEmployeeId] = useState(0);
   const [showResponse, setShowResponse] = useState(false);
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const [error, setError] = useState<string | null>(null);
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    getEmployeeById(employeeId, setEmployee);
+    const res = await getEmployeeById(employeeId);
+
+    if ("errorMessage" in res) {
+      setEmployee(null);
+
+      setError(`${res.code} - ${res.errorMessage}`);
+    } else {
+      setEmployee(res);
+    }
     setShowResponse(true);
   };
 
@@ -31,13 +39,17 @@ const GetById = () => {
         {employeeId > 0 ? <button type="submit">Search</button> : null}
       </form>
       <div className="response">
-        {showResponse ? (
-          employee ? (
+        {showResponse &&
+          (employee ? (
             <EmployeeTable employees={[employee]} />
+          ) : error ? (
+            <div>
+              <p>Error Occured :(</p>
+              <p>{error}</p>
+            </div>
           ) : (
-            <p>Employee Not found :(</p>
-          )
-        ) : null}
+            <p>Something Happened :(</p>
+          ))}
       </div>
     </div>
   );

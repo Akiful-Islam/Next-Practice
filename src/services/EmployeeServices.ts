@@ -1,4 +1,5 @@
 import { Employee } from "@/types/Employee";
+import { ErrorResponse } from "@/types/ErrorResponse";
 
 type QueryParams = {
   pageNumber?: number;
@@ -63,26 +64,10 @@ const getAllEmployees = async (queryParams: QueryParams) => {
   return res.json();
 };
 
-const getEmployeeById = async (
-  id: number,
-  setEmployee: (employee: Employee | null) => void
-) => {
+const getEmployeeById = async (id: number) => {
   const url = `http://localhost:3030/api/employees/${id}`;
-  await fetch(url)
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        setEmployee(null);
-        throw new Error("Employee not found");
-      }
-    })
-    .then((data) => {
-      setEmployee(data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  const res = await fetch(url, { cache: "no-store" });
+  return res.json();
 };
 
 const postEmployee = async (postFields: PostFields) => {
