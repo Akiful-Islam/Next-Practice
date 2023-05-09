@@ -1,22 +1,24 @@
-import DeleteById from "@/components/crud_components/DeleteById";
-import GetAllPaginated from "@/components/crud_components/GetAllPaginated";
-import GetById from "@/components/crud_components/GetById";
-import PatchById from "@/components/crud_components/PatchById";
-import Post from "@/components/crud_components/Post";
+import Link from "next/link";
 import React from "react";
 
-type Props = {};
-
-const page = (props: Props) => {
+const page = () => {
   return (
-    <div>
-      <ul>
-        <GetAllPaginated />
-        <GetById />
-        <Post />
-        <PatchById />
-        <DeleteById />
-      </ul>
+    <div className="emploee-root">
+      <button>
+        <Link href="/employees/get">Get All</Link>
+      </button>
+      <button>
+        <Link href="/employees/get/{id}">Get By Id</Link>
+      </button>
+      <button>
+        <Link href="/employees/post">Post</Link>
+      </button>
+      <button>
+        <Link href="/employees/patch">Patch</Link>
+      </button>
+      <button>
+        <Link href="/employees/delete">Delete</Link>
+      </button>
     </div>
   );
 };

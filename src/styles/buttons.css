@@ -8,7 +8,6 @@
   padding: 16;
   margin: 8;
 }
-
 button[type="submit"] {
   @apply text-black rounded-lg m-2 bg-white;
   border: 12;
@@ -17,5 +16,5 @@ button[type="submit"] {
 }
 
 button {
-  @apply transition duration-500 ease-in-out hover:bg-gray-400 active:animate-pulse active:duration-75 active:bg-gray-300;
+  @apply transition duration-500 bg-gray-200 ease-in-out hover:bg-gray-400 active:animate-pulse active:duration-75 active:bg-gray-300;
 }
