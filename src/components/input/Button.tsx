@@ -4,16 +4,25 @@ type Props = {
   type?: "filled" | "transparent";
   children?: React.ReactNode;
   className?: string;
+  style?: React.CSSProperties;
 };
 
-const Button: React.FC<Props> = ({ type = "filled", children, className }) => {
-  if (type === "filled") {
-    return <button className={className + " btn-filled"}>{children}</button>;
-  } else {
-    return (
-      <button className={className + " btn-transparent"}>{children}</button>
-    );
+const Button: React.FC<Props> = ({
+  type = "filled",
+  children,
+  className,
+  style,
+}) => {
+  let classes: string;
+  type === "filled" ? (classes = "btn-filled") : (classes = "btn-transparent");
+  if (className) {
+    classes += " " + className;
   }
+  return (
+    <button className={classes} style={style}>
+      {children}
+    </button>
+  );
 };
 
 export default Button;
