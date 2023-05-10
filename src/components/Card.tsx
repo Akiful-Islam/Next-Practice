@@ -2,13 +2,19 @@ import React from "react";
 
 type Props = {
   children?: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
 };
 
-const Card = (props: Props) => {
+const Card: React.FC<Props> = ({ children, className, style }) => {
+  let rootDivClass = "flex flex-col justify-center items-center my-2";
+  if (className) {
+    rootDivClass += " " + className;
+  }
   return (
-    <div className="flex flex-col justify-center items-center h-[100vh]">
-      <div className="!z-5 relative flex flex-col rounded-[20px] max-w-[300px]  bg-clip-border shadow-3xl shadow-shadow-500 flex flex-col w-full !p-4 3xl:p-![18px] bg-current undefined">
-        {props.children}
+    <div className={rootDivClass} style={style}>
+      <div className="!z-5 relative flex flex-col rounded-[20px] bg-clip-border shadow-3xl shadow-current flex flex-col w-full !p-4 3xl:p-![18px] bg-current undefined">
+        {children}
       </div>
     </div>
   );
