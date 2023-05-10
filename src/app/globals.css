@@ -11,8 +11,8 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 238, 238, 238;
-    --background-start-rgb: 57, 62, 70;
-    --background-end-rgb: 57, 62, 70;
+    --background-start-rgb: 34, 40, 49;
+    --background-end-rgb: 34, 40, 49;
   }
 }
 
@@ -25,3 +25,14 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+/* Monochrome color palettes: 
+
+By edge:
+#333333
+#666666
+#999999
+#CCCCCC
+#FFFFFF 
+
+*/
