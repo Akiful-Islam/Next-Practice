@@ -1,4 +1,4 @@
-import DeleteById from "@/components/crud_components/DeleteById";
+import DeleteById from "@/components/crud/DeleteById";
 import React from "react";
 type Props = {};
 

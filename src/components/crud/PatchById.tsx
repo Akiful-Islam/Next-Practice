@@ -3,9 +3,9 @@ import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "../EmployeeTable";
 import { PatchData, patchEmployee } from "@/services/EmployeeServices";
-import TextInput from "../input_components/TextInput";
-import NumberInput from "../input_components/NumberInput";
-import EmailInput from "../input_components/EmailInput";
+import TextInput from "../input/TextInput";
+import NumberInput from "../input/NumberInput";
+import EmailInput from "../input/EmailInput";
 
 const PatchById = () => {
   const [employeeId, setEmployeeId] = useState(0);

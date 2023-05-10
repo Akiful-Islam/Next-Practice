@@ -4,8 +4,8 @@ import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "../EmployeeTable";
 import { postEmployee } from "@/services/EmployeeServices";
-import TextInput from "../input_components/TextInput";
-import EmailInput from "../input_components/EmailInput";
+import TextInput from "../input/TextInput";
+import EmailInput from "../input/EmailInput";
 
 const Post = () => {
   const [firstName, setFirstName] = useState("");

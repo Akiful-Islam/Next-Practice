@@ -1,4 +1,4 @@
-import PatchById from "@/components/crud_components/PatchById";
+import PatchById from "@/components/crud/PatchById";
 import React from "react";
 
 const page = () => {

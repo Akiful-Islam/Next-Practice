@@ -1,4 +1,4 @@
-import GetById from "@/components/crud_components/GetById";
+import GetById from "@/components/crud/GetById";
 import React from "react";
 
 const page = () => {

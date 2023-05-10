@@ -4,7 +4,7 @@ import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "../EmployeeTable";
 import { getEmployeeById } from "@/services/EmployeeServices";
-import NumberInput from "../input_components/NumberInput";
+import NumberInput from "../input/NumberInput";
 
 const GetById = () => {
   const [employee, setEmployee] = useState<Employee | null>();

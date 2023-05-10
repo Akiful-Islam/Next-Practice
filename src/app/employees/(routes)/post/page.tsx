@@ -1,4 +1,4 @@
-import Post from "@/components/crud_components/Post";
+import Post from "@/components/crud/Post";
 import React from "react";
 
 const page = () => {
