@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .page-button {
-  @apply self-center w-48 h-14 text-4xl m-1;
+  @apply self-center w-48 h-14 text-4xl m-2;
 }
 
 .get-all-component button {
@@ -20,7 +20,7 @@ button[type="submit"] {
 }
 
 button {
-  @apply py-2 px-4 font-semibold border rounded-3xl;
+  @apply py-2 px-4 font-semibold border rounded-3xl h-8 w-16;
   @apply hover:-translate-y-1;
   @apply active:translate-y-0 active:border-collapse;
   @apply transition ease-in duration-100 transform;
