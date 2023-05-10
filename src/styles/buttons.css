@@ -21,7 +21,7 @@ button[type="submit"] {
 
 button {
   @apply py-2 px-4 text-gray-400 bg-transparent font-semibold border border-gray-400 rounded-3xl;
-  @apply hover:bg-gray-400 hover:text-zinc-100 hover:border-transparent hover:-translate-y-1;
+  @apply hover:bg-gray-400 hover:text-zinc-800 hover:border-transparent hover:-translate-y-1;
   @apply transition ease-in duration-100 transform;
   @apply active:translate-y-0;
 }
