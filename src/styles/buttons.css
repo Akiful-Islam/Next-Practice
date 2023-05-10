@@ -3,11 +3,7 @@
 @tailwind utilities;
 
 .page-button {
-  @apply self-center w-48 h-14 text-4xl font-extrabold bg-slate-100 rounded-xl m-1;
-}
-
-.page-button .button-link {
-  @apply bg-transparent text-slate-800;
+  @apply self-center w-48 h-14 text-4xl m-1;
 }
 
 .get-all-component button {
@@ -24,5 +20,8 @@ button[type="submit"] {
 }
 
 button {
-  @apply transition duration-500 bg-gray-200 ease-in-out hover:bg-gray-400 active:animate-pulse active:duration-75 active:bg-gray-300;
+  @apply py-2 px-4 text-gray-400 bg-transparent font-semibold border border-gray-400 rounded-3xl;
+  @apply hover:bg-gray-400 hover:text-zinc-100 hover:border-transparent hover:-translate-y-1;
+  @apply transition ease-in duration-100 transform;
+  @apply active:translate-y-0;
 }
