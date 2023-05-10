@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .text-attributes {
+    @apply block font-sans tracking-normal text-inherit antialiased;
+  }
+}
+
+h1 {
+  @apply text-attributes font-extrabold text-5xl leading-tight;
+}
+
+h2 {
+  @apply text-attributes font-bold text-4xl leading-[1.3];
+}
+
+h3 {
+  @apply text-attributes font-semibold text-3xl leading-snug;
+}
+
+h4 {
+  @apply text-attributes font-semibold text-2xl leading-snug;
+}
+
+h5 {
+  @apply text-attributes font-semibold text-xl leading-snug;
+}
+
+h6 {
+  @apply text-attributes font-medium text-lg leading-snug;
+}
+
+p {
+  @apply text-attributes font-normal text-base capitalize leading-relaxed;
+}
+
+span {
+  @apply text-attributes font-normal text-base capitalize leading-relaxed;
+}
+
+a :not(button a) {
+  @apply text-gray-400 font-medium hover:text-gray-200 hover:font-semibold;
+}

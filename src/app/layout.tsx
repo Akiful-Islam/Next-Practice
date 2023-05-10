@@ -6,6 +6,7 @@ import "@/styles/select.css";
 import "@/styles/tables.css";
 import "@/styles/response.css";
 import "@/styles/texts.css";
+import "@/styles/typography.css";
 
 const roboto = Roboto({
   weight: ["100", "300", "400", "500", "700", "900"],
