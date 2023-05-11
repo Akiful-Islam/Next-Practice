@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import EmployeeTable from "../data/EmployeeTable";
 import QueryForm from "../QueryForm";
 import { getAllEmployees } from "@/services/EmployeeServices";
+import Button from "../input/Button";
 
 const GetAllPaginated = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -30,9 +31,9 @@ const GetAllPaginated = () => {
 
   return (
     <div className="get-all-component">
-      <button onClick={() => setShowQueryForm(!showQueryForm)}>
+      <Button onClick={() => setShowQueryForm(!showQueryForm)}>
         Add Query Params?
-      </button>
+      </Button>
       {showQueryForm && (
         <QueryForm
           pageNumber={pageNumber}
@@ -45,7 +46,7 @@ const GetAllPaginated = () => {
           setSortDirection={setSortDirection}
         />
       )}
-      <button onClick={handleGetAllClick}>Show Employees</button>
+      <Button onClick={handleGetAllClick}>Show Employees</Button>
 
       {showTable && <EmployeeTable employees={employees} />}
     </div>

@@ -5,6 +5,7 @@ type Props = {
   children?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
+  onClick?: () => void;
 };
 
 const Button: React.FC<Props> = ({
@@ -12,6 +13,7 @@ const Button: React.FC<Props> = ({
   children,
   className,
   style,
+  onClick,
 }) => {
   let classes: string;
   type === "filled" ? (classes = "btn-filled") : (classes = "btn-transparent");
@@ -19,7 +21,7 @@ const Button: React.FC<Props> = ({
     classes += " " + className;
   }
   return (
-    <button className={classes} style={style}>
+    <button className={classes} style={style} onClick={onClick}>
       {children}
     </button>
   );
