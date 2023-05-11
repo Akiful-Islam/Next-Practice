@@ -20,7 +20,7 @@ const Post = () => {
     },
   });
 
-  const watchFields = watch(["firstName", "lastName", "email"]);
+  const watchFields = watch();
 
   const [error, setError] = useState<string | null>(null);
   const [postedEmployee, setPostedEmployee] = useState<Employee | null>(null);
@@ -63,7 +63,7 @@ const Post = () => {
           id="email"
           placeholder="Email"
         />
-        {watchFields[0] && watchFields[1] && watchFields[2] ? (
+        {watchFields.firstName && watchFields.lastName && watchFields.email ? (
           <button type="submit">Post Employee</button>
         ) : null}
       </form>
