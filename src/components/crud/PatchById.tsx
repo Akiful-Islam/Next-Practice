@@ -10,13 +10,17 @@ import EmailInput from "../input/EmailInput";
 const PatchById = () => {
   const [employeeId, setEmployeeId] = useState(0);
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+  const [employee, setEmployee] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+  });
 
-  const [editFirstName, setEditFirstName] = useState(false);
-  const [editLastName, setEditLastName] = useState(false);
-  const [editEmail, setEditEmail] = useState(false);
+  const [edit, setEdit] = useState({
+    firstName: false,
+    lastName: false,
+    email: false,
+  });
 
   const [error, setError] = useState<string | null>(null);
   const [patchedEmployee, setPatchedEmployee] = useState<Employee | null>(null);
@@ -27,9 +31,9 @@ const PatchById = () => {
     event.preventDefault();
 
     const patchData: PatchData = {};
-    if (editFirstName) patchData.firstName = firstName;
-    if (editLastName) patchData.lastName = lastName;
-    if (editEmail) patchData.email = email;
+    if (edit.firstName) patchData.firstName = employee.firstName;
+    if (edit.lastName) patchData.lastName = employee.lastName;
+    if (edit.email) patchData.email = employee.email;
 
     const res = await patchEmployee(employeeId, patchData);
 
@@ -61,17 +65,21 @@ const PatchById = () => {
             <label>
               <input
                 type="checkbox"
-                checked={editFirstName}
-                onChange={() => setEditFirstName(!editFirstName)}
+                checked={edit.firstName}
+                onChange={() =>
+                  setEdit({ ...edit, firstName: !edit.firstName })
+                }
               />
               Edit First Name
             </label>
-            {editFirstName && (
+            {edit.firstName && (
               <label>
                 :
                 <TextInput
-                  value={firstName}
-                  setValue={setFirstName}
+                  value={employee.firstName}
+                  setValue={(value) =>
+                    setEmployee({ ...employee, firstName: value })
+                  }
                   placeholder="Enter First Name"
                 />
               </label>
@@ -80,17 +88,19 @@ const PatchById = () => {
             <label>
               <input
                 type="checkbox"
-                checked={editLastName}
-                onChange={() => setEditLastName(!editLastName)}
+                checked={edit.lastName}
+                onChange={() => setEdit({ ...edit, lastName: !edit.lastName })}
               />
               Edit Last Name
             </label>
-            {editLastName && (
+            {edit.lastName && (
               <label>
                 :
                 <TextInput
-                  value={lastName}
-                  setValue={setLastName}
+                  value={employee.lastName}
+                  setValue={(value) =>
+                    setEmployee({ ...employee, lastName: value })
+                  }
                   placeholder="Enter Last Name"
                 />
               </label>
@@ -99,24 +109,26 @@ const PatchById = () => {
             <label>
               <input
                 type="checkbox"
-                checked={editEmail}
-                onChange={() => setEditEmail(!editEmail)}
+                checked={edit.email}
+                onChange={() => setEdit({ ...edit, email: !edit.email })}
               />
               Edit Email
             </label>
-            {editEmail && (
+            {edit.email && (
               <label>
                 :
                 <EmailInput
-                  value={email}
-                  setValue={setEmail}
+                  value={employee.email}
+                  setValue={(value) =>
+                    setEmployee({ ...employee, email: value })
+                  }
                   placeholder="Enter Email"
                 />
               </label>
             )}
           </div>
         )}
-        {firstName || lastName || email ? (
+        {employeeId > 0 && (edit.firstName || edit.lastName || edit.email) ? (
           <button type="submit">Update Employee</button>
         ) : null}
       </form>
