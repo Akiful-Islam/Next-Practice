@@ -3,18 +3,24 @@ import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "../EmployeeTable";
 import { PatchData, patchEmployee } from "@/services/EmployeeServices";
-import TextInput from "../input/TextInput";
-import NumberInput from "../input/NumberInput";
-import EmailInput from "../input/EmailInput";
+import { useForm } from "react-hook-form";
 
 const PatchById = () => {
-  const [employeeId, setEmployeeId] = useState(0);
-
-  const [employee, setEmployee] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm({
+    defaultValues: {
+      id: 0,
+      firstName: "",
+      lastName: "",
+      email: "",
+    },
   });
+
+  const watchFields = watch(["id", "firstName", "lastName", "email"]);
 
   const [edit, setEdit] = useState({
     firstName: false,
@@ -27,15 +33,13 @@ const PatchById = () => {
 
   const [showResponse, setShowResponse] = useState(false);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
+  const onSubmit = async (data: any) => {
     const patchData: PatchData = {};
-    if (edit.firstName) patchData.firstName = employee.firstName;
-    if (edit.lastName) patchData.lastName = employee.lastName;
-    if (edit.email) patchData.email = employee.email;
+    if (edit.firstName) patchData.firstName = data.firstName;
+    if (edit.lastName) patchData.lastName = data.lastName;
+    if (edit.email) patchData.email = data.email;
 
-    const res = await patchEmployee(employeeId, patchData);
+    const res = await patchEmployee(data.id, patchData);
 
     if ("errorMessage" in res) {
       setPatchedEmployee(null);
@@ -50,85 +54,66 @@ const PatchById = () => {
   return (
     <div>
       <h2>Patch by ID</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Employee ID:
-          <NumberInput
-            value={employeeId}
-            setValue={setEmployeeId}
-            placeholder="Employee ID"
-          />
-        </label>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="employee-id">Employee ID:</label>
+        <input
+          {...register("id")}
+          type="number"
+          id="id"
+          placeholder="Insert ID"
+        />
+
         <br />
-        {employeeId > 0 && (
+        {watchFields[0] > 0 && (
           <div>
-            <label>
-              <input
-                type="checkbox"
-                checked={edit.firstName}
-                onChange={() =>
-                  setEdit({ ...edit, firstName: !edit.firstName })
-                }
-              />
-              Edit First Name
-            </label>
+            <label htmlFor="first-name">Edit First Name</label>
+            <input
+              type="checkbox"
+              checked={edit.firstName}
+              onChange={() => setEdit({ ...edit, firstName: !edit.firstName })}
+            />
             {edit.firstName && (
-              <label>
-                :
-                <TextInput
-                  value={employee.firstName}
-                  setValue={(value) =>
-                    setEmployee({ ...employee, firstName: value })
-                  }
-                  placeholder="Enter First Name"
-                />
-              </label>
+              <input
+                {...register("firstName")}
+                type="text"
+                id="firstName"
+                placeholder="Enter First Name"
+              />
             )}
             <br />
-            <label>
-              <input
-                type="checkbox"
-                checked={edit.lastName}
-                onChange={() => setEdit({ ...edit, lastName: !edit.lastName })}
-              />
-              Edit Last Name
-            </label>
+            <label>Edit Last Name</label>
+            <input
+              type="checkbox"
+              checked={edit.lastName}
+              onChange={() => setEdit({ ...edit, lastName: !edit.lastName })}
+            />
             {edit.lastName && (
-              <label>
-                :
-                <TextInput
-                  value={employee.lastName}
-                  setValue={(value) =>
-                    setEmployee({ ...employee, lastName: value })
-                  }
-                  placeholder="Enter Last Name"
-                />
-              </label>
+              <input
+                {...register("lastName")}
+                type="text"
+                id="lastName"
+                placeholder="Enter Last Name"
+              />
             )}
             <br />
-            <label>
-              <input
-                type="checkbox"
-                checked={edit.email}
-                onChange={() => setEdit({ ...edit, email: !edit.email })}
-              />
-              Edit Email
-            </label>
+            <label>Edit Email</label>
+            <input
+              type="checkbox"
+              checked={edit.email}
+              onChange={() => setEdit({ ...edit, email: !edit.email })}
+            />
             {edit.email && (
-              <label>
-                :
-                <EmailInput
-                  value={employee.email}
-                  setValue={(value) =>
-                    setEmployee({ ...employee, email: value })
-                  }
-                  placeholder="Enter Email"
-                />
-              </label>
+              <input
+                {...register("email")}
+                type="text"
+                id="email"
+                placeholder="Enter Email"
+              />
             )}
           </div>
         )}
-        {employeeId > 0 && (edit.firstName || edit.lastName || edit.email) ? (
+        {watchFields[0] > 0 &&
+        (edit.firstName || edit.lastName || edit.email) ? (
           <button type="submit">Update Employee</button>
         ) : null}
       </form>
