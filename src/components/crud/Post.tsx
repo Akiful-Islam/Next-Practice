@@ -2,7 +2,7 @@
 
 import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
-import EmployeeTable from "../EmployeeTable";
+import EmployeeTable from "../data/EmployeeTable";
 import { postEmployee } from "@/services/EmployeeServices";
 import { useForm } from "react-hook-form";
 

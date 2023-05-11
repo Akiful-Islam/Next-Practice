@@ -2,7 +2,7 @@
 
 import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
-import EmployeeTable from "../EmployeeTable";
+import EmployeeTable from "../data/EmployeeTable";
 import { getEmployeeById } from "@/services/EmployeeServices";
 import NumberInput from "../input/NumberInput";
 

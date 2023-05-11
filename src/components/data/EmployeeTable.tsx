@@ -1,108 +1,44 @@
+import { Employee } from "@/types/Employee";
 import React from "react";
 
 type Props = {
-  style?: React.CSSProperties;
-  className?: string;
-  children?: React.ReactNode;
+  employees: Employee[];
 };
 
-const EmployeeTable: React.FC<Props> = ({ style, className, children }) => {
+const EmployeeTable: React.FC<Props> = ({ employees }) => {
   return (
-    <div className="container mx-auto px-4 sm:px-8">
-      <div className="py-8">
-        <div>
-          <h2 className="text-2xl font-semibold leading-tight">
-            Matches Schedule
-          </h2>
-        </div>
-        <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-          <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
-            <table className="min-w-full leading-normal">
-              <thead>
-                <tr>
-                  <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Home
-                  </th>
-                  <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Res.
-                  </th>
-                  <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Res.
-                  </th>
-                  <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Away
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm w-2/5">
-                    <div className="flex items-center">
-                      <div className="flex-shrink-0 w-10 h-10 hidden sm:table-cell"></div>
-                      <div className="ml-3">
-                        <p className="text-gray-900 whitespace-no-wrap">
-                          Team 1
-                        </p>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap text-center">
-                      0
-                    </p>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap text-center">
-                      3
-                    </p>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm w-2/5">
-                    <div className="flex items-center float-right">
-                      <div className="mr-3">
-                        <p className="text-gray-900 whitespace-no-wrap text-right">
-                          Team 2
-                        </p>
-                      </div>
-                      <div className="flex-shrink-0 w-10 h-10 hidden sm:table-cell"></div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm w-2/5">
-                    <div className="flex items-center">
-                      <div className="flex-shrink-0 w-10 h-10 hidden sm:table-cell"></div>
-                      <div className="ml-3">
-                        <p className="text-gray-900 whitespace-no-wrap">
-                          Team 3
-                        </p>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap text-center">
-                      0
-                    </p>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap text-center">
-                      3
-                    </p>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm w-2/5">
-                    <div className="flex items-center float-right">
-                      <div className="mr-3">
-                        <p className="text-gray-900 whitespace-no-wrap text-right">
-                          Team 4
-                        </p>
-                      </div>
-                      <div className="flex-shrink-0 w-10 h-10 hidden sm:table-cell"></div>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+    <div className="md:px-32 py-8 w-full">
+      <div className="shadow overflow-hidden rounded border-b border-gray-200">
+        <table className="min-w-full bg-white">
+          <thead className="bg-gray-800 text-white">
+            <tr>
+              <th className="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">
+                ID
+              </th>
+              <th className="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">
+                First Name
+              </th>
+              <th className="text-left py-3 px-4 uppercase font-semibold text-sm">
+                Last Name
+              </th>
+              <th className="text-left py-3 px-4 uppercase font-semibold text-sm">
+                Email
+              </th>
+            </tr>
+          </thead>
+          <tbody className="text-zinc-700">
+            {employees.map((employee) => (
+              <tr key={employee.id}>
+                <td className="w-1/3 text-left py-3 px-4">{employee.id}</td>
+                <td className="w-1/3 text-left py-3 px-4">
+                  {employee.firstName}
+                </td>
+                <td className="text-left py-3 px-4">{employee.lastName}</td>
+                <td className="text-left py-3 px-4">{employee.email}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
