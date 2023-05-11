@@ -8,9 +8,11 @@ import TextInput from "../input/TextInput";
 import EmailInput from "../input/EmailInput";
 
 const Post = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+  const [employee, setEmployee] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+  });
 
   const [error, setError] = useState<string | null>(null);
   const [postedEmployee, setPostedEmployee] = useState<Employee | null>(null);
@@ -19,11 +21,7 @@ const Post = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const res = await postEmployee({
-      firstName,
-      lastName,
-      email,
-    });
+    const res = await postEmployee(employee);
 
     if ("errorMessage" in res) {
       setPostedEmployee(null);
@@ -40,24 +38,28 @@ const Post = () => {
         <label>
           First Name:
           <TextInput
-            value={firstName}
-            setValue={setFirstName}
+            value={employee.firstName}
+            setValue={(value) => setEmployee({ ...employee, firstName: value })}
             placeholder="First Name"
           />
         </label>
         <label>
           Last Name:
           <TextInput
-            value={lastName}
-            setValue={setLastName}
+            value={employee.lastName}
+            setValue={(value) => setEmployee({ ...employee, lastName: value })}
             placeholder="Last Name"
           />
         </label>
         <label>
           Email:
-          <EmailInput value={email} setValue={setEmail} placeholder="Email" />
+          <EmailInput
+            value={employee.email}
+            setValue={(value) => setEmployee({ ...employee, email: value })}
+            placeholder="Email"
+          />
         </label>
-        {firstName && lastName && email ? (
+        {employee.firstName && employee.lastName && employee.email ? (
           <button type="submit">Post Employee</button>
         ) : null}
       </form>
