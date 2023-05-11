@@ -17,16 +17,16 @@ const PatchById = () => {
       firstName: "",
       lastName: "",
       email: "",
+      edit: {
+        firstName: false,
+        lastName: false,
+        email: false,
+      },
     },
   });
 
-  const watchFields = watch(["id", "firstName", "lastName", "email"]);
-
-  const [edit, setEdit] = useState({
-    firstName: false,
-    lastName: false,
-    email: false,
-  });
+  const watchFields = watch();
+  const { edit } = watchFields;
 
   const [error, setError] = useState<string | null>(null);
   const [patchedEmployee, setPatchedEmployee] = useState<Employee | null>(null);
@@ -64,13 +64,13 @@ const PatchById = () => {
         />
 
         <br />
-        {watchFields[0] > 0 && (
+        {watchFields.id > 0 && (
           <div>
             <label htmlFor="first-name">Edit First Name</label>
             <input
+              {...register("edit.firstName")}
               type="checkbox"
-              checked={edit.firstName}
-              onChange={() => setEdit({ ...edit, firstName: !edit.firstName })}
+              id="editFistName"
             />
             {edit.firstName && (
               <input
@@ -83,10 +83,11 @@ const PatchById = () => {
             <br />
             <label>Edit Last Name</label>
             <input
+              {...register("edit.lastName")}
               type="checkbox"
-              checked={edit.lastName}
-              onChange={() => setEdit({ ...edit, lastName: !edit.lastName })}
+              id="editLastName"
             />
+
             {edit.lastName && (
               <input
                 {...register("lastName")}
@@ -97,11 +98,7 @@ const PatchById = () => {
             )}
             <br />
             <label>Edit Email</label>
-            <input
-              type="checkbox"
-              checked={edit.email}
-              onChange={() => setEdit({ ...edit, email: !edit.email })}
-            />
+            <input {...register("edit.email")} type="checkbox" id="editEmail" />
             {edit.email && (
               <input
                 {...register("email")}
@@ -112,7 +109,7 @@ const PatchById = () => {
             )}
           </div>
         )}
-        {watchFields[0] > 0 &&
+        {watchFields.id > 0 &&
         (edit.firstName || edit.lastName || edit.email) ? (
           <button type="submit">Update Employee</button>
         ) : null}
