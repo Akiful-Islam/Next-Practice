@@ -3,7 +3,8 @@ import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "../EmployeeTable";
 import { PatchData, patchEmployee } from "@/services/EmployeeServices";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
+import Toggler from "../input/Toggler";
 
 const PatchById = () => {
   const {
@@ -11,6 +12,7 @@ const PatchById = () => {
     handleSubmit,
     formState: { errors },
     watch,
+    control,
   } = useForm({
     defaultValues: {
       id: 0,
@@ -66,11 +68,12 @@ const PatchById = () => {
         <br />
         {watchFields.id > 0 && (
           <div>
-            <label htmlFor="first-name">Edit First Name</label>
-            <input
-              {...register("edit.firstName")}
-              type="checkbox"
-              id="editFistName"
+            <Controller
+              name="edit.firstName"
+              control={control}
+              render={({ field }) => (
+                <Toggler {...field} label="Edit First Name" />
+              )}
             />
             {edit.firstName && (
               <input
@@ -87,6 +90,14 @@ const PatchById = () => {
               type="checkbox"
               id="editLastName"
             />
+
+            {/* <Controller
+              name="edit.lastName"
+              control={control}
+              render={({ field }) => (
+                <Toggler {...field} label="Edit Last Name" />
+              )}
+            /> */}
 
             {edit.lastName && (
               <input

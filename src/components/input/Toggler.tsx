@@ -7,6 +7,9 @@ type Props = {
   placeholder?: string;
   type?: string;
   label?: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  value?: boolean;
 };
 
 const Toggler: React.FC<Props> = ({
@@ -16,6 +19,9 @@ const Toggler: React.FC<Props> = ({
   placeholder,
   type,
   label,
+  onChange,
+  onBlur,
+  value,
 }) => {
   let classes = "input";
   return (
@@ -26,7 +32,14 @@ const Toggler: React.FC<Props> = ({
       >
         {label && <div className="px-2">{label}</div>}
         <div className="relative">
-          <input id="toogleButton" type="checkbox" className="hidden" />
+          <input
+            id="toogleButton"
+            type="checkbox"
+            className="hidden"
+            onChange={onChange}
+            onBlur={onBlur}
+            checked={value}
+          />
           <div className="toggle-path bg-gray-400 w-9 h-5 rounded-full shadow-inner"></div>
           <div className="toggle-circle absolute w-5 h-5 bg-zinc-700 rounded-full shadow inset-y-0 left-0"></div>
         </div>
