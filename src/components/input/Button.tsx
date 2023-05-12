@@ -15,8 +15,10 @@ const Button: React.FC<Props> = ({
   style,
   onClick,
 }) => {
-  let classes: string;
-  type === "filled" ? (classes = "btn-filled") : (classes = "btn-transparent");
+  let classes = "btn ";
+  type === "filled"
+    ? (classes += "btn-filled")
+    : (classes += "btn-transparent");
   if (className) {
     classes += " " + className;
   }

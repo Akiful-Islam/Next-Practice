@@ -2,36 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-.page-button {
-  @apply self-center w-48 h-14 text-4xl m-2;
-}
-
-.get-all-component button {
-  @apply text-black rounded-lg m-2 bg-white;
-  border: 12;
-  padding: 16;
-  margin: 8;
-}
-button[type="submit"] {
-  @apply text-black rounded-lg m-2 bg-white;
-  border: 12;
-  padding: 16;
-  margin: 8;
-}
-
-button {
-  @apply py-2 px-4 font-semibold border rounded-3xl h-8 w-16;
-  @apply hover:-translate-y-1;
-  @apply active:translate-y-0 active:border-collapse;
+.btn {
+  @apply font-semibold border rounded-lg h-12 w-24;
+  @apply hover:-translate-y-[1px];
+  @apply active:translate-y-[1px] active:border-collapse;
   @apply transition ease-in duration-100 transform;
 }
 
 .btn-filled {
-  @apply text-zinc-700 bg-gray-400 border border-gray-600;
-  @apply hover:bg-gray-600 hover:text-zinc-300 hover:border-transparent;
+  @apply text-white bg-bnw-blue-accentLight border;
+  @apply hover:bg-bnw-blue-accent hover:text-bnw-blue-gray;
 }
 
 .btn-transparent {
-  @apply text-zinc-700 bg-transparent border border-gray-600;
-  @apply hover:bg-gray-400 hover:text-zinc-300 hover:border-gray-600;
+  @apply text-bnw-blue-accent bg-transparent border border-bnw-blue-gray;
+  @apply hover:bg-bnw-blue-accent hover:text-white hover:border-bnw-blue-white;
 }
