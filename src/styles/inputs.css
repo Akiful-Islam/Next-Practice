@@ -8,15 +8,14 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 input[type="number"] {
-  @apply w-20 h-9 text-black rounded-lg m-2 appearance-none;
+  @apply w-20 h-9 text-black rounded-lg m-2;
+  appearance: textfield;
 }
 
-input[type="text"] {
-  @apply w-32 h-9 text-black rounded-lg m-2 appearance-none transition duration-200 ease-in-out focus:w-52;
-}
-
+input,
+input[type="text"],
 input[type="email"] {
-  @apply w-24 h-9 text-black rounded-lg m-2 appearance-none transition duration-200 ease-in-out focus:w-52;
+  @apply w-32 h-9 text-black rounded-lg m-2 appearance-none transition duration-200 ease-in-out focus:w-52;
 }
 
 input[type="checkbox"] {
