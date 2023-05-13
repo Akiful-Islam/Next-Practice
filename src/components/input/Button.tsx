@@ -2,6 +2,7 @@ import React from "react";
 
 type Props = {
   type?: "filled" | "transparent";
+  title?: string;
   children?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
@@ -10,6 +11,7 @@ type Props = {
 
 const Button: React.FC<Props> = ({
   type = "filled",
+  title,
   children,
   className,
   style,
@@ -24,6 +26,7 @@ const Button: React.FC<Props> = ({
   }
   return (
     <button className={classes} style={style} onClick={onClick}>
+      {title}
       {children}
     </button>
   );
