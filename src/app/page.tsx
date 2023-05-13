@@ -1,17 +1,8 @@
-import Button from "@/components/input/Button";
-import Link from "next/link";
+import HomePage from "@/components/page/HomePage";
 import React from "react";
 
 const page = () => {
-  return (
-    <div className="home">
-      <Button className="page-button">
-        <Link className="button-link" href="/employees">
-          Employees
-        </Link>
-      </Button>
-    </div>
-  );
+  return <HomePage />;
 };
 
 export default page;
