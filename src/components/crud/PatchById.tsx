@@ -3,8 +3,8 @@ import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "../data/EmployeeTable";
 import { PatchData, patchEmployee } from "@/services/EmployeeServices";
-import { useForm, Controller } from "react-hook-form";
-import Toggler from "../input/Toggler";
+import { useForm } from "react-hook-form";
+import ControlledToggler from "../input/ControlledToggler";
 
 const PatchById = () => {
   const {
@@ -68,12 +68,10 @@ const PatchById = () => {
         <br />
         {watchFields.id > 0 && (
           <div>
-            <Controller
+            <ControlledToggler
               name="edit.firstName"
               control={control}
-              render={({ field }) => (
-                <Toggler {...field} label="Edit First Name" />
-              )}
+              label="Edit First Name"
             />
             {edit.firstName && (
               <input
@@ -84,12 +82,10 @@ const PatchById = () => {
               />
             )}
             <br />
-            <Controller
+            <ControlledToggler
               name="edit.lastName"
               control={control}
-              render={({ field }) => (
-                <Toggler {...field} label="Edit Last Name" />
-              )}
+              label="Edit Last Name"
             />
 
             {edit.lastName && (
@@ -101,10 +97,10 @@ const PatchById = () => {
               />
             )}
             <br />
-            <Controller
+            <ControlledToggler
               name="edit.email"
               control={control}
-              render={({ field }) => <Toggler {...field} label="Edit Email" />}
+              label="Edit Email"
             />
           </div>
         )}
