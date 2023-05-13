@@ -84,20 +84,13 @@ const PatchById = () => {
               />
             )}
             <br />
-            <label>Edit Last Name</label>
-            <input
-              {...register("edit.lastName")}
-              type="checkbox"
-              id="editLastName"
-            />
-
-            {/* <Controller
+            <Controller
               name="edit.lastName"
               control={control}
               render={({ field }) => (
                 <Toggler {...field} label="Edit Last Name" />
               )}
-            /> */}
+            />
 
             {edit.lastName && (
               <input
@@ -108,16 +101,11 @@ const PatchById = () => {
               />
             )}
             <br />
-            <label>Edit Email</label>
-            <input {...register("edit.email")} type="checkbox" id="editEmail" />
-            {edit.email && (
-              <input
-                {...register("email")}
-                type="text"
-                id="email"
-                placeholder="Enter Email"
-              />
-            )}
+            <Controller
+              name="edit.email"
+              control={control}
+              render={({ field }) => <Toggler {...field} label="Edit Email" />}
+            />
           </div>
         )}
         {watchFields.id > 0 &&
