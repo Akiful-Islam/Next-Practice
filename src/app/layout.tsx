@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Roboto } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "@/styles/buttons.css";
 import "@/styles/inputs.css";
 import "@/styles/select.css";
@@ -8,9 +8,8 @@ import "@/styles/response.css";
 import "@/styles/texts.css";
 import "@/styles/typography.css";
 
-const roboto = Roboto({
-  weight: ["100", "300", "400", "500", "700", "900"],
-  subsets: ["latin", "cyrillic", "greek-ext"],
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin-ext", "vietnamese"],
 });
 
 export const metadata = {
@@ -25,11 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={roboto.className}>
-        <div className="root-layout flex items-center justify-center h-screen">
-          {children}
-        </div>
-      </body>
+      <body className={spaceGrotesk.className}>{children}</body>
     </html>
   );
 }
