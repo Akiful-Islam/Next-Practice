@@ -3,10 +3,9 @@ import React from "react";
 type Props = {
   className?: string;
   style?: React.CSSProperties;
-  children?: React.ReactNode;
   placeholder?: string;
-  type?: string;
   label?: string;
+  name?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
   value?: boolean;
@@ -15,10 +14,9 @@ type Props = {
 const Toggler: React.FC<Props> = ({
   className,
   style,
-  children,
   placeholder,
-  type,
   label,
+  name,
   onChange,
   onBlur,
   value,
@@ -27,13 +25,13 @@ const Toggler: React.FC<Props> = ({
   return (
     <div className="flex justify-center">
       <label
-        htmlFor="toogleButton"
+        htmlFor={name && name + "Toggler"}
         className="flex items-center cursor-pointer"
       >
         {label && <div className="px-2">{label}</div>}
         <div className="relative">
           <input
-            id="toogleButton"
+            id={name && name + "Toggler"}
             type="checkbox"
             className="hidden"
             onChange={onChange}
