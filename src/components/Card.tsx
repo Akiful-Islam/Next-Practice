@@ -18,7 +18,7 @@ const Card: React.FC<Props> = ({
   footer,
 }) => {
   let rootDivClass =
-    "relative bg-bnw-blue-white divide-y divide-bnw-blue-gray/10 py-6 px-3 ring-1 ring-bnw-blue-gray/10 shadow-md hover:ring-bnw-blue-accentLight/20 hover:shadow-xl transition-all ease-linear duration-75";
+    "relative bg-bnw-blue-white rounded-md divide-y divide-bnw-blue-gray/10 py-6 px-3 ring-1 ring-bnw-blue-gray/10 shadow-md hover:ring-bnw-blue-accentLight/20 hover:shadow-xl transition-all ease-linear duration-75";
   if (className) {
     rootDivClass += " " + className;
   }
