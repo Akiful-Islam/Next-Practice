@@ -4,10 +4,11 @@ import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "../../data/EmployeeTable";
 import { postEmployee } from "@/services/EmployeeServices";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import Card from "@/components/Card";
 import Button from "@/components/input/Button";
 import { useRouter } from "next/navigation";
+import Input from "@/components/input/Input";
 
 const Post = () => {
   const router = useRouter();
@@ -15,6 +16,7 @@ const Post = () => {
     register,
     handleSubmit,
     formState: { errors },
+    control,
     watch,
   } = useForm({
     defaultValues: {
@@ -22,6 +24,7 @@ const Post = () => {
       lastName: "",
       email: "",
     },
+    mode: "onSubmit",
   });
 
   const watchFields = watch();
@@ -48,27 +51,42 @@ const Post = () => {
         title="Create An Employee"
         hero={
           <form onSubmit={handleSubmit(onSubmit)}>
-            <label htmlFor="first-name">First Name:</label>
+            {/* <label htmlFor="first-name">First Name:</label>
             <input
               {...register("firstName", { required: true })}
               type="text"
               id="firstName"
               placeholder="First Name"
+            /> */}
+            <Controller
+              name="firstName"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => <Input {...field} label="First Name" />}
             />
-            <label htmlFor="last-name">Last Name:</label>
-            <input
-              {...register("lastName", { required: true })}
-              type="text"
-              id="lastName"
-              placeholder="Last Name"
+            <Controller
+              name="lastName"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => <Input {...field} label="Last Name" />}
             />
-            <label htmlFor="email">Email:</label>
-            <input
-              {...register("email", { required: true })}
-              type="email"
-              id="email"
-              placeholder="Email"
+            <Controller
+              name="email"
+              control={control}
+              rules={{
+                required: true,
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message: "Please enter a valid email address.",
+                },
+              }}
+              render={({ field }) => <Input {...field} label="Email" />}
             />
+            {errors.email && (
+              <p className="text-sm text-red-400 font-light animate-pulse">
+                {errors.email.message}
+              </p>
+            )}
             {watchFields.firstName &&
             watchFields.lastName &&
             watchFields.email ? (
