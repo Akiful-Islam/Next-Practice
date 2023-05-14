@@ -5,8 +5,12 @@ import React, { useState } from "react";
 import EmployeeTable from "../../data/EmployeeTable";
 import { postEmployee } from "@/services/EmployeeServices";
 import { useForm } from "react-hook-form";
+import Card from "@/components/Card";
+import Button from "@/components/input/Button";
+import { useRouter } from "next/navigation";
 
 const Post = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -40,33 +44,47 @@ const Post = () => {
   };
   return (
     <div>
-      <h1>Post</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="first-name">First Name:</label>
-        <input
-          {...register("firstName", { required: true })}
-          type="text"
-          id="firstName"
-          placeholder="First Name"
-        />
-        <label htmlFor="last-name">Last Name:</label>
-        <input
-          {...register("lastName", { required: true })}
-          type="text"
-          id="lastName"
-          placeholder="Last Name"
-        />
-        <label htmlFor="email">Email:</label>
-        <input
-          {...register("email", { required: true })}
-          type="email"
-          id="email"
-          placeholder="Email"
-        />
-        {watchFields.firstName && watchFields.lastName && watchFields.email ? (
-          <button type="submit">Post Employee</button>
-        ) : null}
-      </form>
+      <Card
+        title="Create An Employee"
+        hero={
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <label htmlFor="first-name">First Name:</label>
+            <input
+              {...register("firstName", { required: true })}
+              type="text"
+              id="firstName"
+              placeholder="First Name"
+            />
+            <label htmlFor="last-name">Last Name:</label>
+            <input
+              {...register("lastName", { required: true })}
+              type="text"
+              id="lastName"
+              placeholder="Last Name"
+            />
+            <label htmlFor="email">Email:</label>
+            <input
+              {...register("email", { required: true })}
+              type="email"
+              id="email"
+              placeholder="Email"
+            />
+            {watchFields.firstName &&
+            watchFields.lastName &&
+            watchFields.email ? (
+              <button type="submit">Post Employee</button>
+            ) : null}
+          </form>
+        }
+        footer={
+          <Button
+            title="Back"
+            type="transparent"
+            onClick={() => router.push("/employees")}
+          />
+        }
+      />
+
       <div className="response">
         {showResponse &&
           (postedEmployee ? (
