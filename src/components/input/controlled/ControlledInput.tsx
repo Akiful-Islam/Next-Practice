@@ -5,18 +5,25 @@ import Input from "../Input";
 type Props = {
   name: string;
   label?: string;
+  type?: string;
   control: Control<any>;
   rules: RegisterOptions;
 };
 
-const ControlledInput: React.FC<Props> = ({ name, label, control, rules }) => {
+const ControlledInput: React.FC<Props> = ({
+  name,
+  label,
+  type,
+  control,
+  rules,
+}) => {
   return (
     <div>
       <Controller
         name={name}
         control={control}
         rules={rules}
-        render={({ field }) => <Input {...field} label={label} />}
+        render={({ field }) => <Input {...field} label={label} type={type} />}
       />
     </div>
   );
