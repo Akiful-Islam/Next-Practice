@@ -1,7 +1,7 @@
 import React from "react";
 
 type Props = {
-  type?: "filled" | "transparent";
+  variant?: "filled" | "transparent";
   title?: string;
   children?: React.ReactNode;
   className?: string;
@@ -10,7 +10,7 @@ type Props = {
 };
 
 const Button: React.FC<Props> = ({
-  type = "filled",
+  variant = "filled",
   title,
   children,
   className,
@@ -18,7 +18,7 @@ const Button: React.FC<Props> = ({
   onClick,
 }) => {
   let classes = "btn ";
-  type === "filled"
+  variant === "filled"
     ? (classes += "btn-filled")
     : (classes += "btn-transparent");
   if (className) {

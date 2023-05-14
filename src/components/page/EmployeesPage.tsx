@@ -45,7 +45,7 @@ const EmployeesPage = (props: Props) => {
         footer={
           <Button
             title="Back"
-            type="transparent"
+            variant="transparent"
             onClick={() => router.push("/")}
           />
         }

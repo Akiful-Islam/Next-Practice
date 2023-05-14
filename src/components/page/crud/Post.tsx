@@ -102,7 +102,7 @@ const Post = () => {
         footer={
           <Button
             title="Back"
-            type="transparent"
+            variant="transparent"
             onClick={() => router.push("/employees")}
           />
         }
