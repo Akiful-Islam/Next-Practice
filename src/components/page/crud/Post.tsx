@@ -9,6 +9,7 @@ import Card from "@/components/Card";
 import Button from "@/components/input/Button";
 import { useRouter } from "next/navigation";
 import Input from "@/components/input/Input";
+import ControlledInput from "@/components/input/controlled/ControlledInput";
 
 const Post = () => {
   const router = useRouter();
@@ -51,19 +52,19 @@ const Post = () => {
         title="Create An Employee"
         hero={
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Controller
+            <ControlledInput
               name="firstName"
               control={control}
               rules={{ required: true }}
-              render={({ field }) => <Input {...field} label="First Name" />}
+              label="First Name"
             />
-            <Controller
+            <ControlledInput
               name="lastName"
               control={control}
               rules={{ required: true }}
-              render={({ field }) => <Input {...field} label="Last Name" />}
+              label="Last Name"
             />
-            <Controller
+            <ControlledInput
               name="email"
               control={control}
               rules={{
@@ -73,7 +74,7 @@ const Post = () => {
                   message: "Please enter a valid email address.",
                 },
               }}
-              render={({ field }) => <Input {...field} label="Email" />}
+              label="Email"
             />
             {errors.email && (
               <p className="text-sm text-red-400 font-light animate-pulse">
