@@ -1,4 +1,4 @@
-import GetAllPaginated from "@/components/crud/GetAllPaginated";
+import GetAllPaginated from "@/components/page/crud/GetAllPaginated";
 import React from "react";
 
 const page = () => {

@@ -1,10 +1,10 @@
 "use client";
 import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
-import EmployeeTable from "../data/EmployeeTable";
+import EmployeeTable from "../../data/EmployeeTable";
 import { PatchData, patchEmployee } from "@/services/EmployeeServices";
 import { useForm } from "react-hook-form";
-import ControlledToggler from "../input/ControlledToggler";
+import ControlledToggler from "../../input/ControlledToggler";
 
 const PatchById = () => {
   const {

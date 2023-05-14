@@ -2,7 +2,7 @@
 
 import { deleteEmployee } from "@/services/EmployeeServices";
 import React, { useState } from "react";
-import NumberInput from "../input/NumberInput";
+import NumberInput from "../../input/NumberInput";
 
 const DeleteById = () => {
   const [employeeId, setEmployeeId] = useState(0);

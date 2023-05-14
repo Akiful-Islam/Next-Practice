@@ -1,10 +1,10 @@
 "use client";
 import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
-import EmployeeTable from "../data/EmployeeTable";
-import QueryForm from "../QueryForm";
+import EmployeeTable from "../../data/EmployeeTable";
+import QueryForm from "../../QueryForm";
 import { getAllEmployees } from "@/services/EmployeeServices";
-import Button from "../input/Button";
+import Button from "../../input/Button";
 
 const GetAllPaginated = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
