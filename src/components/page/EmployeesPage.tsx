@@ -10,7 +10,7 @@ type Props = {};
 const EmployeesPage = (props: Props) => {
   const router = useRouter();
   return (
-    <div className="flex flex-col">
+    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-6">
       <Card
         title="Employees"
         hero={

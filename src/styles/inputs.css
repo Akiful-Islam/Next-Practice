@@ -12,12 +12,6 @@ input[type="number"] {
   appearance: textfield;
 }
 
-/* /* input,
-input[type="text"],
-input[type="email"] {
-  @apply w-32 h-9 text-black rounded-lg m-2 appearance-none transition duration-200 ease-in-out focus:w-52;
-} */
-
 .toggle-path {
   @apply transition-colors duration-100 ease-in-out;
 }

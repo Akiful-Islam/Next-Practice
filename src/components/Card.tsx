@@ -23,19 +23,17 @@ const Card: React.FC<Props> = ({
     rootDivClass += " " + className;
   }
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-6">
-      <div className={rootDivClass}>
-        {title && (
-          <h2 className="text-bnw-blue-black font-semibold mb-5 mx-10 place-self-auto">
-            {title}
-          </h2>
-        )}
-        <div className="relative h-4/5 flex flex-col items-center justify-center overflow-hidden py-6">
-          {hero}
-          {children}
-        </div>
-        {footer && <div className="pt-8 flex justify-center">{footer}</div>}
+    <div className={rootDivClass}>
+      {title && (
+        <h2 className="text-bnw-blue-black font-semibold mb-5 mx-10 place-self-auto">
+          {title}
+        </h2>
+      )}
+      <div className="relative h-4/5 flex flex-col items-center justify-center overflow-hidden py-6">
+        {hero}
+        {children}
       </div>
+      {footer && <div className="pt-8 flex justify-center">{footer}</div>}
     </div>
   );
 };

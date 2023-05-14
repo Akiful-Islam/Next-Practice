@@ -1,7 +1,7 @@
 import React from "react";
-import NumberInput from "./input/NumberInput";
-import SortDirectionSelector from "./input/SortDirectionSelector";
-import SortBySelector from "./input/SortBySelector";
+import NumberInput from "./NumberInput";
+import SortDirectionSelector from "./SortDirectionSelector";
+import SortBySelector from "./SortBySelector";
 
 type Props = {
   pageNumber: number;

@@ -2,7 +2,7 @@
 import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "../../data/EmployeeTable";
-import QueryForm from "../../QueryForm";
+import QueryForm from "../../input/QueryForm";
 import { getAllEmployees } from "@/services/EmployeeServices";
 import Button from "../../input/Button";
 

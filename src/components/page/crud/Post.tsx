@@ -4,11 +4,10 @@ import { Employee } from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "../../data/EmployeeTable";
 import { postEmployee } from "@/services/EmployeeServices";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Card from "@/components/Card";
 import Button from "@/components/input/Button";
 import { useRouter } from "next/navigation";
-import Input from "@/components/input/Input";
 import ControlledInput from "@/components/input/controlled/ControlledInput";
 
 const Post = () => {
@@ -47,7 +46,7 @@ const Post = () => {
     setShowResponse(true);
   };
   return (
-    <div>
+    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-6">
       <Card
         title="Create An Employee"
         hero={
@@ -82,6 +81,22 @@ const Post = () => {
             watchFields.email ? (
               <button type="submit">Post Employee</button>
             ) : null}
+            <div className="response">
+              {showResponse &&
+                (postedEmployee ? (
+                  <div className="ok-response">
+                    <p>Employee successfully Posted :D</p>
+                    <EmployeeTable employees={[postedEmployee]} />
+                  </div>
+                ) : error ? (
+                  <div>
+                    <p>Error Occured :(</p>
+                    <p>{error}</p>
+                  </div>
+                ) : (
+                  <p>Something Happened :(</p>
+                ))}
+            </div>
           </form>
         }
         footer={
@@ -92,23 +107,6 @@ const Post = () => {
           />
         }
       />
-
-      <div className="response">
-        {showResponse &&
-          (postedEmployee ? (
-            <div className="ok-response">
-              <p>Employee successfully Posted :D</p>
-              <EmployeeTable employees={[postedEmployee]} />
-            </div>
-          ) : error ? (
-            <div>
-              <p>Error Occured :(</p>
-              <p>{error}</p>
-            </div>
-          ) : (
-            <p>Something Happened :(</p>
-          ))}
-      </div>
     </div>
   );
 };
