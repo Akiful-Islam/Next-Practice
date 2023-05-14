@@ -75,12 +75,8 @@ const Post = () => {
                 },
               }}
               label="Email"
+              type="email"
             />
-            {errors.email && (
-              <p className="text-sm text-red-400 font-light animate-pulse">
-                {errors.email.message}
-              </p>
-            )}
             {watchFields.firstName &&
             watchFields.lastName &&
             watchFields.email ? (
