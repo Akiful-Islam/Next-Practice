@@ -2,6 +2,7 @@ import React from "react";
 
 type Props = {
   variant?: "filled" | "transparent";
+  type?: "button" | "submit" | "reset";
   title?: string;
   children?: React.ReactNode;
   className?: string;
@@ -11,6 +12,7 @@ type Props = {
 
 const Button: React.FC<Props> = ({
   variant = "filled",
+  type,
   title,
   children,
   className,
@@ -25,7 +27,7 @@ const Button: React.FC<Props> = ({
     classes += " " + className;
   }
   return (
-    <button className={classes} style={style} onClick={onClick}>
+    <button className={classes} type={type} style={style} onClick={onClick}>
       {title}
       {children}
     </button>
