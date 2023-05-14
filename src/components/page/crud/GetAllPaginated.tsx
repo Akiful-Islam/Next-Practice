@@ -5,8 +5,12 @@ import EmployeeTable from "../../data/EmployeeTable";
 import QueryForm from "../../input/QueryForm";
 import { getAllEmployees } from "@/services/EmployeeServices";
 import Button from "../../input/Button";
+import Card from "@/components/Card";
+import { useRouter } from "next/navigation";
 
 const GetAllPaginated = () => {
+  const router = useRouter();
+
   const [employees, setEmployees] = useState<Employee[]>([]);
 
   const [showTable, setShowTable] = useState(false);
@@ -30,25 +34,40 @@ const GetAllPaginated = () => {
   };
 
   return (
-    <div className="get-all-component">
-      <Button onClick={() => setShowQueryForm(!showQueryForm)}>
-        Add Query Params?
-      </Button>
-      {showQueryForm && (
-        <QueryForm
-          pageNumber={pageNumber}
-          pageSize={pageSize}
-          sortBy={sortBy}
-          sortDirection={sortBy}
-          setPageNumber={setPageNumber}
-          setPageSize={setPageSize}
-          setSortBy={setSortBy}
-          setSortDirection={setSortDirection}
-        />
-      )}
-      <Button onClick={handleGetAllClick}>Show Employees</Button>
+    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-6">
+      <Card
+        title="Get All Employees"
+        hero={
+          <div className="">
+            <Button
+              className="mx-2 "
+              onClick={() => setShowQueryForm(!showQueryForm)}
+            >
+              Add Query Params?
+            </Button>
+            {showQueryForm && (
+              <QueryForm
+                pageNumber={pageNumber}
+                pageSize={pageSize}
+                sortBy={sortBy}
+                sortDirection={sortBy}
+                setPageNumber={setPageNumber}
+                setPageSize={setPageSize}
+                setSortBy={setSortBy}
+                setSortDirection={setSortDirection}
+              />
+            )}
+            <Button className="mx-2 " onClick={handleGetAllClick}>
+              Show Employees
+            </Button>
 
-      {showTable && <EmployeeTable employees={employees} />}
+            {showTable && <EmployeeTable employees={employees} />}
+          </div>
+        }
+        footer={
+          <Button title="Back" onClick={() => router.push("/employees")} />
+        }
+      />
     </div>
   );
 };
