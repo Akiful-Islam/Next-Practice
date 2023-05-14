@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Space_Grotesk } from "next/font/google";
+import { Lato } from "next/font/google";
 import "@/styles/buttons.css";
 import "@/styles/inputs.css";
 import "@/styles/select.css";
@@ -8,8 +8,9 @@ import "@/styles/response.css";
 import "@/styles/texts.css";
 import "@/styles/typography.css";
 
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin-ext", "vietnamese"],
+const spaceGrotesk = Lato({
+  subsets: ["latin-ext"],
+  weight: ["100", "300", "400", "700", "900"],
 });
 
 export const metadata = {

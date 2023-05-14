@@ -12,7 +12,7 @@ const HomePage = () => {
       hero={
         <Button
           className="m-8"
-          title="Employees"
+          title="Enter"
           onClick={() => router.push("/employees")}
         />
       }
