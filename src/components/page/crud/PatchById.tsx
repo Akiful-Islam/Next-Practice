@@ -5,8 +5,12 @@ import EmployeeTable from "../../data/EmployeeTable";
 import { PatchData, patchEmployee } from "@/services/EmployeeServices";
 import { useForm } from "react-hook-form";
 import ControlledToggler from "../../input/controlled/ControlledToggler";
+import Card from "@/components/Card";
+import { useRouter } from "next/navigation";
+import Button from "@/components/input/Button";
 
 const PatchById = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -54,85 +58,94 @@ const PatchById = () => {
   };
 
   return (
-    <div>
-      <h2>Patch by ID</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="employee-id">Employee ID:</label>
-        <input
-          {...register("id")}
-          type="number"
-          id="id"
-          placeholder="Insert ID"
-        />
-
-        <br />
-        {watchFields.id > 0 && (
+    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-6">
+      <Card
+        title="Update Employee"
+        hero={
           <div>
-            <ControlledToggler
-              name="edit.firstName"
-              control={control}
-              label="Edit First Name"
-            />
-            {edit.firstName && (
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <label htmlFor="employee-id">Employee ID:</label>
               <input
-                {...register("firstName")}
-                type="text"
-                id="firstName"
-                placeholder="Enter First Name"
+                {...register("id")}
+                type="number"
+                id="id"
+                placeholder="Insert ID"
               />
-            )}
-            <br />
-            <ControlledToggler
-              name="edit.lastName"
-              control={control}
-              label="Edit Last Name"
-            />
 
-            {edit.lastName && (
-              <input
-                {...register("lastName")}
-                type="text"
-                id="lastName"
-                placeholder="Enter Last Name"
-              />
-            )}
-            <br />
-            <ControlledToggler
-              name="edit.email"
-              control={control}
-              label="Edit Email"
-            />
-            {edit.email && (
-              <input
-                {...register("email")}
-                type="text"
-                id="email"
-                placeholder="Enter Email"
-              />
-            )}
+              <br />
+              {watchFields.id > 0 && (
+                <div>
+                  <ControlledToggler
+                    name="edit.firstName"
+                    control={control}
+                    label="Edit First Name"
+                  />
+                  {edit.firstName && (
+                    <input
+                      {...register("firstName")}
+                      type="text"
+                      id="firstName"
+                      placeholder="Enter First Name"
+                    />
+                  )}
+                  <br />
+                  <ControlledToggler
+                    name="edit.lastName"
+                    control={control}
+                    label="Edit Last Name"
+                  />
+
+                  {edit.lastName && (
+                    <input
+                      {...register("lastName")}
+                      type="text"
+                      id="lastName"
+                      placeholder="Enter Last Name"
+                    />
+                  )}
+                  <br />
+                  <ControlledToggler
+                    name="edit.email"
+                    control={control}
+                    label="Edit Email"
+                  />
+                  {edit.email && (
+                    <input
+                      {...register("email")}
+                      type="text"
+                      id="email"
+                      placeholder="Enter Email"
+                    />
+                  )}
+                </div>
+              )}
+              {watchFields.id > 0 &&
+              (edit.firstName || edit.lastName || edit.email) ? (
+                <button type="submit">Update Employee</button>
+              ) : null}
+            </form>
+            <div className="response">
+              {showResponse &&
+                (patchedEmployee ? (
+                  <div className="ok-response">
+                    <p>Employee Patched :)</p>
+                    <EmployeeTable employees={[patchedEmployee]} />
+                  </div>
+                ) : error ? (
+                  <div>
+                    <p>Error Occured :(</p>
+                    <p>{error}</p>
+                  </div>
+                ) : (
+                  <p>Something went wrong :(</p>
+                ))}
+            </div>
           </div>
-        )}
-        {watchFields.id > 0 &&
-        (edit.firstName || edit.lastName || edit.email) ? (
-          <button type="submit">Update Employee</button>
-        ) : null}
-      </form>
-      <div className="response">
-        {showResponse &&
-          (patchedEmployee ? (
-            <div className="ok-response">
-              <p>Employee Patched :)</p>
-              <EmployeeTable employees={[patchedEmployee]} />
-            </div>
-          ) : error ? (
-            <div>
-              <p>Error Occured :(</p>
-              <p>{error}</p>
-            </div>
-          ) : (
-            <p>Something went wrong :(</p>
-          ))}
-      </div>
+        }
+        footer={
+          <Button title="Back" onClick={() => router.push("/employees")} />
+        }
+      />
     </div>
   );
 };
