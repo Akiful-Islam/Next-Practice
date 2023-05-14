@@ -102,6 +102,14 @@ const PatchById = () => {
               control={control}
               label="Edit Email"
             />
+            {edit.email && (
+              <input
+                {...register("email")}
+                type="text"
+                id="email"
+                placeholder="Enter Email"
+              />
+            )}
           </div>
         )}
         {watchFields.id > 0 &&
