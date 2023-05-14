@@ -3,18 +3,18 @@
 @tailwind utilities;
 
 .btn {
-  @apply font-semibold border rounded-lg h-12 w-24;
+  @apply font-semibold border rounded-lg h-14 w-28 py-1 my-1;
   @apply hover:-translate-y-[1px];
   @apply active:translate-y-[1px] active:border-collapse;
   @apply transition ease-in duration-100 transform;
 }
 
-.btn-filled {
+button.btn-filled {
   @apply text-white bg-bnw-blue-accentLight border;
   @apply hover:bg-bnw-blue-accent hover:text-bnw-blue-gray;
 }
 
-.btn-transparent {
+button.btn-transparent {
   @apply text-bnw-blue-accent bg-transparent border border-bnw-blue-gray;
   @apply hover:bg-bnw-blue-accent hover:text-white hover:border-bnw-blue-white;
 }
