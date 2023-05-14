@@ -38,8 +38,8 @@ const Toggler: React.FC<Props> = ({
             onBlur={onBlur}
             checked={value}
           />
-          <div className="toggle-path bg-gray-400 w-9 h-5 rounded-full shadow-inner"></div>
-          <div className="toggle-circle absolute w-5 h-5 bg-zinc-700 rounded-full shadow inset-y-0 left-0"></div>
+          <div className="toggle-path bg-bnw-blue-gray/30 w-9 h-5 rounded-full shadow-inner"></div>
+          <div className="toggle-circle absolute w-5 h-5 bg-bnw-blue-white rounded-full shadow inset-y-0 left-0"></div>
         </div>
       </label>
     </div>
