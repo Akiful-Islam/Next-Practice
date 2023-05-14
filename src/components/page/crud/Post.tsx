@@ -50,37 +50,43 @@ const Post = () => {
       <Card
         title="Create An Employee"
         hero={
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <ControlledInput
-              name="firstName"
-              control={control}
-              rules={{ required: true }}
-              label="First Name"
-            />
-            <ControlledInput
-              name="lastName"
-              control={control}
-              rules={{ required: true }}
-              label="Last Name"
-            />
-            <ControlledInput
-              name="email"
-              control={control}
-              rules={{
-                required: true,
-                pattern: {
-                  value: /\S+@\S+\.\S+/,
-                  message: "Please enter a valid email address.",
-                },
-              }}
-              label="Email"
-              type="email"
-            />
-            {watchFields.firstName &&
-            watchFields.lastName &&
-            watchFields.email ? (
-              <button type="submit">Post Employee</button>
-            ) : null}
+          <div>
+            <form
+              className="flex flex-col items-center justify-center"
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              <ControlledInput
+                name="firstName"
+                control={control}
+                rules={{ required: true }}
+                label="First Name"
+              />
+              <ControlledInput
+                name="lastName"
+                control={control}
+                rules={{ required: true }}
+                label="Last Name"
+              />
+              <ControlledInput
+                name="email"
+                control={control}
+                rules={{
+                  required: true,
+                  pattern: {
+                    value: /\S+@\S+\.\S+/,
+                    message: "Please enter a valid email address.",
+                  },
+                }}
+                label="Email"
+                type="email"
+              />
+              {watchFields.firstName &&
+              watchFields.lastName &&
+              watchFields.email ? (
+                <Button type="submit" title="Create Employee" />
+              ) : null}
+            </form>
+
             <div className="response">
               {showResponse &&
                 (postedEmployee ? (
@@ -97,7 +103,7 @@ const Post = () => {
                   <p>Something Happened :(</p>
                 ))}
             </div>
-          </form>
+          </div>
         }
         footer={
           <Button
