@@ -1,6 +1,6 @@
 import React from "react";
 import { Control, Controller } from "react-hook-form";
-import Toggler from "./Toggler";
+import Toggler from "../Toggler";
 
 type Props = { name: string; control: Control<any>; label?: string };
 

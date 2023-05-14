@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import EmployeeTable from "../../data/EmployeeTable";
 import { PatchData, patchEmployee } from "@/services/EmployeeServices";
 import { useForm } from "react-hook-form";
-import ControlledToggler from "../../input/ControlledToggler";
+import ControlledToggler from "../../input/controlled/ControlledToggler";
 
 const PatchById = () => {
   const {

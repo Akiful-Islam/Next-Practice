@@ -51,13 +51,6 @@ const Post = () => {
         title="Create An Employee"
         hero={
           <form onSubmit={handleSubmit(onSubmit)}>
-            {/* <label htmlFor="first-name">First Name:</label>
-            <input
-              {...register("firstName", { required: true })}
-              type="text"
-              id="firstName"
-              placeholder="First Name"
-            /> */}
             <Controller
               name="firstName"
               control={control}
