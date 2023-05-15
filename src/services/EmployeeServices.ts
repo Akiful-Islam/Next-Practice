@@ -1,8 +1,8 @@
-type QueryParams = {
-  pageNumber?: number;
-  pageSize?: number;
-  sortBy?: string;
-  sortDirection?: string;
+export type Query = {
+  pageNumber: number;
+  pageSize: number;
+  sortBy: string;
+  sortDirection: string;
 };
 
 type PostData = {
@@ -17,7 +17,7 @@ export type PatchData = {
   email?: string;
 };
 
-const getAllEmployees = async (queryParams: QueryParams) => {
+const getAllEmployees = async (queryParams: Query) => {
   const { pageNumber, pageSize, sortBy, sortDirection } = queryParams;
 
   let url = "http://localhost:3030/api/employees";
