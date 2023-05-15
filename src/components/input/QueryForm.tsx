@@ -2,6 +2,7 @@ import React from "react";
 import NumberInput from "./NumberInput";
 import SortDirectionSelector from "./SortDirectionSelector";
 import SortBySelector from "./SortBySelector";
+import Input from "./Input";
 
 type Props = {
   pageNumber: number;
@@ -25,22 +26,22 @@ const QueryForm: React.FC<Props> = ({
   setSortDirection,
 }) => {
   return (
-    <div>
-      <label htmlFor="page-size">Page Size:</label>
-      <NumberInput
-        id="page-size"
-        value={pageSize}
-        setValue={setPageSize}
-        placeholder="Page Size"
-        required={false}
+    <div className="flex flex-row">
+      <Input
+        className="w-10"
+        name="page-size"
+        value={pageSize.toString()}
+        onChange={(e) => setPageSize(parseInt(e.target.value))}
+        label="Page Size"
+        type="number"
       />
-      <label htmlFor="page-number">Page Number:</label>
-      <NumberInput
-        id="page-size"
-        value={pageNumber}
-        setValue={setPageNumber}
-        placeholder="Page Number"
-        required={false}
+      <Input
+        className="w-10"
+        name="page-number"
+        value={pageNumber.toString()}
+        onChange={(e) => setPageNumber(parseInt(e.target.value))}
+        label="Page Number"
+        type="number"
       />
       <label htmlFor="sort-by">Sort By:</label>
       <SortBySelector value={sortBy} setValue={setSortBy} />
