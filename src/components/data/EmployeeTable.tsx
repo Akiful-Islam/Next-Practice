@@ -17,8 +17,8 @@ const EmployeeTable: React.FC<Props> = ({ employees, noActions = false }) => {
         <table className="employee-table min-w-full bg-white">
           <thead className="">
             <tr>
-              <th className="w-1/3 ">ID</th>
-              <th className="w-1/3 ">First Name</th>
+              <th className="w-8 ">ID</th>
+              <th className="w-auto ">First Name</th>
               <th className="">Last Name</th>
               <th className="">Email</th>
               {!noActions && <th className="">Actions</th>}
@@ -36,8 +36,11 @@ const EmployeeTable: React.FC<Props> = ({ employees, noActions = false }) => {
                 <td className="">{employee.lastName}</td>
                 <td className="">{employee.email}</td>
                 {!noActions && (
-                  <td className="">
-                    <UpdaterButtons id={employee.id} />
+                  <td
+                    className="cursor-default"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <UpdaterButtons employeeId={employee.id} />
                   </td>
                 )}
               </tr>
