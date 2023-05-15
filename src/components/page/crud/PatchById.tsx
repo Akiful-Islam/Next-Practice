@@ -25,21 +25,11 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
     watch,
     control,
-  } = useForm({
-    defaultValues: {
-      firstName: employee?.firstName,
-      lastName: employee?.lastName,
-      email: employee?.email,
-      edit: {
-        firstName: false,
-        lastName: false,
-        email: false,
-      },
-    },
-  });
+    reset,
+  } = useForm();
 
   const watchFields = watch();
   const { edit } = watchFields;
@@ -64,6 +54,16 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
       setError(`${res.code} - ${res.errorMessage}`);
     } else {
       setEmployee(res);
+      reset({
+        firstName: res.firstName,
+        lastName: res.lastName,
+        email: res.email,
+        edit: {
+          firstName: false,
+          lastName: false,
+          email: false,
+        },
+      });
     }
   };
 
