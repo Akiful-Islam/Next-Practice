@@ -29,10 +29,12 @@ const Card: React.FC<Props> = ({
           {title}
         </h2>
       )}
-      <div className="relative h-4/5 flex flex-col items-center justify-center overflow-hidden py-6">
-        {hero}
-        {children}
-      </div>
+      {(hero || children) && (
+        <div className="relative h-4/5 flex flex-col items-center justify-center overflow-hidden py-6">
+          {hero}
+          {children}
+        </div>
+      )}
       {footer && <div className="pt-8 flex justify-center">{footer}</div>}
     </div>
   );
