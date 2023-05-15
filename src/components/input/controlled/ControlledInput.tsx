@@ -6,6 +6,7 @@ type Props = {
   name: string;
   label?: string;
   type?: "text" | "email" | "password" | "number";
+  className?: string;
   control: Control<any>;
   rules: RegisterOptions;
 };
@@ -14,6 +15,7 @@ const ControlledInput: React.FC<Props> = ({
   name,
   label,
   type,
+  className,
   control,
   rules,
 }) => {
@@ -23,7 +25,9 @@ const ControlledInput: React.FC<Props> = ({
         name={name}
         control={control}
         rules={rules}
-        render={({ field }) => <Input {...field} label={label} type={type} />}
+        render={({ field }) => (
+          <Input {...field} label={label} type={type} className={className} />
+        )}
       />
     </div>
   );
