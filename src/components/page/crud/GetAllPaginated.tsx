@@ -55,7 +55,9 @@ const GetAllPaginated = () => {
       {employees.length > 0 ? (
         <EmployeeTable employees={employees} />
       ) : (
-        <p>Seems the table is empty</p>
+        <p className="text-lg font-medium text-bnw-blue-black animate-pulse pt-4">
+          Seems like the page is empty
+        </p>
       )}
     </div>
   );
