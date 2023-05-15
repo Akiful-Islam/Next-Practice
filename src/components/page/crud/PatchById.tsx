@@ -12,6 +12,7 @@ import ControlledToggler from "../../input/controlled/ControlledToggler";
 import Card from "@/components/Card";
 import { useRouter } from "next/navigation";
 import Button from "@/components/input/Button";
+import ControlledInput from "@/components/input/controlled/ControlledInput";
 
 type Props = {
   routeId: string;
@@ -100,7 +101,10 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
           <div>
             {employeeExists ? (
               <div>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form
+                  className="flex flex-col justify-center items-center"
+                  onSubmit={handleSubmit(onSubmit)}
+                >
                   <div>
                     <ControlledToggler
                       name="edit.firstName"
@@ -108,11 +112,14 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
                       label="Edit First Name"
                     />
                     {edit.firstName && (
-                      <input
-                        {...register("firstName")}
+                      <ControlledInput
+                        name="firstName"
+                        control={control}
+                        rules={{
+                          required: "First Name is cannot be empty",
+                        }}
                         type="text"
-                        id="firstName"
-                        placeholder="Enter First Name"
+                        label="First Name"
                       />
                     )}
                     <br />
@@ -122,11 +129,14 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
                       label="Edit Last Name"
                     />
                     {edit.lastName && (
-                      <input
-                        {...register("lastName")}
+                      <ControlledInput
+                        name="lastName"
+                        control={control}
+                        rules={{
+                          required: "Last Name is cannot be empty",
+                        }}
                         type="text"
-                        id="lastName"
-                        placeholder="Enter Last Name"
+                        label="Last Name"
                       />
                     )}
                     <br />
@@ -136,11 +146,18 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
                       label="Edit Email"
                     />
                     {edit.email && (
-                      <input
-                        {...register("email")}
-                        type="text"
-                        id="email"
-                        placeholder="Enter Email"
+                      <ControlledInput
+                        name="email"
+                        control={control}
+                        rules={{
+                          required: "Email is cannot be empty",
+                          pattern: {
+                            value: /\S+@\S+\.\S+/,
+                            message: "Invalid email format.",
+                          },
+                        }}
+                        type="email"
+                        label="Email"
                       />
                     )}
                     {error && (
@@ -150,9 +167,9 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
                     )}
                   </div>
 
-                  {edit.firstName || edit.lastName || edit.email ? (
-                    <button type="submit">Update Employee</button>
-                  ) : null}
+                  {(edit.firstName || edit.lastName || edit.email) && (
+                    <Button title="Update" type="submit" />
+                  )}
                 </form>
                 {showResponse && (
                   <div className="response">
