@@ -1,23 +1,29 @@
 "use client";
-
-import { Employee } from "@/types/Employee";
-import React, { useState } from "react";
-import EmployeeTable from "../../data/EmployeeTable";
-import { getEmployeeById } from "@/services/EmployeeServices";
-import NumberInput from "../../input/NumberInput";
 import Card from "@/components/Card";
+import EmployeeTable from "@/components/data/EmployeeTable";
 import Button from "@/components/input/Button";
+import { getEmployeeById } from "@/services/EmployeeServices";
+import { Employee } from "@/types/Employee";
 import { useRouter } from "next/navigation";
+import { parse } from "path";
+import React, { useEffect, useState } from "react";
 
-const GetById = () => {
+type Props = {
+  routeId: string;
+};
+
+const GetById: React.FC<Props> = ({ routeId }) => {
   const router = useRouter();
   const [employee, setEmployee] = useState<Employee | null>();
-  const [employeeId, setEmployeeId] = useState(0);
-  const [showResponse, setShowResponse] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const res = await getEmployeeById(employeeId);
+
+  const fetchEmployeeById = async (routeId: string) => {
+    if (isNaN(parseInt(routeId))) {
+      setError("Invalid Route: " + routeId + ". Please enter a valid number.");
+      setEmployee(null);
+      return;
+    }
+    const res = await getEmployeeById(parseInt(routeId));
 
     if ("errorMessage" in res) {
       setEmployee(null);
@@ -25,42 +31,32 @@ const GetById = () => {
     } else {
       setEmployee(res);
     }
-    setShowResponse(true);
   };
+
+  useEffect(() => {
+    fetchEmployeeById(routeId);
+  }, []);
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-6">
       <Card
-        title="Get Employee By Id"
+        title={"Employee " + routeId + ":"}
         hero={
-          <div>
-            <form onSubmit={handleSubmit}>
-              <label htmlFor="employeeId">Employee Id: </label>
-              <NumberInput
-                id="employeeId"
-                value={employeeId}
-                setValue={setEmployeeId}
-                placeholder="Id"
-              />
-              {employeeId > 0 ? <button type="submit">Search</button> : null}
-            </form>
-            <div className="response">
-              {showResponse &&
-                (employee ? (
-                  <EmployeeTable employees={[employee]} />
-                ) : error ? (
-                  <div>
-                    <p>Error Occured :(</p>
-                    <p>{error}</p>
-                  </div>
-                ) : (
-                  <p>Something Happened :(</p>
-                ))}
-            </div>
+          <div className="response">
+            {employee ? (
+              <EmployeeTable employees={[employee]} />
+            ) : (
+              error && (
+                <div>
+                  <p>Error Occured :(</p>
+                  <p>{error}</p>
+                </div>
+              )
+            )}
           </div>
         }
         footer={
-          <Button title="Back" onClick={() => router.push("/employees")} />
+          <Button title="Return" onClick={() => router.push("/employees")} />
         }
       />
     </div>

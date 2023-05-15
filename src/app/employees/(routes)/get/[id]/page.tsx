@@ -1,10 +1,10 @@
 import GetById from "@/components/page/crud/GetById";
 import React from "react";
 
-const page = () => {
+const page = ({ params }: { params: { id: string } }) => {
   return (
     <div className="get-single">
-      <GetById />
+      <GetById routeId={params.id} />
     </div>
   );
 };
