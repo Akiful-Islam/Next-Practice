@@ -17,8 +17,8 @@ const EmployeeTable: React.FC<Props> = ({ employees, noActions = false }) => {
         <table className="employee-table min-w-full bg-white">
           <thead className="">
             <tr>
-              <th className="w-8 ">ID</th>
-              <th className="w-auto ">First Name</th>
+              <th className="">ID</th>
+              <th className="">First Name</th>
               <th className="">Last Name</th>
               <th className="">Email</th>
               {!noActions && <th className="">Actions</th>}
@@ -31,8 +31,8 @@ const EmployeeTable: React.FC<Props> = ({ employees, noActions = false }) => {
                 className="cursor-pointer"
                 onClick={() => router.push("/employees/get/" + employee.id)}
               >
-                <td className="w-1/3 ">{employee.id}</td>
-                <td className="w-1/3 ">{employee.firstName}</td>
+                <td className="">{employee.id}</td>
+                <td className="">{employee.firstName}</td>
                 <td className="">{employee.lastName}</td>
                 <td className="">{employee.email}</td>
                 {!noActions && (
