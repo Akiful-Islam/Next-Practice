@@ -19,7 +19,7 @@ const GetById: React.FC<Props> = ({ routeId }) => {
 
   const fetchEmployeeById = async (routeId: string) => {
     const parsedId = parseInt(routeId);
-    if (parsedId) {
+    if (isNaN(parsedId)) {
       setError(`Invalid route "${routeId}". Enter a valid number.`);
       return;
     }
