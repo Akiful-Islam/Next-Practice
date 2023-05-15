@@ -17,28 +17,13 @@ const EmployeesPage = (props: Props) => {
           <div className="flex h-full w-full flex-col items-center justify-center overflow-hidden">
             <Button
               className="my-1 w-full"
-              title="Get All"
+              title="Check All Employees"
               onClick={() => router.push("/employees/get")}
             />
             <Button
-              className="my-1  w-full"
-              title="Get by Id"
-              onClick={() => router.push("/employees/get/{id}")}
-            />
-            <Button
               className="my-1 w-full"
-              title="Create"
+              title="Create New Employee"
               onClick={() => router.push("/employees/post")}
-            />
-            <Button
-              className="my-1 w-full"
-              title="Update"
-              onClick={() => router.push("/employees/patch")}
-            />
-            <Button
-              className="my-1 w-full"
-              title="Delete"
-              onClick={() => router.push("/employees/delete")}
             />
           </div>
         }
