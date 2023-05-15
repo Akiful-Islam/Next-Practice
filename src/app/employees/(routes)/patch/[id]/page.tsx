@@ -1,10 +1,10 @@
 import PatchById from "@/components/page/crud/PatchById";
 import React from "react";
 
-const page = () => {
+const page = ({ params }: { params: { id: string } }) => {
   return (
     <div className="patch-root">
-      <PatchById />
+      <PatchById routeId={params.id} />
     </div>
   );
 };
