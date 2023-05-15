@@ -20,6 +20,8 @@ type Props = {
 
 const PatchById: React.FC<Props> = ({ routeId }) => {
   const router = useRouter();
+  const [employee, setEmployee] = useState<Employee | null>(null);
+
   const {
     register,
     handleSubmit,
@@ -28,9 +30,9 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
     control,
   } = useForm({
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
+      firstName: employee?.firstName,
+      lastName: employee?.lastName,
+      email: employee?.email,
       edit: {
         firstName: false,
         lastName: false,
@@ -45,7 +47,6 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
   const [error, setError] = useState<string | null>(null);
   const [patchedEmployee, setPatchedEmployee] = useState<Employee | null>(null);
   const [showResponse, setShowResponse] = useState(false);
-  const [employeeExists, setEmployeeExists] = useState(false);
 
   const fetchEmployeeById = async (routeId: string) => {
     const parsedId = parseInt(routeId);
@@ -62,7 +63,7 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
     if ("errorMessage" in res) {
       setError(`${res.code} - ${res.errorMessage}`);
     } else {
-      setEmployeeExists(true);
+      setEmployee(res);
     }
   };
 
@@ -87,8 +88,8 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
   };
 
   let title;
-  if (employeeExists) {
-    title = `Update Employee ${routeId}`;
+  if (employee) {
+    title = `Update ${employee.firstName}'s informations`;
   } else {
     title = "Invalid Employee ID";
   }
@@ -99,7 +100,7 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
         title={title}
         hero={
           <div>
-            {employeeExists ? (
+            {employee ? (
               <div>
                 <form
                   className="flex flex-col justify-center items-center"
