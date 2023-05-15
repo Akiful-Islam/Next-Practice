@@ -33,7 +33,11 @@ const Input: React.FC<Props> = ({
           </div>
         )}
         <input
-          className="w-full max-w-xs h-10 px-2 rounded-md text-lg text-black font-medium border border-bnw-blue-gray/25 transition ease-in duration-75  hover:ring-1 hover:ring-offset-bnw-blue-accentLight/75 hover:shadow-md focus:shadow-lg focus:outline-none focus:ring focus:ring-offset-bnw-blue-accent/75"
+          className={
+            "w-full max-w-xs h-10 px-2 rounded-md text-lg text-black font-medium border border-bnw-blue-gray/25 transition ease-in duration-75  hover:ring-1 hover:ring-offset-bnw-blue-accentLight/75 hover:shadow-md focus:shadow-lg focus:outline-none focus:ring focus:ring-offset-bnw-blue-accent/75" +
+            " " +
+            className
+          }
           id={name && name + "Input"}
           type={type}
           onChange={onChange}
