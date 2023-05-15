@@ -1,67 +1,74 @@
 "use client";
 
 import { deleteEmployee } from "@/services/EmployeeServices";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NumberInput from "../../input/NumberInput";
 import Card from "@/components/Card";
 import { useRouter } from "next/navigation";
 import Button from "@/components/input/Button";
 
-const DeleteById = () => {
+type Props = {
+  routeId: string;
+};
+
+const DeleteById: React.FC<Props> = ({ routeId }) => {
   const router = useRouter();
-  const [employeeId, setEmployeeId] = useState(0);
 
-  const [employeeFound, setemployeeFound] = useState(false);
+  const [employeeFound, setEmployeeFound] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [showResponse, setShowResponse] = useState(false);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const res = await deleteEmployee(employeeId);
+  const fetchDeleteById = async (routeId: string) => {
+    const parsedId = parseInt(routeId);
+    if (isNaN(parsedId)) {
+      setError(`Invalid route "${routeId}". Enter a valid number.`);
+      return;
+    }
+
+    if (parsedId < 1) {
+      setError(`Invalid route "${routeId}". Id starts from 1.`);
+      return;
+    }
+    const res = await deleteEmployee(parsedId);
     if (res) {
-      setemployeeFound(false);
       setError(`${res.code} - ${res.errorMessage}`);
     } else {
-      setemployeeFound(true);
+      setEmployeeFound(true);
     }
-    setShowResponse(true);
   };
+
+  useEffect(() => {
+    fetchDeleteById(routeId);
+  }, []);
+
+  let title;
+  if (employeeFound) {
+    title = `Employee Deleted`;
+  } else {
+    title = "Invalid Employee ID";
+  }
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-6">
       <Card
-        title="Delete Employee"
+        title={title}
         hero={
-          <div>
-            <form onSubmit={handleSubmit}>
-              <label htmlFor="employeeId">Employee Id: </label>
-              <NumberInput
-                value={employeeId}
-                setValue={setEmployeeId}
-                placeholder="Employee Id"
-              />
-              {employeeId > 0 ? <Button title="Delete" type="submit" /> : null}
-            </form>
-            <div className="response">
-              {showResponse ? (
-                employeeFound ? (
-                  <div className="ok-response">
-                    <p>Employee Deleted :D</p>
-                  </div>
-                ) : error ? (
-                  <div>
-                    <p>Error Occured :(</p>
-                    <p>{error}</p>
-                  </div>
-                ) : (
-                  <p>Something went wrong :(</p>
-                )
-              ) : null}
-            </div>
+          <div className="response">
+            {employeeFound ? (
+              <div className="ok-response">
+                <p>Employee Successfully Deleted with id: {routeId}</p>
+              </div>
+            ) : (
+              error && (
+                <div>
+                  <p>Error Occured :(</p>
+                  <p>{error}</p>
+                </div>
+              )
+            )}
           </div>
         }
         footer={
-          <Button title="Back" onClick={() => router.push("/employees")} />
+          <Button title="Return" onClick={() => router.push("/employees")} />
         }
       />
     </div>

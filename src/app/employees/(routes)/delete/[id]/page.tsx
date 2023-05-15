@@ -2,10 +2,10 @@ import DeleteById from "@/components/page/crud/DeleteById";
 import React from "react";
 type Props = {};
 
-const page = () => {
+const page = ({ params }: { params: { id: string } }) => {
   return (
     <div className="delete-root">
-      <DeleteById />
+      <DeleteById routeId={params.id} />
     </div>
   );
 };
