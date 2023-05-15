@@ -19,14 +19,17 @@ const GetById: React.FC<Props> = ({ routeId }) => {
 
   const fetchEmployeeById = async (routeId: string) => {
     if (isNaN(parseInt(routeId))) {
-      setError("Invalid Route: " + routeId + ". Please enter a valid number.");
-      setEmployee(null);
+      setError(`Invalid route "${routeId}". Enter a valid number.`);
+      return;
+    }
+
+    if (parseInt(routeId) < 1) {
+      setError(`Invalid route "${routeId}". Id starts from 1.`);
       return;
     }
     const res = await getEmployeeById(parseInt(routeId));
 
     if ("errorMessage" in res) {
-      setEmployee(null);
       setError(`${res.code} - ${res.errorMessage}`);
     } else {
       setEmployee(res);
@@ -37,10 +40,17 @@ const GetById: React.FC<Props> = ({ routeId }) => {
     fetchEmployeeById(routeId);
   }, []);
 
+  let title;
+  if (employee) {
+    title = `${employee.firstName}'s Info`;
+  } else {
+    title = "Invalid Employee ID";
+  }
+
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-6">
       <Card
-        title={"Employee " + routeId + ":"}
+        title={title}
         hero={
           <div className="response">
             {employee ? (
