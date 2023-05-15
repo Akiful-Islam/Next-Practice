@@ -18,16 +18,17 @@ const GetById: React.FC<Props> = ({ routeId }) => {
   const [error, setError] = useState<string | null>(null);
 
   const fetchEmployeeById = async (routeId: string) => {
-    if (isNaN(parseInt(routeId))) {
+    const parsedId = parseInt(routeId);
+    if (parsedId) {
       setError(`Invalid route "${routeId}". Enter a valid number.`);
       return;
     }
 
-    if (parseInt(routeId) < 1) {
+    if (parsedId < 1) {
       setError(`Invalid route "${routeId}". Id starts from 1.`);
       return;
     }
-    const res = await getEmployeeById(parseInt(routeId));
+    const res = await getEmployeeById(parsedId);
 
     if ("errorMessage" in res) {
       setError(`${res.code} - ${res.errorMessage}`);
