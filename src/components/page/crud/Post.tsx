@@ -58,23 +58,23 @@ const Post = () => {
               <ControlledInput
                 name="firstName"
                 control={control}
-                rules={{ required: true }}
+                rules={{ required: "First Name cannot be empty." }}
                 label="First Name"
               />
               <ControlledInput
                 name="lastName"
                 control={control}
-                rules={{ required: true }}
+                rules={{ required: "Last name cannot be empty." }}
                 label="Last Name"
               />
               <ControlledInput
                 name="email"
                 control={control}
                 rules={{
-                  required: true,
+                  required: "Email cannot be empty.",
                   pattern: {
                     value: /\S+@\S+\.\S+/,
-                    message: "Please enter a valid email address.",
+                    message: "Invalid email format.",
                   },
                 }}
                 label="Email"
