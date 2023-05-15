@@ -6,9 +6,10 @@ import { useRouter } from "next/navigation";
 
 type Props = {
   employees: Employee[];
+  noActions?: boolean;
 };
 
-const EmployeeTable: React.FC<Props> = ({ employees }) => {
+const EmployeeTable: React.FC<Props> = ({ employees, noActions = false }) => {
   const router = useRouter();
   return (
     <div className="md:px-32 py-8 w-full">
@@ -20,7 +21,7 @@ const EmployeeTable: React.FC<Props> = ({ employees }) => {
               <th className="w-1/3 ">First Name</th>
               <th className="">Last Name</th>
               <th className="">Email</th>
-              <th className="min-w-44">Update</th>
+              {!noActions && <th className="">Actions</th>}
             </tr>
           </thead>
           <tbody className=" text-bnw-blue-black divide-y divide-bnw-blue-gray/20">
@@ -34,9 +35,11 @@ const EmployeeTable: React.FC<Props> = ({ employees }) => {
                 <td className="w-1/3 ">{employee.firstName}</td>
                 <td className="">{employee.lastName}</td>
                 <td className="">{employee.email}</td>
-                <td className="">
-                  <UpdaterButtons id={employee.id} />
-                </td>
+                {!noActions && (
+                  <td className="">
+                    <UpdaterButtons id={employee.id} />
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

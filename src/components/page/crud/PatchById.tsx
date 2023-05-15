@@ -157,7 +157,7 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
                 {showResponse && (
                   <div className="response">
                     {patchedEmployee ? (
-                      <EmployeeTable employees={[patchedEmployee]} />
+                      <EmployeeTable employees={[patchedEmployee]} noActions />
                     ) : (
                       error && <p>Employee not updated</p>
                     )}
