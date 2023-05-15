@@ -1,30 +1,41 @@
 import React, { useState } from "react";
 import Button from "./input/Button";
+import { useRouter } from "next/navigation";
 
 type Props = {
-  id: number;
+  employeeId: number;
 };
 
-const UpdaterButtons: React.FC<Props> = ({ id }) => {
+const UpdaterButtons: React.FC<Props> = ({ employeeId }) => {
+  const router = useRouter();
   const [showUpdaterButtons, setShowUpdaterButtons] = useState(false);
 
-  const handleEditClick = () => {};
-  const handleDeleteClick = () => {};
+  const handleEditClick = (id: number) => {
+    router.push(`/employees/patch/${id}`);
+  };
+  const handleDeleteClick = (id: number) => {
+    router.push(`/employees/delete/${id}`);
+  };
 
   return (
     <div className="">
       {showUpdaterButtons ? (
         <div className="flex place-content-center">
-          <Button className="!h-10 !w-20 border-2 !text-sm" title="Edit" />
+          <Button
+            className="!h-10 !w-20 border-2 !text-sm"
+            title="Edit"
+            onClick={() => handleEditClick(employeeId)}
+          />
           <Button
             variant="transparent"
             className="!h-10 !w-20 !text-sm !text-red-400 !border-red-400 hover:!bg-red-400 hover:!text-white"
             title="Delete"
+            onClick={() => handleDeleteClick(employeeId)}
           />
         </div>
       ) : (
         <Button
-          className="!h-12 !w-24 !text-sm"
+          className="!h-10 !w-20 !text-sm"
           title="Update?"
           variant="transparent"
           onClick={() => setShowUpdaterButtons(!showUpdaterButtons)}
