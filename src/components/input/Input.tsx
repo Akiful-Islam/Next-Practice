@@ -4,7 +4,7 @@ type Props = {
   label?: string;
   className?: string;
   style?: React.CSSProperties;
-  type?: string;
+  type?: "text" | "email" | "password" | "number";
   name?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;

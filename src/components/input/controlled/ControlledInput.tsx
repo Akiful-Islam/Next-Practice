@@ -5,7 +5,7 @@ import Input from "../Input";
 type Props = {
   name: string;
   label?: string;
-  type?: string;
+  type?: "text" | "email" | "password" | "number";
   control: Control<any>;
   rules: RegisterOptions;
 };
