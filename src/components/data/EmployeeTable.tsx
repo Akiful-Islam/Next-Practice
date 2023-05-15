@@ -1,5 +1,7 @@
 import { Employee } from "@/types/Employee";
-import React from "react";
+import React, { useState } from "react";
+import Button from "../input/Button";
+import UpdaterButtons from "../UpdaterButtons";
 
 type Props = {
   employees: Employee[];
@@ -9,32 +11,26 @@ const EmployeeTable: React.FC<Props> = ({ employees }) => {
   return (
     <div className="md:px-32 py-8 w-full">
       <div className="shadow-md overflow-hidden rounded-lg border-b border-bnw-blue-gray/20">
-        <table className="min-w-full bg-white">
-          <thead className="bg-bnw-blue-gray/10 text-bnw-blue-black">
+        <table className="employee-table min-w-full bg-white">
+          <thead className="">
             <tr>
-              <th className="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">
-                ID
-              </th>
-              <th className="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">
-                First Name
-              </th>
-              <th className="text-left py-3 px-4 uppercase font-semibold text-sm">
-                Last Name
-              </th>
-              <th className="text-left py-3 px-4 uppercase font-semibold text-sm">
-                Email
-              </th>
+              <th className="w-1/3 ">ID</th>
+              <th className="w-1/3 ">First Name</th>
+              <th className="">Last Name</th>
+              <th className="">Email</th>
+              <th className="min-w-44">Update</th>
             </tr>
           </thead>
-          <tbody className="text-zinc-700 divide-y divide-bnw-blue-gray/20">
+          <tbody className=" text-bnw-blue-black divide-y divide-bnw-blue-gray/20">
             {employees.map((employee) => (
-              <tr key={employee.id}>
-                <td className="w-1/3 text-left py-3 px-4">{employee.id}</td>
-                <td className="w-1/3 text-left py-3 px-4">
-                  {employee.firstName}
+              <tr key={employee.id} className="">
+                <td className="w-1/3 ">{employee.id}</td>
+                <td className="w-1/3 ">{employee.firstName}</td>
+                <td className="">{employee.lastName}</td>
+                <td className="">{employee.email}</td>
+                <td className="">
+                  <UpdaterButtons id={employee.id} />
                 </td>
-                <td className="text-left py-3 px-4">{employee.lastName}</td>
-                <td className="text-left py-3 px-4">{employee.email}</td>
               </tr>
             ))}
           </tbody>

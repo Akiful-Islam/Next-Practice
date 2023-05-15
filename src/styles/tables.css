@@ -2,26 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-.employee-table table {
-  @apply w-48 border-collapse border border-gray-500;
+.employee-table thead {
+  @apply bg-bnw-blue-white text-bnw-blue-black hover:bg-bnw-blue-gray/20 transition-colors ease-in duration-150;
 }
 
 .employee-table th {
-  @apply bg-gray-800 border border-gray-500 px-4 py-2;
-}
-
-.employee-table td {
-  @apply border border-gray-300 px-4 py-2;
+  @apply text-center py-3 px-4 uppercase font-semibold text-sm;
 }
 
 .employee-table tr:nth-child(even) {
-  @apply bg-gray-700;
+  @apply bg-grayscale-graphic-200/10 hover:bg-grayscale-graphic-200/20;
 }
 
 .employee-table tr:nth-child(odd) {
-  @apply bg-gray-600;
+  @apply bg-grayscale-graphic-400/10 hover:bg-grayscale-graphic-300/20;
 }
 
 .employee-table tr {
-  @apply transition duration-200 ease-in-out hover:bg-gray-500;
+  @apply transition duration-200 ease-in-out;
+}
+
+.employee-table td {
+  @apply text-center py-3 px-4 transition-colors ease-in duration-150;
 }
