@@ -23,7 +23,6 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
   const [employee, setEmployee] = useState<Employee | null>(null);
 
   const {
-    register,
     handleSubmit,
     formState: { errors, dirtyFields, isDirty },
     control,
@@ -170,7 +169,12 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
           </div>
         }
         footer={
-          <Button title="Return" onClick={() => router.push("/employees")} />
+          <Button
+            className="!h-8 !w-16 !text-sm font-medium"
+            variant="transparent"
+            title="Return"
+            onClick={() => router.back()}
+          />
         }
       />
     </div>

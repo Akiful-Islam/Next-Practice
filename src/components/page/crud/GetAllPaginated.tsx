@@ -49,7 +49,19 @@ const GetAllPaginated = () => {
           />
         }
         footer={
-          <Button title="Back" onClick={() => router.push("/employees")} />
+          <div>
+            <Button
+              className="!h-8 !w-16 !text-sm font-medium"
+              title="Add"
+              onClick={() => router.push("employees/post")}
+            />
+            <Button
+              className="!h-8 !w-16 !text-sm font-medium"
+              variant="transparent"
+              title="Back"
+              onClick={() => router.push("/employees")}
+            />
+          </div>
         }
       />
       {employees.length > 0 ? (

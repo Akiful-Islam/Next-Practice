@@ -13,11 +13,9 @@ import ControlledInput from "@/components/input/controlled/ControlledInput";
 const Post = () => {
   const router = useRouter();
   const {
-    register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, dirtyFields },
     control,
-    watch,
   } = useForm({
     defaultValues: {
       firstName: "",
@@ -26,8 +24,6 @@ const Post = () => {
     },
     mode: "onSubmit",
   });
-
-  const watchFields = watch();
 
   const [error, setError] = useState<string | null>(null);
   const [postedEmployee, setPostedEmployee] = useState<Employee | null>(null);
@@ -80,9 +76,9 @@ const Post = () => {
                 label="Email"
                 type="email"
               />
-              {watchFields.firstName &&
-              watchFields.lastName &&
-              watchFields.email ? (
+              {dirtyFields.firstName &&
+              dirtyFields.lastName &&
+              dirtyFields.email ? (
                 <Button type="submit" title="Create Employee" />
               ) : null}
             </form>
@@ -107,9 +103,10 @@ const Post = () => {
         }
         footer={
           <Button
+            className="!h-8 !w-16 !text-sm font-medium"
             title="Back"
             variant="transparent"
-            onClick={() => router.push("/employees")}
+            onClick={() => router.back()}
           />
         }
       />
