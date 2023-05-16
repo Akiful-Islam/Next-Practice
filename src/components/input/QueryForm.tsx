@@ -24,7 +24,7 @@ const QueryForm: React.FC<Props> = ({
   setSortDirection,
 }) => {
   return (
-    <div className="flex flex-row">
+    <div className="w-3/4 flex flex-row justify-around">
       <Input
         className="w-10"
         name="page-size"
@@ -42,6 +42,7 @@ const QueryForm: React.FC<Props> = ({
         type="number"
       />
       <Selector
+        className="w-10"
         name="sort-by"
         label="Sort By"
         options={[
@@ -54,6 +55,7 @@ const QueryForm: React.FC<Props> = ({
         onChange={(e) => setSortBy(e.target.value)}
       />
       <Selector
+        className="w-10"
         name="sort-direction"
         label="Sort Direction"
         options={[
