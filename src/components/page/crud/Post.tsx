@@ -51,36 +51,39 @@ const Post = () => {
               className="flex flex-col items-center justify-center"
               onSubmit={handleSubmit(onSubmit)}
             >
-              <ControlledInput
-                name="firstName"
-                control={control}
-                rules={{ required: "First Name cannot be empty." }}
-                label="First Name"
-              />
-              <ControlledInput
-                name="lastName"
-                control={control}
-                rules={{ required: "Last name cannot be empty." }}
-                label="Last Name"
-              />
-              <ControlledInput
-                name="email"
-                control={control}
-                rules={{
-                  required: "Email cannot be empty.",
-                  pattern: {
-                    value: /\S+@\S+\.\S+/,
-                    message: "Invalid email format.",
-                  },
-                }}
-                label="Email"
-                type="email"
-              />
+              <div>
+                <ControlledInput
+                  name="firstName"
+                  control={control}
+                  rules={{ required: "First Name cannot be empty." }}
+                  label="First Name"
+                />
+                <ControlledInput
+                  name="lastName"
+                  control={control}
+                  rules={{ required: "Last name cannot be empty." }}
+                  label="Last Name"
+                />
+                <ControlledInput
+                  name="email"
+                  control={control}
+                  rules={{
+                    required: "Email cannot be empty.",
+                    pattern: {
+                      value: /\S+@\S+\.\S+/,
+                      message: "Invalid email format.",
+                    },
+                  }}
+                  label="Email"
+                  type="email"
+                />
+              </div>
+
               {dirtyFields.firstName &&
-              dirtyFields.lastName &&
-              dirtyFields.email ? (
-                <Button type="submit" title="Create Employee" />
-              ) : null}
+                dirtyFields.lastName &&
+                dirtyFields.email && (
+                  <Button type="submit" title="Create Employee" />
+                )}
             </form>
 
             <div className="response">
