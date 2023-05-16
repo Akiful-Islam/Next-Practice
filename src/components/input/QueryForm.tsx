@@ -2,6 +2,7 @@ import React from "react";
 import SortDirectionSelector from "./SortDirectionSelector";
 import SortBySelector from "./SortBySelector";
 import Input from "./Input";
+import Selector from "./Selector";
 
 type Props = {
   pageNumber: number;
@@ -42,12 +43,27 @@ const QueryForm: React.FC<Props> = ({
         label="Page Number"
         type="number"
       />
-      <label htmlFor="sort-by">Sort By:</label>
-      <SortBySelector value={sortBy} setValue={setSortBy} />
-      <label htmlFor="sort-direction">Sort Direction:</label>
-      <SortDirectionSelector
+      <Selector
+        name="sort-by"
+        label="Sort By"
+        options={[
+          { value: "id", label: "Id" },
+          { value: "firstName", label: "First Name" },
+          { value: "lastName", label: "Last Name" },
+          { value: "email", label: "Email" },
+        ]}
+        value={sortBy}
+        onChange={(e) => setSortBy(e.target.value)}
+      />
+      <Selector
+        name="sort-direction"
+        label="Sort Direction"
+        options={[
+          { value: "asc", label: "Ascending" },
+          { value: "desc", label: "Descending" },
+        ]}
         value={sortDirection}
-        setValue={setSortDirection}
+        onChange={(e) => setSortDirection(e.target.value)}
       />
     </div>
   );
