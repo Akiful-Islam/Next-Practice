@@ -33,7 +33,7 @@ const GetAllPaginated = () => {
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-6">
       <Card
-        title="Get All Employees"
+        title="All Employees"
         hero={
           <QueryForm
             pageNumber={query.pageNumber}

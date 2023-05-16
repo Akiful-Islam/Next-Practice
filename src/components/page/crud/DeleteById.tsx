@@ -2,7 +2,6 @@
 
 import { deleteEmployee } from "@/services/EmployeeServices";
 import React, { useEffect, useState } from "react";
-import NumberInput from "../../input/NumberInput";
 import Card from "@/components/Card";
 import { useRouter } from "next/navigation";
 import Button from "@/components/input/Button";

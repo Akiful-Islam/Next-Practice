@@ -40,10 +40,10 @@ span {
   @apply text-attributes font-normal text-base capitalize leading-relaxed;
 }
 
-/* a {
+a {
   @apply text-gray-300 font-medium hover:text-gray-200 hover:font-semibold;
 }
 
 button a {
   @apply text-inherit font-normal hover:font-normal hover:text-inherit;
-} */
+}

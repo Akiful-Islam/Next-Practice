@@ -1,6 +1,5 @@
 import { Employee } from "@/types/Employee";
-import React, { useState } from "react";
-import Button from "../input/Button";
+import React from "react";
 import UpdaterButtons from "../UpdaterButtons";
 import { useRouter } from "next/navigation";
 

@@ -5,7 +5,6 @@ import Button from "@/components/input/Button";
 import { getEmployeeById } from "@/services/EmployeeServices";
 import { Employee } from "@/types/Employee";
 import { useRouter } from "next/navigation";
-import { parse } from "path";
 import React, { useEffect, useState } from "react";
 
 type Props = {
