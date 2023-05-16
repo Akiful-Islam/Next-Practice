@@ -145,7 +145,7 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
                     )}
                   </div>
 
-                  {isDirty && <Button title="Update" type="submit" />}
+                  {isDirty && <Button title="Update Employee" type="submit" />}
                 </form>
                 {showResponse && (
                   <div className="response">
