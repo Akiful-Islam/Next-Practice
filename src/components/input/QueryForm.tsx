@@ -1,6 +1,4 @@
 import React from "react";
-import SortDirectionSelector from "./SortDirectionSelector";
-import SortBySelector from "./SortBySelector";
 import Input from "./Input";
 import Selector from "./Selector";
 
