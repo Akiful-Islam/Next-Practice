@@ -25,14 +25,16 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isDirty },
-    watch,
+    formState: { errors, dirtyFields, isDirty },
     control,
     reset,
-  } = useForm();
-
-  const watchFields = watch();
-  const { edit } = watchFields;
+  } = useForm({
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+    },
+  });
 
   const [error, setError] = useState<string | null>(null);
   const [patchedEmployee, setPatchedEmployee] = useState<Employee | null>(null);
@@ -58,11 +60,6 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
         firstName: res.firstName,
         lastName: res.lastName,
         email: res.email,
-        edit: {
-          firstName: false,
-          lastName: false,
-          email: false,
-        },
       });
     }
   };
@@ -73,9 +70,9 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
 
   const onSubmit = async (data: any) => {
     const patchData: PatchData = {};
-    if (edit.firstName) patchData.firstName = data.firstName;
-    if (edit.lastName) patchData.lastName = data.lastName;
-    if (edit.email) patchData.email = data.email;
+    if (dirtyFields.firstName) patchData.firstName = data.firstName;
+    if (dirtyFields.lastName) patchData.lastName = data.lastName;
+    if (dirtyFields.email) patchData.email = data.email;
 
     const res = await patchEmployee(parseInt(routeId), patchData);
 
@@ -83,6 +80,11 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
       setError(`${res.code} - ${res.errorMessage}`);
     } else {
       setPatchedEmployee(res);
+      reset({
+        firstName: res.firstName,
+        lastName: res.lastName,
+        email: res.email,
+      });
     }
     setShowResponse(true);
   };
@@ -107,60 +109,37 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
                   onSubmit={handleSubmit(onSubmit)}
                 >
                   <div>
-                    <ControlledToggler
-                      name="edit.firstName"
+                    <ControlledInput
+                      name="firstName"
                       control={control}
-                      label="Edit First Name"
+                      rules={{
+                        required: "First Name is cannot be empty",
+                      }}
+                      type="text"
+                      label="First Name"
                     />
-                    {edit.firstName && (
-                      <ControlledInput
-                        name="firstName"
-                        control={control}
-                        rules={{
-                          required: "First Name is cannot be empty",
-                        }}
-                        type="text"
-                        label="First Name"
-                      />
-                    )}
-                    <br />
-                    <ControlledToggler
-                      name="edit.lastName"
+                    <ControlledInput
+                      name="lastName"
                       control={control}
-                      label="Edit Last Name"
+                      rules={{
+                        required: "Last Name is cannot be empty",
+                      }}
+                      type="text"
+                      label="Last Name"
                     />
-                    {edit.lastName && (
-                      <ControlledInput
-                        name="lastName"
-                        control={control}
-                        rules={{
-                          required: "Last Name is cannot be empty",
-                        }}
-                        type="text"
-                        label="Last Name"
-                      />
-                    )}
-                    <br />
-                    <ControlledToggler
-                      name="edit.email"
+                    <ControlledInput
+                      name="email"
                       control={control}
-                      label="Edit Email"
+                      rules={{
+                        required: "Email is cannot be empty",
+                        pattern: {
+                          value: /\S+@\S+\.\S+/,
+                          message: "Invalid email format.",
+                        },
+                      }}
+                      type="email"
+                      label="Email"
                     />
-                    {edit.email && (
-                      <ControlledInput
-                        name="email"
-                        control={control}
-                        rules={{
-                          required: "Email is cannot be empty",
-                          pattern: {
-                            value: /\S+@\S+\.\S+/,
-                            message: "Invalid email format.",
-                          },
-                        }}
-                        type="email"
-                        label="Email"
-                      />
-                    )}
                     {error && (
                       <div className="response">
                         <p>{error}</p>
@@ -168,9 +147,7 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
                     )}
                   </div>
 
-                  {(edit.firstName || edit.lastName || edit.email) && (
-                    <Button title="Update" type="submit" />
-                  )}
+                  {isDirty && <Button title="Update" type="submit" />}
                 </form>
                 {showResponse && (
                   <div className="response">
