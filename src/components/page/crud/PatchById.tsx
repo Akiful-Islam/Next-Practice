@@ -31,6 +31,8 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
       firstName: "",
       lastName: "",
       email: "",
+      phoneNumber: "",
+      position: "",
     },
   });
 
@@ -58,6 +60,8 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
         firstName: res.firstName,
         lastName: res.lastName,
         email: res.email,
+        phoneNumber: res.phoneNumber,
+        position: res.position,
       });
     }
   };
@@ -111,7 +115,7 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
                       name="firstName"
                       control={control}
                       rules={{
-                        required: "First Name is cannot be empty",
+                        required: "First Name cannot be empty",
                       }}
                       type="text"
                       label="First Name"
@@ -120,7 +124,7 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
                       name="lastName"
                       control={control}
                       rules={{
-                        required: "Last Name is cannot be empty",
+                        required: "Last Name cannot be empty",
                       }}
                       type="text"
                       label="Last Name"
@@ -129,7 +133,7 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
                       name="email"
                       control={control}
                       rules={{
-                        required: "Email is cannot be empty",
+                        required: "Email cannot be empty",
                         pattern: {
                           value: /\S+@\S+\.\S+/,
                           message: "Invalid email format.",
@@ -137,6 +141,28 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
                       }}
                       type="email"
                       label="Email"
+                    />
+                    <ControlledInput
+                      name="phoneNumber"
+                      control={control}
+                      rules={{
+                        required: "Phone Number cannot be empty",
+                        pattern: {
+                          value: /^\d{11}$/,
+                          message: "Phone number must only contain 11 digits.",
+                        },
+                      }}
+                      type="tel"
+                      label="Phone Number"
+                    />
+                    <ControlledInput
+                      name="position"
+                      control={control}
+                      rules={{
+                        required: "Position cannot be empty",
+                      }}
+                      type="text"
+                      label="Position"
                     />
                     {error && (
                       <div className="response">
