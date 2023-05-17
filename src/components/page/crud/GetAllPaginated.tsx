@@ -7,11 +7,13 @@ import { Query, getAllEmployees } from "@/services/EmployeeServices";
 import Button from "../../input/Button";
 import Card from "@/components/Card";
 import { useRouter } from "next/navigation";
+import { Page } from "@/types/Page";
 
 const GetAllPaginated = () => {
   const router = useRouter();
 
   const [employees, setEmployees] = useState<Employee[]>([]);
+  const [page, setPage] = useState<Page | null>(null);
 
   const [query, setQuery] = useState<Query>({
     pageNumber: 0,
@@ -22,7 +24,7 @@ const GetAllPaginated = () => {
 
   const fetchAllEmployees = async () => {
     const response = await getAllEmployees(query);
-
+    setPage(response);
     setEmployees(response.content);
   };
 
@@ -41,7 +43,7 @@ const GetAllPaginated = () => {
         onClick={() => router.push("employees/post")}
       />
 
-      {employees.length > 0 && (
+      {page && page.totalElements > 0 ? (
         <QueryForm
           pageNumber={query.pageNumber}
           pageSize={query.pageSize}
@@ -54,14 +56,25 @@ const GetAllPaginated = () => {
             setQuery({ ...query, sortDirection })
           }
         />
+      ) : (
+        <p className="text-lg font-medium text-red-400 animate-pulse pt-4">
+          No content exists :(
+        </p>
       )}
 
       {employees.length > 0 ? (
         <EmployeeTable employees={employees} />
       ) : (
-        <p className="text-lg font-medium text-bnw-blue-black animate-pulse pt-4">
-          Seems like the page is empty
-        </p>
+        page &&
+        page.totalElements > 0 && (
+          <Card
+            hero={
+              <p className="text-lg font-medium text-bnw-blue-black animate-pulse pt-4">
+                Seems like the page is empty
+              </p>
+            }
+          />
+        )
       )}
       <Button
         className="!h-8 !w-16 !text-sm font-medium"
