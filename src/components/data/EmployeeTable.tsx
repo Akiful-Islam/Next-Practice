@@ -1,10 +1,10 @@
-import { Employee } from "@/types/Employee";
+import { ResponseEmployee } from "@/types/Employee";
 import React from "react";
 import UpdaterButtons from "../UpdaterButtons";
 import { useRouter } from "next/navigation";
 
 type Props = {
-  employees: Employee[];
+  employees: ResponseEmployee[];
   noActions?: boolean;
 };
 

@@ -1,5 +1,5 @@
 "use client";
-import { Employee } from "@/types/Employee";
+import { ResponseEmployee } from "@/types/Employee";
 import React, { useEffect, useState } from "react";
 import EmployeeTable from "../../data/EmployeeTable";
 import QueryForm from "../../input/QueryForm";
@@ -12,7 +12,7 @@ import { Page } from "@/types/Page";
 const GetAllPaginated = () => {
   const router = useRouter();
 
-  const [employees, setEmployees] = useState<Employee[]>([]);
+  const [employees, setEmployees] = useState<ResponseEmployee[]>([]);
   const [page, setPage] = useState<Page | null>(null);
 
   const [query, setQuery] = useState<Query>({

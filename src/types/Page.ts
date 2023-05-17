@@ -1,4 +1,4 @@
-import { Employee } from "./Employee";
+import { ResponseEmployee } from "./Employee";
 
 export type Sort = {
   empty: boolean;
@@ -16,7 +16,7 @@ export type Pageable = {
 };
 
 export type Page = {
-  content: Employee[];
+  content: ResponseEmployee[];
   pageable: Pageable;
   totalPages: number;
   totalElements: number;
