@@ -1,12 +1,8 @@
 "use client";
-import { Employee } from "@/types/Employee";
+import { PatchEmployee, ResponseEmployee } from "@/types/Employee";
 import React, { useEffect, useState } from "react";
 import EmployeeTable from "../../data/EmployeeTable";
-import {
-  PatchData,
-  getEmployeeById,
-  patchEmployee,
-} from "@/services/EmployeeServices";
+import { getEmployeeById, patchEmployee } from "@/services/EmployeeServices";
 import { useForm } from "react-hook-form";
 import Card from "@/components/Card";
 import { useRouter } from "next/navigation";
@@ -19,25 +15,26 @@ type Props = {
 
 const PatchById: React.FC<Props> = ({ routeId }) => {
   const router = useRouter();
-  const [employee, setEmployee] = useState<Employee | null>(null);
+  const [employee, setEmployee] = useState<ResponseEmployee | null>(null);
 
   const {
     handleSubmit,
     formState: { errors, dirtyFields, isDirty },
     control,
     reset,
-  } = useForm({
+  } = useForm<PatchEmployee>({
     defaultValues: {
       firstName: "",
       lastName: "",
       email: "",
       phoneNumber: "",
-      position: "",
+      position: "Developer",
     },
   });
 
   const [error, setError] = useState<string | null>(null);
-  const [patchedEmployee, setPatchedEmployee] = useState<Employee | null>(null);
+  const [patchedEmployee, setPatchedEmployee] =
+    useState<ResponseEmployee | null>(null);
   const [showResponse, setShowResponse] = useState(false);
 
   const fetchEmployeeById = async (routeId: string) => {
@@ -70,8 +67,8 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
     fetchEmployeeById(routeId);
   }, []);
 
-  const onSubmit = async (data: any) => {
-    const patchData: PatchData = {};
+  const onSubmit = async (data: PatchEmployee) => {
+    const patchData: PatchEmployee = {};
     if (dirtyFields.firstName) patchData.firstName = data.firstName;
     if (dirtyFields.lastName) patchData.lastName = data.lastName;
     if (dirtyFields.email) patchData.email = data.email;

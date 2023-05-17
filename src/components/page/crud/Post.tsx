@@ -1,6 +1,6 @@
 "use client";
 
-import { Employee } from "@/types/Employee";
+import { PostEmployee, ResponseEmployee } from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "../../data/EmployeeTable";
 import { postEmployee } from "@/services/EmployeeServices";
@@ -16,23 +16,25 @@ const Post = () => {
     handleSubmit,
     formState: { errors, dirtyFields },
     control,
-  } = useForm({
+  } = useForm<PostEmployee>({
     defaultValues: {
       firstName: "",
       lastName: "",
       email: "",
       phoneNumber: "",
-      position: "",
+      position: "Developer",
     },
     mode: "onSubmit",
   });
 
   const [error, setError] = useState<string | null>(null);
-  const [postedEmployee, setPostedEmployee] = useState<Employee | null>(null);
+  const [postedEmployee, setPostedEmployee] = useState<ResponseEmployee | null>(
+    null
+  );
 
   const [showResponse, setShowResponse] = useState(false);
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: PostEmployee) => {
     const res = await postEmployee(data);
     console.log(res);
 
