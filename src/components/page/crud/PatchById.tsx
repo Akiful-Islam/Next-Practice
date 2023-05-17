@@ -86,6 +86,8 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
         firstName: res.firstName,
         lastName: res.lastName,
         email: res.email,
+        phoneNumber: res.phoneNumber,
+        position: res.position,
       });
     }
     setShowResponse(true);
