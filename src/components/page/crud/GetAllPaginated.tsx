@@ -22,10 +22,13 @@ const GetAllPaginated = () => {
     sortDirection: "asc",
   });
 
+  const [loading, setLoading] = useState(true);
+
   const fetchAllEmployees = async () => {
     const response = await getAllEmployees(query);
     setPage(response);
     setEmployees(response.content);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -39,6 +42,7 @@ const GetAllPaginated = () => {
       </h1>
 
       <Button
+        className="my-10"
         title="Add New Employee"
         onClick={() => router.push("employees/post")}
       />
@@ -57,9 +61,11 @@ const GetAllPaginated = () => {
           }
         />
       ) : (
-        <p className="text-lg font-medium text-red-400 animate-pulse pt-4">
-          No content exists :(
-        </p>
+        !loading && (
+          <p className="text-lg font-medium text-red-400 animate-pulse pt-4">
+            No content exists :(
+          </p>
+        )
       )}
 
       {employees.length > 0 ? (
