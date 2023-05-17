@@ -16,10 +16,11 @@ const EmployeeTable: React.FC<Props> = ({ employees, noActions = false }) => {
         <table className="employee-table min-w-full bg-white">
           <thead className="">
             <tr>
-              <th className="">ID</th>
-              <th className="">First Name</th>
-              <th className="">Last Name</th>
-              <th className="">Email</th>
+              {Object.keys(employees[0]).map((key) => (
+                <th key={key} className="">
+                  {key}
+                </th>
+              ))}
               {!noActions && <th className="">Actions</th>}
             </tr>
           </thead>
@@ -34,6 +35,8 @@ const EmployeeTable: React.FC<Props> = ({ employees, noActions = false }) => {
                 <td className="">{employee.firstName}</td>
                 <td className="">{employee.lastName}</td>
                 <td className="">{employee.email}</td>
+                <td className="">{employee.phoneNumber}</td>
+                <td className="">{employee.position}</td>
                 {!noActions && (
                   <td
                     className="cursor-default"
