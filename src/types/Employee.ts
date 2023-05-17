@@ -3,6 +3,6 @@ export type Employee = {
   firstName: string;
   lastName: string;
   email: string;
-  phone: string;
+  phoneNumber: string;
   position: "Developer" | "Manager" | "HR" | "QA";
 };
