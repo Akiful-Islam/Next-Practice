@@ -21,6 +21,8 @@ const Post = () => {
       firstName: "",
       lastName: "",
       email: "",
+      phoneNumber: "",
+      position: "",
     },
     mode: "onSubmit",
   });
@@ -76,6 +78,25 @@ const Post = () => {
                   }}
                   label="Email"
                   type="email"
+                />
+                <ControlledInput
+                  name="phoneNumber"
+                  control={control}
+                  rules={{
+                    required: "Phone Number cannot be empty",
+                    pattern: {
+                      value: /^\d{11}$/,
+                      message: "Phone number must only contain 11 digits.",
+                    },
+                  }}
+                  label="Phone Number"
+                  type="tel"
+                />
+                <ControlledInput
+                  name="position"
+                  control={control}
+                  rules={{ required: "Position cannot be empty." }}
+                  label="Position"
                 />
               </div>
 
