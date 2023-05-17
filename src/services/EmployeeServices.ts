@@ -9,12 +9,16 @@ type PostData = {
   firstName: string;
   lastName: string;
   email: string;
+  phoneNumber: string;
+  position: "Developer" | "Manager" | "HR" | "QA";
 };
 
 export type PatchData = {
   firstName?: string;
   lastName?: string;
   email?: string;
+  phoneNumber?: string;
+  position?: "Developer" | "Manager" | "HR" | "QA";
 };
 
 const getAllEmployees = async (queryParams: Query) => {

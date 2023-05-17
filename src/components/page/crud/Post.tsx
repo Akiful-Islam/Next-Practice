@@ -34,6 +34,7 @@ const Post = () => {
 
   const onSubmit = async (data: any) => {
     const res = await postEmployee(data);
+    console.log(res);
 
     if ("errorMessage" in res) {
       setPostedEmployee(null);
@@ -102,7 +103,9 @@ const Post = () => {
 
               {dirtyFields.firstName &&
                 dirtyFields.lastName &&
-                dirtyFields.email && (
+                dirtyFields.email &&
+                dirtyFields.phoneNumber &&
+                dirtyFields.position && (
                   <Button type="submit" title="Create Employee" />
                 )}
             </form>

@@ -75,8 +75,12 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
     if (dirtyFields.firstName) patchData.firstName = data.firstName;
     if (dirtyFields.lastName) patchData.lastName = data.lastName;
     if (dirtyFields.email) patchData.email = data.email;
+    if (dirtyFields.phoneNumber) patchData.phoneNumber = data.phoneNumber;
+    if (dirtyFields.position) patchData.position = data.position;
 
     const res = await patchEmployee(parseInt(routeId), patchData);
+
+    console.log(res);
 
     if ("errorMessage" in res) {
       setError(`${res.code} - ${res.errorMessage}`);
