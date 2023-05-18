@@ -43,11 +43,17 @@ const GetAllPaginated = () => {
     setPage(response);
     setEmployees(response.content);
     setLoading(false);
+    console.log(query);
   };
 
   useEffect(() => {
     fetchAllEmployees();
   }, [query]);
+
+  useEffect(() => {
+    setSearch("");
+    setQuery({ ...query, name: undefined, phoneNumber: undefined });
+  }, [searchBy]);
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-6">
@@ -82,6 +88,7 @@ const GetAllPaginated = () => {
               label="Search"
               value={search}
               onChange={handleSearch}
+              type={searchBy === "phoneNumber" ? "number" : "text"}
             />
             <Selector
               className="w-24"
