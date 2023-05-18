@@ -3,7 +3,7 @@ import Card from "@/components/Card";
 import EmployeeTable from "@/components/data/EmployeeTable";
 import Button from "@/components/input/Button";
 import { getEmployeeById } from "@/services/EmployeeServices";
-import { Employee } from "@/types/Employee";
+import { ResponseEmployee } from "@/types/Employee";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -13,7 +13,7 @@ type Props = {
 
 const GetById: React.FC<Props> = ({ routeId }) => {
   const router = useRouter();
-  const [employee, setEmployee] = useState<Employee | null>();
+  const [employee, setEmployee] = useState<ResponseEmployee | null>();
   const [error, setError] = useState<string | null>(null);
 
   const fetchEmployeeById = async (routeId: string) => {

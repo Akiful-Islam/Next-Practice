@@ -1,17 +1,18 @@
 "use client";
-import { Employee } from "@/types/Employee";
+import {
+  EmployeePosition,
+  PatchEmployee,
+  ResponseEmployee,
+} from "@/types/Employee";
 import React, { useEffect, useState } from "react";
 import EmployeeTable from "../../data/EmployeeTable";
-import {
-  PatchData,
-  getEmployeeById,
-  patchEmployee,
-} from "@/services/EmployeeServices";
+import { getEmployeeById, patchEmployee } from "@/services/EmployeeServices";
 import { useForm } from "react-hook-form";
 import Card from "@/components/Card";
 import { useRouter } from "next/navigation";
 import Button from "@/components/input/Button";
 import ControlledInput from "@/components/input/controlled/ControlledInput";
+import ControlledSelector from "@/components/input/controlled/ControlledSelector";
 
 type Props = {
   routeId: string;
@@ -19,23 +20,18 @@ type Props = {
 
 const PatchById: React.FC<Props> = ({ routeId }) => {
   const router = useRouter();
-  const [employee, setEmployee] = useState<Employee | null>(null);
+  const [employee, setEmployee] = useState<ResponseEmployee | null>(null);
 
   const {
     handleSubmit,
     formState: { errors, dirtyFields, isDirty },
     control,
     reset,
-  } = useForm({
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-    },
-  });
+  } = useForm<PatchEmployee>();
 
   const [error, setError] = useState<string | null>(null);
-  const [patchedEmployee, setPatchedEmployee] = useState<Employee | null>(null);
+  const [patchedEmployee, setPatchedEmployee] =
+    useState<ResponseEmployee | null>(null);
   const [showResponse, setShowResponse] = useState(false);
 
   const fetchEmployeeById = async (routeId: string) => {
@@ -58,6 +54,8 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
         firstName: res.firstName,
         lastName: res.lastName,
         email: res.email,
+        phoneNumber: res.phoneNumber,
+        position: res.position,
       });
     }
   };
@@ -66,13 +64,17 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
     fetchEmployeeById(routeId);
   }, []);
 
-  const onSubmit = async (data: any) => {
-    const patchData: PatchData = {};
+  const onSubmit = async (data: PatchEmployee) => {
+    const patchData: PatchEmployee = {};
     if (dirtyFields.firstName) patchData.firstName = data.firstName;
     if (dirtyFields.lastName) patchData.lastName = data.lastName;
     if (dirtyFields.email) patchData.email = data.email;
+    if (dirtyFields.phoneNumber) patchData.phoneNumber = data.phoneNumber;
+    if (dirtyFields.position) patchData.position = data.position;
 
     const res = await patchEmployee(parseInt(routeId), patchData);
+
+    console.log(res);
 
     if ("errorMessage" in res) {
       setError(`${res.code} - ${res.errorMessage}`);
@@ -82,6 +84,8 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
         firstName: res.firstName,
         lastName: res.lastName,
         email: res.email,
+        phoneNumber: res.phoneNumber,
+        position: res.position,
       });
     }
     setShowResponse(true);
@@ -111,7 +115,7 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
                       name="firstName"
                       control={control}
                       rules={{
-                        required: "First Name is cannot be empty",
+                        required: "First Name cannot be empty",
                       }}
                       type="text"
                       label="First Name"
@@ -120,7 +124,7 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
                       name="lastName"
                       control={control}
                       rules={{
-                        required: "Last Name is cannot be empty",
+                        required: "Last Name cannot be empty",
                       }}
                       type="text"
                       label="Last Name"
@@ -129,7 +133,7 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
                       name="email"
                       control={control}
                       rules={{
-                        required: "Email is cannot be empty",
+                        required: "Email cannot be empty",
                         pattern: {
                           value: /\S+@\S+\.\S+/,
                           message: "Invalid email format.",
@@ -137,6 +141,36 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
                       }}
                       type="email"
                       label="Email"
+                    />
+                    <ControlledInput
+                      name="phoneNumber"
+                      control={control}
+                      rules={{
+                        required: "Phone Number cannot be empty",
+                        pattern: {
+                          value: /^\d{11}$/,
+                          message: "Phone number must only contain 11 digits.",
+                        },
+                      }}
+                      type="tel"
+                      label="Phone Number"
+                    />
+                    <ControlledSelector
+                      name="position"
+                      control={control}
+                      rules={{
+                        required: "Position cannot be empty",
+                      }}
+                      label="Position"
+                      options={[
+                        {
+                          value: EmployeePosition.DEVELOPER,
+                          label: "Developer",
+                        },
+                        { value: EmployeePosition.QA, label: "QA" },
+                        { value: EmployeePosition.MANAGER, label: "Manager" },
+                        { value: EmployeePosition.HR, label: "HR" },
+                      ]}
                     />
                     {error && (
                       <div className="response">

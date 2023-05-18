@@ -1,24 +1,17 @@
+import { PatchEmployee, PostEmployee } from "@/types/Employee";
+
 export type Query = {
   pageNumber: number;
   pageSize: number;
   sortBy: string;
   sortDirection: string;
-};
-
-type PostData = {
-  firstName: string;
-  lastName: string;
-  email: string;
-};
-
-export type PatchData = {
-  firstName?: string;
-  lastName?: string;
-  email?: string;
+  name?: string;
+  phoneNumber?: string;
 };
 
 const getAllEmployees = async (queryParams: Query) => {
-  const { pageNumber, pageSize, sortBy, sortDirection } = queryParams;
+  const { pageNumber, pageSize, sortBy, sortDirection, name, phoneNumber } =
+    queryParams;
 
   let url = "http://localhost:3030/api/employees";
 
@@ -36,6 +29,12 @@ const getAllEmployees = async (queryParams: Query) => {
       params.append("sort", sortBy);
     }
   }
+  if (name) {
+    params.append("name", name);
+  }
+  if (phoneNumber) {
+    params.append("phoneNumber", phoneNumber);
+  }
 
   if (params.toString()) {
     url += `?${params.toString()}`;
@@ -52,7 +51,7 @@ const getEmployeeById = async (id: number) => {
   return res.json();
 };
 
-const postEmployee = async (postData: PostData) => {
+const postEmployee = async (postData: PostEmployee) => {
   const url = `http://localhost:3030/api/employees`;
   const res = await fetch(url, {
     method: "POST",
@@ -64,7 +63,7 @@ const postEmployee = async (postData: PostData) => {
   return res.json();
 };
 
-const patchEmployee = async (id: number, patchData: PatchData) => {
+const patchEmployee = async (id: number, patchData: PatchEmployee) => {
   const url = `http://localhost:3030/api/employees/${id}`;
 
   const res = await fetch(url, {

@@ -1,6 +1,10 @@
 "use client";
 
-import { Employee } from "@/types/Employee";
+import {
+  EmployeePosition,
+  PostEmployee,
+  ResponseEmployee,
+} from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "../../data/EmployeeTable";
 import { postEmployee } from "@/services/EmployeeServices";
@@ -9,6 +13,7 @@ import Card from "@/components/Card";
 import Button from "@/components/input/Button";
 import { useRouter } from "next/navigation";
 import ControlledInput from "@/components/input/controlled/ControlledInput";
+import ControlledSelector from "@/components/input/controlled/ControlledSelector";
 
 const Post = () => {
   const router = useRouter();
@@ -16,23 +21,28 @@ const Post = () => {
     handleSubmit,
     formState: { errors, dirtyFields },
     control,
-  } = useForm({
+  } = useForm<PostEmployee>({
     defaultValues: {
       firstName: "",
       lastName: "",
       email: "",
+      phoneNumber: "",
+      position: EmployeePosition.DEVELOPER,
     },
     mode: "onSubmit",
   });
 
   const [error, setError] = useState<string | null>(null);
-  const [postedEmployee, setPostedEmployee] = useState<Employee | null>(null);
+  const [postedEmployee, setPostedEmployee] = useState<ResponseEmployee | null>(
+    null
+  );
 
   const [showResponse, setShowResponse] = useState(false);
 
-  const onSubmit = async (data: any) => {
-    const res = await postEmployee(data);
+  const onSubmit = async (data: PostEmployee) => {
+    console.log(data);
 
+    const res = await postEmployee(data);
     if ("errorMessage" in res) {
       setPostedEmployee(null);
       setError(`${res.code} - ${res.errorMessage}`);
@@ -77,11 +87,37 @@ const Post = () => {
                   label="Email"
                   type="email"
                 />
+                <ControlledInput
+                  name="phoneNumber"
+                  control={control}
+                  rules={{
+                    required: "Phone Number cannot be empty",
+                    pattern: {
+                      value: /^\d{11}$/,
+                      message: "Phone number must only contain 11 digits.",
+                    },
+                  }}
+                  label="Phone Number"
+                  type="tel"
+                />
+                <ControlledSelector
+                  name="position"
+                  control={control}
+                  rules={{ required: "Position cannot be empty." }}
+                  label="Position"
+                  options={[
+                    { value: EmployeePosition.DEVELOPER, label: "Developer" },
+                    { value: EmployeePosition.QA, label: "QA" },
+                    { value: EmployeePosition.MANAGER, label: "Manager" },
+                    { value: EmployeePosition.HR, label: "HR" },
+                  ]}
+                />
               </div>
 
               {dirtyFields.firstName &&
                 dirtyFields.lastName &&
-                dirtyFields.email && (
+                dirtyFields.email &&
+                dirtyFields.phoneNumber && (
                   <Button type="submit" title="Create Employee" />
                 )}
             </form>

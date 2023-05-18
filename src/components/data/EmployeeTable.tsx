@@ -1,10 +1,10 @@
-import { Employee } from "@/types/Employee";
+import { ResponseEmployee } from "@/types/Employee";
 import React from "react";
 import UpdaterButtons from "../UpdaterButtons";
 import { useRouter } from "next/navigation";
 
 type Props = {
-  employees: Employee[];
+  employees: ResponseEmployee[];
   noActions?: boolean;
 };
 
@@ -20,6 +20,8 @@ const EmployeeTable: React.FC<Props> = ({ employees, noActions = false }) => {
               <th className="">First Name</th>
               <th className="">Last Name</th>
               <th className="">Email</th>
+              <th className="">Phone Number</th>
+              <th className="">Position</th>
               {!noActions && <th className="">Actions</th>}
             </tr>
           </thead>
@@ -34,6 +36,8 @@ const EmployeeTable: React.FC<Props> = ({ employees, noActions = false }) => {
                 <td className="">{employee.firstName}</td>
                 <td className="">{employee.lastName}</td>
                 <td className="">{employee.email}</td>
+                <td className="">{employee.phoneNumber}</td>
+                <td className="">{employee.position}</td>
                 {!noActions && (
                   <td
                     className="cursor-default"
