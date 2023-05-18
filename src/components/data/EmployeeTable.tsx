@@ -36,6 +36,8 @@ const EmployeeTable: React.FC<Props> = ({ employees, noActions = false }) => {
                 <td className="">{employee.firstName}</td>
                 <td className="">{employee.lastName}</td>
                 <td className="">{employee.email}</td>
+                <td className="">{employee.phoneNumber}</td>
+                <td className="">{employee.position}</td>
                 {!noActions && (
                   <td
                     className="cursor-default"
