@@ -5,10 +5,13 @@ export type Query = {
   pageSize: number;
   sortBy: string;
   sortDirection: string;
+  name?: string;
+  phoneNumber?: string;
 };
 
 const getAllEmployees = async (queryParams: Query) => {
-  const { pageNumber, pageSize, sortBy, sortDirection } = queryParams;
+  const { pageNumber, pageSize, sortBy, sortDirection, name, phoneNumber } =
+    queryParams;
 
   let url = "http://localhost:3030/api/employees";
 
@@ -25,6 +28,12 @@ const getAllEmployees = async (queryParams: Query) => {
     } else {
       params.append("sort", sortBy);
     }
+  }
+  if (name) {
+    params.append("name", name);
+  }
+  if (phoneNumber) {
+    params.append("phoneNumber", phoneNumber);
   }
 
   if (params.toString()) {
