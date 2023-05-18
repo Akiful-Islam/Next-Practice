@@ -145,7 +145,7 @@ const Post = () => {
             className="!h-8 !w-16 !text-sm font-medium"
             title="Back"
             variant="transparent"
-            onClick={() => router.back()}
+            onClick={() => router.push("/employees/get")}
           />
         }
       />

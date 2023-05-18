@@ -71,7 +71,7 @@ const DeleteById: React.FC<Props> = ({ routeId }) => {
             className="!h-8 !w-16 !text-sm font-medium"
             variant="transparent"
             title="Return"
-            onClick={() => router.back()}
+            onClick={() => router.push("/employees/get")}
           />
         }
       />
