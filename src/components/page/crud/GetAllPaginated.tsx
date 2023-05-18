@@ -43,7 +43,6 @@ const GetAllPaginated = () => {
     setPage(response);
     setEmployees(response.content);
     setLoading(false);
-    console.log(searchBy);
   };
 
   useEffect(() => {
@@ -110,7 +109,15 @@ const GetAllPaginated = () => {
         <EmployeeTable employees={employees} />
       ) : (
         page &&
-        page.totalElements > 0 && (
+        (search ? (
+          <Card
+            hero={
+              <p className="text-lg font-medium text-bnw-blue-black animate-pulse pt-4">
+                No results found
+              </p>
+            }
+          />
+        ) : (
           <Card
             hero={
               <p className="text-lg font-medium text-bnw-blue-black animate-pulse pt-4">
@@ -118,7 +125,7 @@ const GetAllPaginated = () => {
               </p>
             }
           />
-        )
+        ))
       )}
       <Button
         className="!h-8 !w-16 !text-sm font-medium"
