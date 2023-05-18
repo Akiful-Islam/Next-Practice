@@ -1,5 +1,9 @@
 "use client";
-import { PatchEmployee, ResponseEmployee } from "@/types/Employee";
+import {
+  EmployeePosition,
+  PatchEmployee,
+  ResponseEmployee,
+} from "@/types/Employee";
 import React, { useEffect, useState } from "react";
 import EmployeeTable from "../../data/EmployeeTable";
 import { getEmployeeById, patchEmployee } from "@/services/EmployeeServices";
@@ -8,6 +12,7 @@ import Card from "@/components/Card";
 import { useRouter } from "next/navigation";
 import Button from "@/components/input/Button";
 import ControlledInput from "@/components/input/controlled/ControlledInput";
+import ControlledSelector from "@/components/input/controlled/ControlledSelector";
 
 type Props = {
   routeId: string;
@@ -22,15 +27,7 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
     formState: { errors, dirtyFields, isDirty },
     control,
     reset,
-  } = useForm<PatchEmployee>({
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phoneNumber: "",
-      position: "Developer",
-    },
-  });
+  } = useForm<PatchEmployee>();
 
   const [error, setError] = useState<string | null>(null);
   const [patchedEmployee, setPatchedEmployee] =
@@ -158,14 +155,22 @@ const PatchById: React.FC<Props> = ({ routeId }) => {
                       type="tel"
                       label="Phone Number"
                     />
-                    <ControlledInput
+                    <ControlledSelector
                       name="position"
                       control={control}
                       rules={{
                         required: "Position cannot be empty",
                       }}
-                      type="text"
                       label="Position"
+                      options={[
+                        {
+                          value: EmployeePosition.DEVELOPER,
+                          label: "Developer",
+                        },
+                        { value: EmployeePosition.QA, label: "QA" },
+                        { value: EmployeePosition.MANAGER, label: "Manager" },
+                        { value: EmployeePosition.HR, label: "HR" },
+                      ]}
                     />
                     {error && (
                       <div className="response">
