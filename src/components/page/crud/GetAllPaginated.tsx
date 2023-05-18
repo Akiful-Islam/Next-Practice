@@ -63,7 +63,7 @@ const GetAllPaginated = () => {
       />
 
       {page ? (
-        <div className="w-screen flex ">
+        <div className="w-screen flex flex-col justify-center items-center">
           <QueryForm
             pageNumber={query.pageNumber}
             pageSize={query.pageSize}
@@ -76,24 +76,27 @@ const GetAllPaginated = () => {
               setQuery({ ...query, sortDirection })
             }
           />
-          <Selector
-            className="w-24"
-            label="Search By"
-            value={searchBy ? searchBy : undefined}
-            onChange={(e) =>
-              setSearchBy(e.target.value as "name" | "phoneNumber")
-            }
-            options={[
-              { value: "name", label: "Name" },
-              { value: "phoneNumber", label: "Phone" },
-            ]}
-          />
-          <Input
-            className="w-64"
-            label="Search"
-            value={search}
-            onChange={handleSearch}
-          />
+
+          <div className="flex justify-center items-center al w-1/3">
+            <Input
+              className="w-64"
+              label="Search"
+              value={search}
+              onChange={handleSearch}
+            />
+            <Selector
+              className="w-24"
+              label="Search By"
+              value={searchBy ? searchBy : undefined}
+              onChange={(e) =>
+                setSearchBy(e.target.value as "name" | "phoneNumber")
+              }
+              options={[
+                { value: "name", label: "Name" },
+                { value: "phoneNumber", label: "Phone" },
+              ]}
+            />
+          </div>
         </div>
       ) : (
         !loading && (
