@@ -62,7 +62,7 @@ const GetAllPaginated = () => {
         onClick={() => router.push("employees/post")}
       />
 
-      {page && page.totalElements > 0 ? (
+      {page ? (
         <div className="w-screen flex ">
           <QueryForm
             pageNumber={query.pageNumber}
@@ -88,7 +88,12 @@ const GetAllPaginated = () => {
               { value: "phoneNumber", label: "Phone" },
             ]}
           />
-          <Input className="w-64" label="Search" onChange={handleSearch} />
+          <Input
+            className="w-64"
+            label="Search"
+            value={search}
+            onChange={handleSearch}
+          />
         </div>
       ) : (
         !loading && (
