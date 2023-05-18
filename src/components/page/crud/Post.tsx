@@ -1,6 +1,10 @@
 "use client";
 
-import { PostEmployee, ResponseEmployee } from "@/types/Employee";
+import {
+  EmployeePosition,
+  PostEmployee,
+  ResponseEmployee,
+} from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "../../data/EmployeeTable";
 import { postEmployee } from "@/services/EmployeeServices";
@@ -9,6 +13,7 @@ import Card from "@/components/Card";
 import Button from "@/components/input/Button";
 import { useRouter } from "next/navigation";
 import ControlledInput from "@/components/input/controlled/ControlledInput";
+import ControlledSelector from "@/components/input/controlled/ControlledSelector";
 
 const Post = () => {
   const router = useRouter();
@@ -22,7 +27,7 @@ const Post = () => {
       lastName: "",
       email: "",
       phoneNumber: "",
-      position: "Developer",
+      position: EmployeePosition.DEVELOPER,
     },
     mode: "onSubmit",
   });
@@ -35,9 +40,9 @@ const Post = () => {
   const [showResponse, setShowResponse] = useState(false);
 
   const onSubmit = async (data: PostEmployee) => {
-    const res = await postEmployee(data);
-    console.log(res);
+    console.log(data);
 
+    const res = await postEmployee(data);
     if ("errorMessage" in res) {
       setPostedEmployee(null);
       setError(`${res.code} - ${res.errorMessage}`);
@@ -95,19 +100,24 @@ const Post = () => {
                   label="Phone Number"
                   type="tel"
                 />
-                <ControlledInput
+                <ControlledSelector
                   name="position"
                   control={control}
                   rules={{ required: "Position cannot be empty." }}
                   label="Position"
+                  options={[
+                    { value: EmployeePosition.DEVELOPER, label: "Developer" },
+                    { value: EmployeePosition.QA, label: "QA" },
+                    { value: EmployeePosition.MANAGER, label: "Manager" },
+                    { value: EmployeePosition.HR, label: "HR" },
+                  ]}
                 />
               </div>
 
               {dirtyFields.firstName &&
                 dirtyFields.lastName &&
                 dirtyFields.email &&
-                dirtyFields.phoneNumber &&
-                dirtyFields.position && (
+                dirtyFields.phoneNumber && (
                   <Button type="submit" title="Create Employee" />
                 )}
             </form>
