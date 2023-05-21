@@ -4,7 +4,9 @@ import React from "react";
 
 const getData = async (id: string) => {
   if (isNaN(Number(id))) {
-    throw new Error(`Invalid route "${id}". Enter a valid number.`);
+    throw new Error(
+      `Invalid route "${id}". Enter a valid number. or did you mean all?`
+    );
   }
 
   if (Number(id) < 1) {
