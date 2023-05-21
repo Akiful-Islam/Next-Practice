@@ -4,9 +4,8 @@ import {
   PatchEmployee,
   ResponseEmployee,
 } from "@/types/Employee";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import EmployeeTable from "../../data/EmployeeTable";
-import { getEmployeeById, patchEmployee } from "@/services/EmployeeServices";
 import { useForm } from "react-hook-form";
 import Card from "@/components/Card";
 import { useRouter } from "next/navigation";
