@@ -3,11 +3,11 @@ import { notFound } from "next/navigation";
 import React from "react";
 
 const getData = async (id: string) => {
-  if (isNaN(parseInt(id))) {
+  if (isNaN(Number(id))) {
     throw new Error(`Invalid route "${id}". Enter a valid number.`);
   }
 
-  if (parseInt(id) < 1) {
+  if (Number(id) < 1) {
     throw new Error(`Invalid route "${id}". Id starts from 1.`);
   }
   const url = `http://localhost:3030/api/employees/${id}`;
