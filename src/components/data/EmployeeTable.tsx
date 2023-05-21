@@ -33,7 +33,7 @@ const EmployeeTable: React.FC<Props> = ({ employees, noActions = false }) => {
               <tr
                 key={employee.id}
                 className="cursor-pointer"
-                onClick={() => router.push("/employees/get/" + employee.id)}
+                onClick={() => router.push("/employees/" + employee.id)}
               >
                 <td className="">{employee.id}</td>
                 <td className="">{employee.firstName}</td>

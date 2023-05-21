@@ -34,7 +34,7 @@ const DeleteById: React.FC<Props> = ({ deletedEmployee }) => {
             className="!h-8 !w-16 !text-sm font-medium"
             variant="transparent"
             title="Return"
-            onClick={() => router.push("/employees/get")}
+            onClick={() => router.push(`/employees/get`)}
           />
         }
       />
