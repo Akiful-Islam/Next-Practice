@@ -15,190 +15,130 @@ import ControlledInput from "@/components/input/controlled/ControlledInput";
 import ControlledSelector from "@/components/input/controlled/ControlledSelector";
 
 type Props = {
-  routeId: string;
+  employee: ResponseEmployee;
 };
 
-const PatchById: React.FC<Props> = ({ routeId }) => {
+const PatchById: React.FC<Props> = ({ employee }) => {
   const router = useRouter();
-  const [employee, setEmployee] = useState<ResponseEmployee | null>(null);
 
   const {
     handleSubmit,
     formState: { errors, dirtyFields, isDirty },
     control,
     reset,
-  } = useForm<PatchEmployee>();
-
-  const [error, setError] = useState<string | null>(null);
-  const [patchedEmployee, setPatchedEmployee] =
-    useState<ResponseEmployee | null>(null);
-  const [showResponse, setShowResponse] = useState(false);
-
-  const fetchEmployeeById = async (routeId: string) => {
-    const parsedId = parseInt(routeId);
-    if (isNaN(parsedId)) {
-      setError(`Invalid route "${routeId}". Enter a valid number.`);
-      return;
-    }
-
-    if (parsedId < 1) {
-      setError(`Invalid route "${routeId}". Id starts from 1.`);
-      return;
-    }
-    const res = await getEmployeeById(parsedId);
-    if ("errorMessage" in res) {
-      setError(`${res.code} - ${res.errorMessage}`);
-    } else {
-      setEmployee(res);
-      reset({
-        firstName: res.firstName,
-        lastName: res.lastName,
-        email: res.email,
-        phoneNumber: res.phoneNumber,
-        position: res.position,
-      });
-    }
-  };
-
-  useEffect(() => {
-    fetchEmployeeById(routeId);
-  }, []);
+  } = useForm<PatchEmployee>({
+    defaultValues: {
+      firstName: employee.firstName,
+      lastName: employee.lastName,
+      email: employee.email,
+      phoneNumber: employee.phoneNumber,
+      position: employee.position,
+    },
+  });
 
   const onSubmit = async (data: PatchEmployee) => {
-    const patchData: PatchEmployee = {};
-    if (dirtyFields.firstName) patchData.firstName = data.firstName;
-    if (dirtyFields.lastName) patchData.lastName = data.lastName;
-    if (dirtyFields.email) patchData.email = data.email;
-    if (dirtyFields.phoneNumber) patchData.phoneNumber = data.phoneNumber;
-    if (dirtyFields.position) patchData.position = data.position;
-
-    const res = await patchEmployee(parseInt(routeId), patchData);
-
-    console.log(res);
-
-    if ("errorMessage" in res) {
-      setError(`${res.code} - ${res.errorMessage}`);
-    } else {
-      setPatchedEmployee(res);
-      reset({
-        firstName: res.firstName,
-        lastName: res.lastName,
-        email: res.email,
-        phoneNumber: res.phoneNumber,
-        position: res.position,
-      });
+    const params = new URLSearchParams();
+    if (dirtyFields.firstName && data.firstName) {
+      params.append("firstName", data.firstName);
     }
-    setShowResponse(true);
+    if (dirtyFields.lastName && data.lastName) {
+      params.append("lastName", data.lastName);
+    }
+    if (dirtyFields.email && data.email) {
+      params.append("email", data.email);
+    }
+    if (dirtyFields.phoneNumber && data.phoneNumber) {
+      params.append("phoneNumber", data.phoneNumber);
+    }
+    if (dirtyFields.position && data.position) {
+      params.append("position", data.position);
+    }
+    router.push(`/employees/${employee.id}/edit?${params.toString()}`);
+    reset({
+      firstName: data.firstName || employee.firstName,
+      lastName: data.lastName || employee.lastName,
+      email: data.email || employee.email,
+      phoneNumber: data.phoneNumber || employee.phoneNumber,
+      position: data.position || employee.position,
+    });
   };
 
-  let title;
-  if (employee) {
-    title = `Update ${employee.firstName}'s informations`;
-  } else {
-    title = "Invalid Employee ID";
-  }
-
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-6">
+    <div className="relative min-h-max flex flex-col items-center justify-center overflow-hidden py-6">
       <Card
-        title={title}
+        title={`Edit Employee ${employee.id}`}
         hero={
           <div>
-            {employee ? (
+            <form
+              className="flex flex-col justify-center items-center"
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <div>
-                <form
-                  className="flex flex-col justify-center items-center"
-                  onSubmit={handleSubmit(onSubmit)}
-                >
-                  <div>
-                    <ControlledInput
-                      name="firstName"
-                      control={control}
-                      rules={{
-                        required: "First Name cannot be empty",
-                      }}
-                      type="text"
-                      label="First Name"
-                    />
-                    <ControlledInput
-                      name="lastName"
-                      control={control}
-                      rules={{
-                        required: "Last Name cannot be empty",
-                      }}
-                      type="text"
-                      label="Last Name"
-                    />
-                    <ControlledInput
-                      name="email"
-                      control={control}
-                      rules={{
-                        required: "Email cannot be empty",
-                        pattern: {
-                          value: /\S+@\S+\.\S+/,
-                          message: "Invalid email format.",
-                        },
-                      }}
-                      type="email"
-                      label="Email"
-                    />
-                    <ControlledInput
-                      name="phoneNumber"
-                      control={control}
-                      rules={{
-                        required: "Phone Number cannot be empty",
-                        pattern: {
-                          value: /^\d{11}$/,
-                          message: "Phone number must only contain 11 digits.",
-                        },
-                      }}
-                      type="tel"
-                      label="Phone Number"
-                    />
-                    <ControlledSelector
-                      name="position"
-                      control={control}
-                      rules={{
-                        required: "Position cannot be empty",
-                      }}
-                      label="Position"
-                      options={[
-                        {
-                          value: EmployeePosition.DEVELOPER,
-                          label: "Developer",
-                        },
-                        { value: EmployeePosition.QA, label: "QA" },
-                        { value: EmployeePosition.MANAGER, label: "Manager" },
-                        { value: EmployeePosition.HR, label: "HR" },
-                      ]}
-                    />
-                    {error && (
-                      <div className="response">
-                        <p>{error}</p>
-                      </div>
-                    )}
-                  </div>
-
-                  {isDirty && <Button title="Update Employee" type="submit" />}
-                </form>
-                {showResponse && (
-                  <div className="response">
-                    {patchedEmployee ? (
-                      <EmployeeTable employees={[patchedEmployee]} noActions />
-                    ) : (
-                      error && <p>Employee not updated</p>
-                    )}
-                  </div>
-                )}
+                <ControlledInput
+                  name="firstName"
+                  control={control}
+                  rules={{
+                    required: "First Name cannot be empty",
+                  }}
+                  type="text"
+                  label="First Name"
+                />
+                <ControlledInput
+                  name="lastName"
+                  control={control}
+                  rules={{
+                    required: "Last Name cannot be empty",
+                  }}
+                  type="text"
+                  label="Last Name"
+                />
+                <ControlledInput
+                  name="email"
+                  control={control}
+                  rules={{
+                    required: "Email cannot be empty",
+                    pattern: {
+                      value: /\S+@\S+\.\S+/,
+                      message: "Invalid email format.",
+                    },
+                  }}
+                  type="email"
+                  label="Email"
+                />
+                <ControlledInput
+                  name="phoneNumber"
+                  control={control}
+                  rules={{
+                    required: "Phone Number cannot be empty",
+                    pattern: {
+                      value: /^\d{11}$/,
+                      message: "Phone number must only contain 11 digits.",
+                    },
+                  }}
+                  type="tel"
+                  label="Phone Number"
+                />
+                <ControlledSelector
+                  name="position"
+                  control={control}
+                  rules={{
+                    required: "Position cannot be empty",
+                  }}
+                  label="Position"
+                  options={[
+                    {
+                      value: EmployeePosition.DEVELOPER,
+                      label: "Developer",
+                    },
+                    { value: EmployeePosition.QA, label: "QA" },
+                    { value: EmployeePosition.MANAGER, label: "Manager" },
+                    { value: EmployeePosition.HR, label: "HR" },
+                  ]}
+                />
               </div>
-            ) : (
-              error && (
-                <div className="response">
-                  <p>Error Occured :(</p>
-                  <p>{error}</p>
-                </div>
-              )
-            )}
+
+              {isDirty && <Button title="Update Employee" type="submit" />}
+            </form>
           </div>
         }
         footer={
