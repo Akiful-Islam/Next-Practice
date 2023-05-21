@@ -4,11 +4,14 @@ import UpdaterButtons from "../UpdaterButtons";
 import { useRouter } from "next/navigation";
 
 type Props = {
-  employees: ResponseEmployee[];
+  employees: ResponseEmployee[] | ResponseEmployee;
   noActions?: boolean;
 };
 
 const EmployeeTable: React.FC<Props> = ({ employees, noActions = false }) => {
+  if (!Array.isArray(employees)) {
+    employees = [employees];
+  }
   const router = useRouter();
   return (
     <div className="md:px-32 py-8 w-full">

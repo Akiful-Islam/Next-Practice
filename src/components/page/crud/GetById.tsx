@@ -19,7 +19,7 @@ const GetById: React.FC<Props> = ({ employee }) => {
         title={`${employee.firstName} ${employee.lastName}'s details`}
         hero={
           <div className="response">
-            <EmployeeTable employees={[employee]} />
+            <EmployeeTable employees={employee} />
           </div>
         }
         footer={
