@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Lato } from "next/font/google";
+import { Slabo_27px } from "next/font/google";
 import "@/styles/buttons.css";
 import "@/styles/inputs.css";
 import "@/styles/select.css";
@@ -8,9 +8,9 @@ import "@/styles/response.css";
 import "@/styles/texts.css";
 import "@/styles/typography.css";
 
-const spaceGrotesk = Lato({
+const slabo27 = Slabo_27px({
+  weight: "400",
   subsets: ["latin-ext"],
-  weight: ["100", "300", "400", "700", "900"],
 });
 
 export const metadata = {
@@ -25,7 +25,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={spaceGrotesk.className}>{children}</body>
+      <body className={slabo27.className + " h-screen flex flex-col"}>
+        <section className="root-header bg-bnw-blue-gray  ">
+          <h2 className="text-white mx-4 p-2 ">Employee Database</h2>
+        </section>
+        <section className="root-body min-h-max flex-1 flex flex-col justify-center items-center">
+          {children}
+        </section>
+        <section className="root-footer bg-bnw-blue-gray/10 text-black">
+          <p className="text-center ">2023 &copy; All Rights Reserved</p>
+        </section>
+      </body>
     </html>
   );
 }
