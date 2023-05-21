@@ -9,3 +9,11 @@
 .loading-text {
   @apply animate-pulse self-center text-6xl bg-slate-500 rounded-xl;
 }
+
+.error {
+  @apply flex items-center justify-center h-max;
+}
+
+.error-text {
+  @apply animate-pulse self-center text-3xl bg-red-600/50 font-semibold rounded-xl;
+}
