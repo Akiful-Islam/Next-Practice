@@ -3,30 +3,28 @@ import { ResponseEmployee } from "@/types/Employee";
 import React, { useEffect, useState } from "react";
 import EmployeeTable from "../../data/EmployeeTable";
 import QueryForm from "../../input/QueryForm";
-import { Query, getAllEmployees } from "@/services/EmployeeServices";
 import Button from "../../input/Button";
 import Card from "@/components/Card";
 import { useRouter } from "next/navigation";
-import { Page } from "@/types/Page";
+import { Page, Query } from "@/types/Page";
 import Selector from "@/components/input/Selector";
 import Input from "@/components/input/Input";
 
-const GetAllPaginated = () => {
-  const router = useRouter();
+type Props = {
+  page: Page;
+  employees: ResponseEmployee[];
+  searchParams: Query;
+};
 
-  const [employees, setEmployees] = useState<ResponseEmployee[]>([]);
-  const [page, setPage] = useState<Page | null>(null);
+const GetAllPaginated: React.FC<Props> = ({
+  page,
+  employees,
+  searchParams,
+}) => {
+  const router = useRouter();
+  const [query, setQuery] = useState(searchParams);
   const [searchBy, setSearchBy] = useState<"name" | "phoneNumber">("name");
   const [search, setSearch] = useState("");
-
-  const [query, setQuery] = useState<Query>({
-    pageNumber: 0,
-    pageSize: 10,
-    sortBy: "id",
-    sortDirection: "asc",
-  });
-
-  const [loading, setLoading] = useState(true);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -38,16 +36,28 @@ const GetAllPaginated = () => {
     }
   };
 
-  const fetchAllEmployees = async () => {
-    const response = await getAllEmployees(query);
-    setPage(response);
-    setEmployees(response.content);
-    setLoading(false);
-    console.log(query);
+  const reRender = (query: Query) => {
+    const params = new URLSearchParams();
+    if (query.page) {
+      params.append("page", query.page.toString());
+    }
+    if (query.size) {
+      params.append("size", query.size.toString());
+    }
+    if (query.sort) {
+      params.append("sort", query.sort);
+    }
+    if (query.name) {
+      params.append("name", query.name);
+    }
+    if (query.phoneNumber) {
+      params.append("phoneNumber", query.phoneNumber);
+    }
+    router.push(`/employees/all?${params.toString()}`);
   };
 
   useEffect(() => {
-    fetchAllEmployees();
+    reRender(query);
   }, [query]);
 
   useEffect(() => {
@@ -60,57 +70,50 @@ const GetAllPaginated = () => {
       <h1 className="text-6xl font-bold text-bnw-blue-black my-10 transition-colors ease-in-out duration-100 hover:text-bnw-blue-gray">
         Employees
       </h1>
-
       <Button
         className="my-10"
         title="Add New Employee"
         onClick={() => router.push("employees/post")}
       />
+      <div className="w-screen flex flex-col justify-center items-center">
+        <QueryForm
+          pageNumber={query.page}
+          pageSize={query.size}
+          sortBy={query.sort}
+          sortDirection={query.sort && query.sort.split(",")[1]}
+          setPageNumber={(page) => setQuery({ ...query, page })}
+          setPageSize={(size) => setQuery({ ...query, size })}
+          setSortBy={(sort) => setQuery({ ...query, sort })}
+          setSortDirection={(sortDirection) =>
+            setQuery({
+              ...query,
+              sort: `${query.sort?.split(",")[0]},${sortDirection}`,
+            })
+          }
+        />
 
-      {page ? (
-        <div className="w-screen flex flex-col justify-center items-center">
-          <QueryForm
-            pageNumber={query.pageNumber}
-            pageSize={query.pageSize}
-            sortBy={query.sortBy}
-            sortDirection={query.sortDirection}
-            setPageNumber={(pageNumber) => setQuery({ ...query, pageNumber })}
-            setPageSize={(pageSize) => setQuery({ ...query, pageSize })}
-            setSortBy={(sortBy) => setQuery({ ...query, sortBy })}
-            setSortDirection={(sortDirection) =>
-              setQuery({ ...query, sortDirection })
-            }
+        <div className="flex justify-center items-center al w-1/3">
+          <Input
+            className="w-64"
+            label="Search"
+            value={search}
+            onChange={handleSearch}
+            type={searchBy === "phoneNumber" ? "number" : "text"}
           />
-
-          <div className="flex justify-center items-center al w-1/3">
-            <Input
-              className="w-64"
-              label="Search"
-              value={search}
-              onChange={handleSearch}
-              type={searchBy === "phoneNumber" ? "number" : "text"}
-            />
-            <Selector
-              className="w-24"
-              label="Search By"
-              value={searchBy ? searchBy : undefined}
-              onChange={(e) =>
-                setSearchBy(e.target.value as "name" | "phoneNumber")
-              }
-              options={[
-                { value: "name", label: "Name" },
-                { value: "phoneNumber", label: "Phone" },
-              ]}
-            />
-          </div>
+          <Selector
+            className="w-24"
+            label="Search By"
+            value={searchBy ? searchBy : undefined}
+            onChange={(e) =>
+              setSearchBy(e.target.value as "name" | "phoneNumber")
+            }
+            options={[
+              { value: "name", label: "Name" },
+              { value: "phoneNumber", label: "Phone" },
+            ]}
+          />
         </div>
-      ) : (
-        !loading && (
-          <p className="text-lg font-medium text-red-400 animate-pulse pt-4">
-            No content exists :(
-          </p>
-        )
-      )}
+      </div>
 
       {employees.length > 0 ? (
         <EmployeeTable employees={employees} />

@@ -3,10 +3,10 @@ import Input from "./Input";
 import Selector from "./Selector";
 
 type Props = {
-  pageNumber: number;
-  setPageNumber: (pageNumber: number) => void;
-  pageSize: number;
-  setPageSize: (pageSize: number) => void;
+  pageNumber: string;
+  setPageNumber: (pageNumber: string) => void;
+  pageSize: string;
+  setPageSize: (pageSize: string) => void;
   sortBy: string;
   setSortBy: (sortBy: string) => void;
   sortDirection: string;
@@ -29,7 +29,7 @@ const QueryForm: React.FC<Props> = ({
         className="w-10"
         name="page-size"
         value={pageSize.toString()}
-        onChange={(e) => setPageSize(parseInt(e.target.value))}
+        onChange={(e) => setPageSize(e.target.value)}
         label="Page Size"
         type="number"
       />
@@ -37,7 +37,7 @@ const QueryForm: React.FC<Props> = ({
         className="w-10"
         name="page-number"
         value={pageNumber.toString()}
-        onChange={(e) => setPageNumber(parseInt(e.target.value))}
+        onChange={(e) => setPageNumber(e.target.value)}
         label="Page Number"
         type="number"
       />
