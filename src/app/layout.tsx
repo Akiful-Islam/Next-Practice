@@ -6,6 +6,7 @@ import "@/styles/select.css";
 import "@/styles/tables.css";
 import "@/styles/texts.css";
 import "@/styles/typography.css";
+import Link from "next/link";
 
 const slabo27 = Slabo_27px({
   weight: "400",
@@ -25,8 +26,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={slabo27.className + " h-screen flex flex-col"}>
-        <section className="root-header bg-bnw-blue-gray  ">
-          <h2 className="text-white mx-4 p-2 ">Employee Database</h2>
+        <section className="root-header bg-bnw-blue-gray ">
+          <Link href="/employees">
+            <h2 className="text-white mx-4 p-2 ">Employee Database</h2>
+          </Link>
         </section>
         <section className="root-body min-h-max flex-1 flex flex-col justify-center items-center">
           {children}
