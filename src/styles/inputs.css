@@ -2,14 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  appearance: none;
-}
+@layer utilities {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    appearance: none;
+  }
 
-input[type="number"] {
-  @apply w-20 h-9 text-black rounded-lg m-2;
-  appearance: textfield;
+  input[type="number"] {
+    @apply w-20 h-9 text-black rounded-lg m-2;
+    appearance: textfield;
+  }
 }
 
 .toggle-path {
