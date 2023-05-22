@@ -6,11 +6,7 @@ import React from "react";
 type Props = {};
 
 const Provider = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <div>
-      <ThemeProvider>{children}</ThemeProvider>
-    </div>
-  );
+  return <ThemeProvider defaultTheme="dark">{children}</ThemeProvider>;
 };
 
 export default Provider;
