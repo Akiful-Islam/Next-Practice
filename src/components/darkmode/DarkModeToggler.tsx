@@ -3,9 +3,11 @@ import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import Toggler from "../input/Toggler";
 
-type Props = {};
+type Props = {
+  className?: string;
+};
 
-const DarkModeToggler = (props: Props) => {
+const DarkModeToggler: React.FC<Props> = ({ className }) => {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
@@ -17,14 +19,13 @@ const DarkModeToggler = (props: Props) => {
   console.log(theme);
 
   return (
-    <div>
-      <Toggler
-        name="darkmode"
-        label="Toggle Dark"
-        value={theme === "dark" ? true : false}
-        onChange={(e) => setTheme(e.target.checked ? "dark" : "light")}
-      />
-    </div>
+    <Toggler
+      className={className}
+      name="darkmode"
+      label="Toggle Dark"
+      value={theme === "dark" ? true : false}
+      onChange={(e) => setTheme(e.target.checked ? "dark" : "light")}
+    />
   );
 };
 

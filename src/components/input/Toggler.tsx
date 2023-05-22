@@ -23,7 +23,7 @@ const Toggler: React.FC<Props> = ({
 }) => {
   let classes = "input";
   return (
-    <div className="flex justify-center">
+    <div className={"flex justify-center" + " " + className}>
       <label
         htmlFor={name && name + "Toggler"}
         className="flex items-center cursor-pointer"
