@@ -16,6 +16,56 @@
   }
 }
 
+@layer components {
+  .glassmorph {
+    @apply bg-bnw-blue-white/50 rounded-md shadow-md shadow-bnw-blue-gray/30 border border-solid border-black/10;
+    backdrop-filter: blur(15.5px);
+    -webkit-backdrop-filter: blur(15.5px);
+  }
+
+  .glassmorph-dark {
+    @apply bg-bnw-blue-black/50 rounded-md shadow-md shadow-bnw-blue-gray/30 border border-solid border-white/10;
+    backdrop-filter: blur(15.5px);
+    -webkit-backdrop-filter: blur(15.5px);
+  }
+
+  .bg-gradient {
+    background-image: linear-gradient(
+      to right bottom,
+      #6fa6d3,
+      #91b2da,
+      #aebfe0,
+      #c6cde5,
+      #dbdcea,
+      #d3d3dc,
+      #cbcacf,
+      #c2c2c2,
+      #9f9f9f,
+      #7e7e7e,
+      #5e5e5e,
+      #404040
+    );
+  }
+
+  .bg-gradient-dark {
+    background-image: linear-gradient(
+      to left bottom,
+      #505050,
+      #49494e,
+      #42424c,
+      #393b4a,
+      #303548,
+      #2d3245,
+      #2b3042,
+      #282d3f,
+      #2b2d3b,
+      #2e2e37,
+      #2f2f34,
+      #303030
+    );
+  }
+}
+
 /* body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
