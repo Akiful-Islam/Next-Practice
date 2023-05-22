@@ -29,11 +29,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={slabo27.className + " h-screen flex flex-col"}>
         <Provider>
-          <section className="root-header bg-bnw-blue-gray ">
-            <DarkModeToggler />
-            <Link href="/employees">
-              <h2 className="text-white mx-4 p-2 ">Employee Database</h2>
+          <section className="root-header bg-bnw-blue-gray inline-flex">
+            <Link className="flex-1 mx-12 px-8" href="/employees">
+              <h2 className="text-white mx-4 p-2">Employee Database</h2>
             </Link>
+            <DarkModeToggler className="mx-4 px-4" />
           </section>
           <section className="root-body min-h-max flex-1 flex flex-col justify-center items-center">
             {children}
