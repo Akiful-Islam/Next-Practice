@@ -18,7 +18,7 @@ const EmployeesPage = (props: Props) => {
             <Button
               className="my-1 w-full"
               title="Check All Employees"
-              onClick={() => router.push("/employees/get")}
+              onClick={() => router.push("/employees/all")}
             />
             <Button
               className="my-1 w-full"
