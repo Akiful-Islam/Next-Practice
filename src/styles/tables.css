@@ -11,15 +11,15 @@
 }
 
 .employee-table tr:nth-child(even) {
-  @apply bg-grayscale-graphic-200/10 hover:bg-grayscale-graphic-200/20;
+  @apply bg-grayscale-graphic-100/20;
 }
 
 .employee-table tr:nth-child(odd) {
-  @apply bg-grayscale-graphic-400/10 hover:bg-grayscale-graphic-300/20;
+  @apply bg-grayscale-graphic-200/20;
 }
 
 .employee-table tr {
-  @apply transition duration-200 ease-in-out;
+  @apply transition duration-200 ease-in-out hover:scale-[1.02] hover:bg-grayscale-graphic-500/20 hover:text-bnw-blue-black;
 }
 
 .employee-table td {
