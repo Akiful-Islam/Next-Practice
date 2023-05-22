@@ -18,13 +18,13 @@
 
 @layer components {
   .glassmorph {
-    @apply bg-bnw-blue-white/50 rounded-md shadow-md shadow-bnw-blue-gray/30 border border-solid border-black/10;
+    @apply bg-bnw-blue-white/20 rounded-md shadow-md shadow-bnw-blue-gray/30 border border-solid border-black/10;
     backdrop-filter: blur(15.5px);
     -webkit-backdrop-filter: blur(15.5px);
   }
 
   .glassmorph-dark {
-    @apply bg-bnw-blue-black/50 rounded-md shadow-md shadow-bnw-blue-gray/30 border border-solid border-white/10;
+    @apply bg-bnw-blue-black/30 rounded-md shadow-md shadow-bnw-blue-gray/30 border border-solid border-white/10;
     backdrop-filter: blur(15.5px);
     -webkit-backdrop-filter: blur(15.5px);
   }
@@ -49,19 +49,49 @@
 
   .bg-gradient-dark {
     background-image: linear-gradient(
-      to left bottom,
-      #505050,
-      #49494e,
-      #42424c,
-      #393b4a,
-      #303548,
-      #2d3245,
-      #2b3042,
-      #282d3f,
-      #2b2d3b,
-      #2e2e37,
-      #2f2f34,
-      #303030
+      to left top,
+      #293856,
+      #272f47,
+      #232739,
+      #1e1f2c,
+      #18181f,
+      #19191d,
+      #1a191c,
+      #1a1a1a,
+      #232323,
+      #2c2c2c,
+      #363636,
+      #404040
+    );
+    background-image: linear-gradient(
+      to right bottom,
+      #293856,
+      #272f47,
+      #232739,
+      #1e1f2c,
+      #18181f,
+      #19191d,
+      #1a191c,
+      #1a1a1a,
+      #232323,
+      #2c2c2c,
+      #363636,
+      #404040
+    );
+    background-image: linear-gradient(
+      to right bottom,
+      #5573ae,
+      #586898,
+      #575e82,
+      #53546d,
+      #4c4b59,
+      #45444d,
+      #3e3e42,
+      #373737,
+      #313131,
+      #2a2a2a,
+      #242424,
+      #1e1e1e
     );
   }
 }
