@@ -20,13 +20,13 @@ const Card: React.FC<Props> = ({
   return (
     <div
       className={
-        "relative bg-bnw-blue-white rounded-md divide-y divide-bnw-blue-gray/10 py-6 px-3 ring-1 ring-bnw-blue-gray/10 shadow-md hover:ring-bnw-blue-accentLight/20 hover:shadow-xl transition-all ease-linear duration-75" +
+        "relative glassmorph dark:glassmorph-dark divide-y divide-bnw-blue-gray/10 py-6 px-3 ring-1 ring-bnw-blue-gray/10 shadow-md hover:ring-bnw-blue-accentLight/20 hover:shadow-lg transition-all ease-linear duration-75" +
         " " +
         className
       }
     >
       {title && (
-        <h2 className="text-bnw-blue-black font-semibold mb-5 mx-10 place-self-auto">
+        <h2 className="text-bnw-blue-black font-semibold mb-5 mx-10 text-center">
           {title}
         </h2>
       )}
