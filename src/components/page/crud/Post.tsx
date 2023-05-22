@@ -59,7 +59,7 @@ const Post = () => {
     setShowResponse(true);
   };
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-6">
+    <div className="relative min-h-max flex flex-col items-center justify-center overflow-hidden py-6">
       <Card
         title="Create An Employee"
         hero={

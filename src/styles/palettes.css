@@ -119,17 +119,17 @@
 
 /* Color Theme Swatches in RGBA */
 .Usechannel---Online-AI-Chatbot-Platform-1-rgba {
-  color: rgb(111, 166, 211);
+  color: hsl(207, 53%, 63%);
 }
 .Usechannel---Online-AI-Chatbot-Platform-2-rgba {
-  color: rgb(85, 115, 174);
+  color: hsl(220, 35%, 51%);
 }
 .Usechannel---Online-AI-Chatbot-Platform-3-rgba {
-  color: rgba(242, 242, 242, 1);
+  color: hsl(0, 0%, 95%);
 }
 .Usechannel---Online-AI-Chatbot-Platform-4-rgba {
-  color: rgba(63, 63, 63, 1);
+  color: hsl(0, 0%, 25%);
 }
 .Usechannel---Online-AI-Chatbot-Platform-5-rgba {
-  color: rgba(12, 12, 12, 1);
+  color: hsl(0, 0%, 5%);
 }

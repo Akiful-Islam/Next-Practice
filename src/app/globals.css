@@ -16,6 +16,86 @@
   }
 }
 
+@layer components {
+  .glassmorph {
+    @apply bg-bnw-blue-white/20 rounded-md shadow-md shadow-bnw-blue-gray/30 border border-solid border-black/10;
+    backdrop-filter: blur(15.5px);
+    -webkit-backdrop-filter: blur(15.5px);
+  }
+
+  .glassmorph-dark {
+    @apply bg-bnw-blue-black/30 rounded-md shadow-md shadow-bnw-blue-gray/30 border border-solid border-white/10;
+    backdrop-filter: blur(15.5px);
+    -webkit-backdrop-filter: blur(15.5px);
+  }
+
+  .bg-gradient {
+    background-image: linear-gradient(
+      to right bottom,
+      #6fa6d3,
+      #91b2da,
+      #aebfe0,
+      #c6cde5,
+      #dbdcea,
+      #d3d3dc,
+      #cbcacf,
+      #c2c2c2,
+      #9f9f9f,
+      #7e7e7e,
+      #5e5e5e,
+      #404040
+    );
+  }
+
+  .bg-gradient-dark {
+    background-image: linear-gradient(
+      to left top,
+      #293856,
+      #272f47,
+      #232739,
+      #1e1f2c,
+      #18181f,
+      #19191d,
+      #1a191c,
+      #1a1a1a,
+      #232323,
+      #2c2c2c,
+      #363636,
+      #404040
+    );
+    background-image: linear-gradient(
+      to right bottom,
+      #293856,
+      #272f47,
+      #232739,
+      #1e1f2c,
+      #18181f,
+      #19191d,
+      #1a191c,
+      #1a1a1a,
+      #232323,
+      #2c2c2c,
+      #363636,
+      #404040
+    );
+    background-image: linear-gradient(
+      to right bottom,
+      #5573ae,
+      #586898,
+      #575e82,
+      #53546d,
+      #4c4b59,
+      #45444d,
+      #3e3e42,
+      #373737,
+      #313131,
+      #2a2a2a,
+      #242424,
+      #1e1e1e
+    );
+  }
+}
+
 /* body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(

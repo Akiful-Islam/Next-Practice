@@ -27,14 +27,14 @@ const Input: React.FC<Props> = ({
       htmlFor={name && name + "Input"}
     >
       {label && (
-        <div className="pl-2 w-1/3 flex flex-row-reverse">
-          <p className="text-md font-normal">{label}</p>
+        <div className="ml-2 flex-1 flex flex-row-reverse ">
+          <p className="text-md font-normal font-serif">{label}</p>
         </div>
       )}
-      {label && <p className="text-md font-normal pr-2"> : </p>}
+      {label && <p className="text-md mr-2"> : </p>}
       <input
         className={
-          "w-2/3 h-10 px-2 rounded-md text-lg text-black font-medium border border-bnw-blue-gray/25 transition ease-in-out duration-150  hover:ring-1 hover:ring-offset-bnw-blue-accentLight/75 hover:shadow-md focus:shadow-lg focus:outline-none focus:ring focus:ring-offset-bnw-blue-accent/75" +
+          "flex-1 h-10 px-2 rounded-md text-lg text-black border border-bnw-blue-gray/25 transition ease-in-out duration-150  hover:ring-1 hover:ring-offset-bnw-blue-accentLight/75 hover:shadow-md focus:shadow-lg focus:outline-none focus:ring focus:ring-offset-bnw-blue-accent/75" +
           " " +
           className
         }
