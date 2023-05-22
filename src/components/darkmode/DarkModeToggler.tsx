@@ -16,7 +16,6 @@ const DarkModeToggler: React.FC<Props> = ({ className }) => {
   }, []);
 
   if (!mounted) return null;
-  console.log(theme);
 
   return (
     <Toggler
