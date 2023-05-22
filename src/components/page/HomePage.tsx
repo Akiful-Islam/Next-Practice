@@ -7,7 +7,7 @@ import Card from "../Card";
 const HomePage = () => {
   const router = useRouter();
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-6">
+    <div className="relative min-h-full flex flex-col items-center justify-center overflow-hidden py-6">
       <Card
         title="Welcome"
         hero={

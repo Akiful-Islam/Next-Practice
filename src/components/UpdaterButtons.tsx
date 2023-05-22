@@ -11,10 +11,10 @@ const UpdaterButtons: React.FC<Props> = ({ employeeId }) => {
   const [showUpdaterButtons, setShowUpdaterButtons] = useState(false);
 
   const handleEditClick = (id: number) => {
-    router.push(`/employees/patch/${id}`);
+    router.push(`/employees/${id}/edit`);
   };
   const handleDeleteClick = (id: number) => {
-    router.push(`/employees/delete/${id}`);
+    router.push(`/employees/${id}/delete`);
   };
 
   return (

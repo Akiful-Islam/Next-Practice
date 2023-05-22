@@ -28,3 +28,11 @@ export type Page = {
   numberOfElements: number;
   empty: boolean;
 };
+
+export type Query = {
+  page: string;
+  size: string;
+  sort: string;
+  name?: string;
+  phoneNumber?: string;
+};

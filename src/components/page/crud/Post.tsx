@@ -7,7 +7,6 @@ import {
 } from "@/types/Employee";
 import React, { useState } from "react";
 import EmployeeTable from "../../data/EmployeeTable";
-import { postEmployee } from "@/services/EmployeeServices";
 import { useForm } from "react-hook-form";
 import Card from "@/components/Card";
 import Button from "@/components/input/Button";
@@ -32,7 +31,6 @@ const Post = () => {
     mode: "onSubmit",
   });
 
-  const [error, setError] = useState<string | null>(null);
   const [postedEmployee, setPostedEmployee] = useState<ResponseEmployee | null>(
     null
   );
@@ -42,11 +40,20 @@ const Post = () => {
   const onSubmit = async (data: PostEmployee) => {
     console.log(data);
 
-    const res = await postEmployee(data);
-    if ("errorMessage" in res) {
-      setPostedEmployee(null);
-      setError(`${res.code} - ${res.errorMessage}`);
-    } else {
+    const res = await fetch("http://localhost:3030/api/employees", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+      cache: "no-store",
+    })
+      .then((res) => res.json())
+      .catch((err) => {
+        throw new Error(err);
+      });
+
+    if (!("errorMessage" in res)) {
       setPostedEmployee(res);
     }
     setShowResponse(true);
@@ -123,20 +130,12 @@ const Post = () => {
             </form>
 
             <div className="response">
-              {showResponse &&
-                (postedEmployee ? (
-                  <div className="ok-response">
-                    <p>Employee successfully Posted :D</p>
-                    <EmployeeTable employees={[postedEmployee]} />
-                  </div>
-                ) : error ? (
-                  <div>
-                    <p>Error Occured :(</p>
-                    <p>{error}</p>
-                  </div>
-                ) : (
-                  <p>Something Happened :(</p>
-                ))}
+              {showResponse && postedEmployee && (
+                <div className="ok-response">
+                  <p>Employee successfully Posted :D</p>
+                  <EmployeeTable employees={[postedEmployee]} />
+                </div>
+              )}
             </div>
           </div>
         }
