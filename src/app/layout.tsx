@@ -34,17 +34,21 @@ export default function RootLayout({
         }
       >
         <Provider>
-          <section className="root-header bg-bnw-blue-gray inline-flex">
+          <section className="root-header bg-bnw-blue-gray/70 inline-flex">
             <Link className="flex-1 mx-12 px-8" href="/employees">
-              <h2 className="text-white mx-4 p-2">Employee Database</h2>
+              <h2 className="text-white mx-4 p-2 dark:text-black font-serif">
+                Employee Database
+              </h2>
             </Link>
             <DarkModeToggler className="mx-4 px-4" />
           </section>
           <section className="root-body min-h-max flex-1 flex flex-col justify-center items-center">
             {children}
           </section>
-          <section className="root-footer bg-bnw-blue-gray/10 text-black">
-            <p className="text-center ">2023 &copy; All Rights Reserved</p>
+          <section className="root-footer bg-bnw-blue-gray/10 dark:bg-bnw-blue-white/10 text-black dark:text-bnw-blue-white">
+            <p className="text-center font-mono">
+              2023 &copy; All Rights Reserved
+            </p>
           </section>
         </Provider>
       </body>
