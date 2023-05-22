@@ -27,7 +27,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={slabo27.className + " h-screen flex flex-col"}>
+      <body
+        className={
+          slabo27.className +
+          " min-h-screen flex flex-col bg-gradient dark:bg-gradient-dark"
+        }
+      >
         <Provider>
           <section className="root-header bg-bnw-blue-gray inline-flex">
             <Link className="flex-1 mx-12 px-8" href="/employees">
