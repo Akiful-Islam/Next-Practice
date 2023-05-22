@@ -4,7 +4,7 @@ import {
   PatchEmployee,
   ResponseEmployee,
 } from "@/types/Employee";
-import React from "react";
+import React, { useState } from "react";
 import EmployeeTable from "../../data/EmployeeTable";
 import { useForm } from "react-hook-form";
 import Card from "@/components/Card";
@@ -35,31 +35,38 @@ const PatchById: React.FC<Props> = ({ employee }) => {
     },
   });
 
+  const [patchedEmployee, setPatchedEmployee] =
+    useState<ResponseEmployee | null>(null);
+  const [showResponse, setShowResponse] = useState(false);
+
   const onSubmit = async (data: PatchEmployee) => {
-    const params = new URLSearchParams();
-    if (dirtyFields.firstName && data.firstName) {
-      params.append("firstName", data.firstName);
-    }
-    if (dirtyFields.lastName && data.lastName) {
-      params.append("lastName", data.lastName);
-    }
-    if (dirtyFields.email && data.email) {
-      params.append("email", data.email);
-    }
-    if (dirtyFields.phoneNumber && data.phoneNumber) {
-      params.append("phoneNumber", data.phoneNumber);
-    }
-    if (dirtyFields.position && data.position) {
-      params.append("position", data.position);
-    }
-    router.push(`/employees/${employee.id}/edit?${params.toString()}`);
+    const patchData: PatchEmployee = {};
+    if (dirtyFields.firstName) patchData.firstName = data.firstName;
+    if (dirtyFields.lastName) patchData.lastName = data.lastName;
+    if (dirtyFields.email) patchData.email = data.email;
+    if (dirtyFields.phoneNumber) patchData.phoneNumber = data.phoneNumber;
+    if (dirtyFields.position) patchData.position = data.position;
+
+    const url = `http://localhost:3030/api/employees/${employee.id}`;
+    const res = await fetch(url, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(patchData),
+      cache: "no-store",
+    })
+      .then((res) => res.json())
+      .catch((err) => {
+        throw new Error(err);
+      });
+    setPatchedEmployee(res);
     reset({
-      firstName: data.firstName || employee.firstName,
-      lastName: data.lastName || employee.lastName,
-      email: data.email || employee.email,
-      phoneNumber: data.phoneNumber || employee.phoneNumber,
-      position: data.position || employee.position,
+      firstName: res.firstName,
+      lastName: res.lastName,
+      email: res.email,
+      phoneNumber: res.phoneNumber,
+      position: res.position,
     });
+    setShowResponse(true);
   };
 
   return (
@@ -138,6 +145,14 @@ const PatchById: React.FC<Props> = ({ employee }) => {
 
               {isDirty && <Button title="Update Employee" type="submit" />}
             </form>
+            <div className="response">
+              {showResponse && patchedEmployee && (
+                <div className="ok-response">
+                  <p>Employee successfully Updated :D</p>
+                  <EmployeeTable employees={patchedEmployee} />
+                </div>
+              )}
+            </div>
           </div>
         }
         footer={
